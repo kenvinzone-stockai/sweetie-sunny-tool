@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" class="scroll-smooth">
+<html lang="vi" class="scroll-smooth" data-theme="rose">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,24 +18,83 @@
                     fontFamily: {
                         sans: ['Be Vietnam Pro', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
-                    },
-                    boxShadow: {
-                        'pink-glow': '0 0 15px rgba(244, 63, 94, 0.2)',
-                        'pink-glow-hover': '0 0 25px rgba(236, 72, 153, 0.45)',
-                        'premium': '0 10px 30px -10px rgba(244, 63, 94, 0.08), 0 1px 3px rgba(244, 63, 94, 0.02)',
-                        'premium-hover': '0 20px 40px -15px rgba(236, 72, 153, 0.12), 0 1px 10px rgba(236, 72, 153, 0.05)',
                     }
                 }
             }
         }
     </script>
     <style>
-        /* CSS Variables for custom soft theme */
-        :root {
-            --neon-color-rgba: 244, 63, 94;
+        /* CSS Custom Properties for 3 gorgeous feminine themes */
+        :root, [data-theme="rose"] {
+            --bg-gradient: linear-gradient(135deg, #fff5f6 0%, #ffffff 50%, #ffeef2 100%);
+            --grid-color: rgba(244, 63, 94, 0.05);
+            --card-bg: rgba(255, 255, 255, 0.65);
+            --card-border: rgba(251, 113, 133, 0.28);
+            --card-border-hover: rgba(236, 72, 153, 0.8);
+            --text-main: #4c0519;
+            --text-muted: #9f1239;
+            --brand-color: #ec4899;
+            --brand-color-glow: rgba(236, 72, 153, 0.25);
+            --input-bg: rgba(255, 255, 255, 0.75);
+            --input-border: rgba(251, 113, 133, 0.25);
+            --badge-bg: #ffe4e6;
+            --badge-text: #e11d48;
+            --nav-bg: rgba(255, 245, 247, 0.6);
+            --nav-active-bg: #ffffff;
+            --nav-active-text: #db2777;
+            --shadow-glow: 0 10px 30px -10px rgba(244, 63, 94, 0.1), 0 1px 3px rgba(244, 63, 94, 0.02);
+            --shadow-glow-hover: 0 15px 35px -10px rgba(236, 72, 153, 0.25), 0 0 15px rgba(236, 72, 153, 0.15);
         }
 
-        /* Smooth Custom Scrollbar */
+        [data-theme="cyber"] {
+            --bg-gradient: linear-gradient(135deg, #090005 0%, #11010d 50%, #170012 100%);
+            --grid-color: rgba(236, 72, 153, 0.08);
+            --card-bg: rgba(16, 2, 12, 0.75);
+            --card-border: rgba(236, 72, 153, 0.32);
+            --card-border-hover: rgba(244, 63, 94, 0.95);
+            --text-main: #fdf2f8;
+            --text-muted: #f472b6;
+            --brand-color: #ff007f;
+            --brand-color-glow: rgba(255, 0, 127, 0.45);
+            --input-bg: rgba(8, 0, 6, 0.7);
+            --input-border: rgba(236, 72, 153, 0.4);
+            --badge-bg: #4c0519;
+            --badge-text: #f472b6;
+            --nav-bg: rgba(16, 2, 12, 0.4);
+            --nav-active-bg: rgba(236, 72, 153, 0.25);
+            --nav-active-text: #ff007f;
+            --shadow-glow: 0 10px 30px -10px rgba(244, 63, 94, 0.3), 0 1px 3px rgba(244, 63, 94, 0.05);
+            --shadow-glow-hover: 0 15px 35px -10px rgba(255, 0, 127, 0.4), 0 0 20px rgba(255, 0, 127, 0.3);
+        }
+
+        [data-theme="lavender"] {
+            --bg-gradient: linear-gradient(135deg, #f5f3ff 0%, #ffffff 50%, #faf5ff 100%);
+            --grid-color: rgba(139, 92, 246, 0.06);
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(167, 139, 250, 0.32);
+            --card-border-hover: rgba(124, 58, 237, 0.9);
+            --text-main: #2e1065;
+            --text-muted: #6b21a8;
+            --brand-color: #8b5cf6;
+            --brand-color-glow: rgba(139, 92, 246, 0.3);
+            --input-bg: rgba(255, 255, 255, 0.8);
+            --input-border: rgba(167, 139, 250, 0.35);
+            --badge-bg: #ede9fe;
+            --badge-text: #6d28d9;
+            --nav-bg: rgba(245, 243, 255, 0.65);
+            --nav-active-bg: #ffffff;
+            --nav-active-text: #7c3aed;
+            --shadow-glow: 0 10px 30px -10px rgba(139, 92, 246, 0.1), 0 1px 3px rgba(139, 92, 246, 0.02);
+            --shadow-glow-hover: 0 15px 35px -10px rgba(124, 58, 237, 0.25), 0 0 15px rgba(124, 58, 237, 0.15);
+        }
+
+        /* Responsive Grid Background Overlay */
+        .grid-overlay {
+            background-image: radial-gradient(var(--grid-color) 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+
+        /* Custom Scrollbars */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -43,151 +102,242 @@
         ::-webkit-scrollbar-track {
             background: transparent;
         }
-        .dark ::-webkit-scrollbar-track {
-            background: #11030a;
-        }
         ::-webkit-scrollbar-thumb {
-            background: #fbcfe8;
+            background: var(--card-border);
             border-radius: 99px;
             border: 2px solid transparent;
             background-clip: content-box;
         }
-        .dark ::-webkit-scrollbar-thumb {
-            background: #db2777;
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-color);
             border: 2px solid transparent;
             background-clip: content-box;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #f472b6;
-        }
-        .dark ::-webkit-scrollbar-thumb:hover {
-            background: #ec4899;
-        }
 
-        /* Neon Breathing Borders Effect */
-        @keyframes neon-breath {
-            0%, 100% {
-                border-color: rgba(244, 63, 94, 0.25);
-                box-shadow: 0 0 8px rgba(244, 63, 94, 0.1), inset 0 0 4px rgba(244, 63, 94, 0.02);
+        /* Radial Pulse Aura Effect (Spec-matching) */
+        .radial-pulse-container {
+            position: relative;
+        }
+        .radial-pulse-aura {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .radial-pulse-aura::after {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            right: -12px;
+            bottom: -12px;
+            border: 2.5px solid var(--brand-color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: radial-pulse-ani 2.5s infinite cubic-bezier(0.24, 0, 0.38, 1);
+        }
+        @keyframes radial-pulse-ani {
+            0% {
+                transform: scale(0.65);
+                opacity: 0;
             }
             50% {
-                border-color: rgba(236, 72, 153, 0.85);
-                box-shadow: 0 0 22px rgba(236, 72, 153, 0.45), inset 0 0 10px rgba(236, 72, 153, 0.15);
+                opacity: 0.85;
+            }
+            100% {
+                transform: scale(1.65);
+                opacity: 0;
+            }
+        }
+
+        /* Glassmorphic Shine Sweep Animation */
+        .sweep-effect {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .sweep-effect::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -80%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.35) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(28deg);
+            transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .sweep-effect:hover::after {
+            left: 140%;
+            opacity: 1;
+        }
+
+        /* Breathing active borders */
+        @keyframes border-breath {
+            0%, 100% {
+                border-color: var(--card-border);
+                box-shadow: 0 0 10px rgba(236, 72, 153, 0.05);
+            }
+            50% {
+                border-color: var(--brand-color);
+                box-shadow: 0 0 18px var(--brand-color-glow);
             }
         }
         .neon-glow-active {
-            animation: neon-breath 3.5s infinite ease-in-out;
-        }
-        .neon-glow-hover:hover {
-            animation: neon-breath 2s infinite ease-in-out;
-            transition: all 0.3s ease;
+            animation: border-breath 3.5s infinite ease-in-out;
         }
 
-        /* Premium Glassmorphism Cards */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.65);
+        /* Semantic styles mapped to current Theme variables */
+        .theme-bg {
+            background: var(--bg-gradient);
+            transition: background 0.4s ease;
+        }
+        .theme-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-glow);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(251, 113, 133, 0.18);
+            color: var(--text-main);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .dark .glass-card {
-            background: rgba(18, 4, 12, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(236, 72, 153, 0.25);
+        .theme-card:hover {
+            border-color: var(--card-border-hover);
+            box-shadow: var(--shadow-glow-hover);
         }
-
-        /* Tab transitions */
-        .tab-transition {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .theme-text-main {
+            color: var(--text-main);
         }
-        .theme-transition {
-            transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+        .theme-text-muted {
+            color: var(--text-muted);
         }
-
-        /* Remove input spin buttons */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
+        .theme-input {
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            color: var(--text-main);
+            transition: all 0.3s ease;
         }
-        input[type=number] {
-            -moz-appearance: textfield;
+        .theme-input:focus {
+            background: #ffffff;
+            border-color: var(--brand-color);
+            box-shadow: 0 0 0 4px var(--brand-color-glow);
+        }
+        .dark .theme-input:focus {
+            background: rgba(0,0,0,0.8);
+        }
+        .theme-badge {
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            border: 1px solid var(--card-border);
+        }
+        .theme-border {
+            border-color: var(--card-border);
+        }
+        .theme-nav-btn {
+            color: var(--text-muted);
+            border: 1px solid transparent;
+        }
+        .theme-nav-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .theme-nav-btn.active {
+            background: var(--nav-active-bg);
+            color: var(--nav-active-text);
+            border-color: var(--card-border);
+            box-shadow: 0 4px 15px var(--brand-color-glow);
+        }
+        .dark .theme-nav-btn.active {
+            background: rgba(236, 72, 153, 0.15);
         }
     </style>
 </head>
-<body class="bg-gradient-to-tr from-[#fff5f6] via-white to-[#fff0f3] dark:from-[#0a0005] dark:via-[#0f040d] dark:to-[#14000e] text-rose-950 dark:text-pink-100 font-sans min-h-screen flex flex-col theme-transition">
-    <!-- Beautiful Floating Decorative Pink Orbs -->
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-rose-200/30 dark:bg-pink-900/10 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-pink-200/20 dark:bg-purple-900/10 rounded-full blur-[150px] pointer-events-none"></div>
+<body class="theme-bg text-rose-950 font-sans min-h-screen flex flex-col theme-transition grid-overlay">
 
     <!-- Header Section -->
-    <header class="relative z-10 bg-white/50 dark:bg-pink-950/20 backdrop-blur-md border-b border-rose-100 dark:border-pink-950 theme-transition sticky top-0">
+    <header class="relative z-10 bg-white/40 dark:bg-black/30 backdrop-blur-md border-b theme-border theme-transition sticky top-0">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-4">
             
-            <!-- Branding -->
-            <div class="flex items-center gap-3.5">
-                <div class="relative group">
-                    <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-rose-400 rounded-xl blur opacity-40 group-hover:opacity-75 transition duration-1000"></div>
-                    <div class="relative p-2.5 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl shadow-md text-white">
-                        <!-- Premium Heart Crown Icon for Sweetie Sunny -->
+            <!-- Branding Area with Radial Pulse Aura -->
+            <div class="flex items-center gap-4">
+                <div class="radial-pulse-container">
+                    <div class="radial-pulse-aura"></div>
+                    <div class="relative p-2.5 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl shadow-md text-white z-10">
+                        <!-- Premium Heart Crown Icon -->
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                         </svg>
                     </div>
                 </div>
                 <div>
-                    <h1 class="text-lg font-extrabold tracking-tight flex items-center gap-2 text-rose-600 dark:text-pink-400">
+                    <h1 class="text-lg font-extrabold tracking-tight flex items-center gap-2 theme-text-main">
                         SWEETIE SUNNY'S APP TOOL
-                        <span class="text-[9px] bg-pink-100 dark:bg-pink-950/80 text-pink-600 dark:text-pink-400 border border-pink-200 dark:border-pink-900 px-2.5 py-0.5 rounded-full font-mono font-bold tracking-wider">PRO v2.5</span>
+                        <span class="text-[9px] theme-badge px-2.5 py-0.5 rounded-full font-mono font-bold tracking-wider">PRO v3.0</span>
                     </h1>
-                    <p class="text-[11px] text-rose-400/80 dark:text-pink-400/60 font-medium">Hệ thống Phân tích Thuế, VAT & Quy đổi Đa Quốc Gia</p>
+                    <p class="text-[11px] theme-text-muted font-medium">Hệ thống phân tích Thuế, VAT & Quy đổi đa ngôn ngữ độc quyền</p>
                 </div>
             </div>
             
-            <!-- Actions & Global Exchange Ticker -->
+            <!-- Segmented Theme Switcer & Exchange inputs -->
             <div class="flex items-center gap-4 flex-wrap sm:flex-nowrap">
+                
                 <!-- Global Exchange Rate Indicators -->
-                <div class="bg-white/60 dark:bg-pink-950/30 border border-pink-100 dark:border-pink-900/60 rounded-xl px-3.5 py-1.5 flex items-center gap-3 shadow-sm text-xs font-semibold">
-                    <div class="flex items-center gap-1.5">
-                        <span class="text-rose-500">USD/VND:</span>
-                        <input type="text" id="global-usd-rate" value="25,450" class="w-14 bg-transparent text-pink-600 dark:text-pink-400 font-bold border-b border-dashed border-pink-300 dark:border-pink-700 text-center focus:outline-none focus:border-pink-500 font-mono" oninput="syncRatesGlobal()">
+                <div class="bg-white/40 dark:bg-black/40 border theme-border rounded-xl px-3 py-1.5 flex items-center gap-3 shadow-sm text-xs font-semibold">
+                    <div class="flex items-center gap-1">
+                        <span class="theme-text-muted">USD/VND:</span>
+                        <input type="text" id="global-usd-rate" value="25,450" class="w-14 bg-transparent theme-text-main font-bold border-b border-dashed theme-border text-center focus:outline-none" oninput="syncRatesGlobal()">
                     </div>
-                    <div class="h-4 w-[1px] bg-pink-100 dark:bg-pink-900"></div>
-                    <div class="flex items-center gap-1.5">
-                        <span class="text-rose-500">USD/THB:</span>
-                        <input type="text" id="global-thb-rate" value="36.50" class="w-12 bg-transparent text-pink-600 dark:text-pink-400 font-bold border-b border-dashed border-pink-300 dark:border-pink-700 text-center focus:outline-none focus:border-pink-500 font-mono" oninput="syncRatesGlobal()">
+                    <div class="h-4 w-[1px] bg-rose-200 dark:bg-pink-900/60"></div>
+                    <div class="flex items-center gap-1">
+                        <span class="theme-text-muted">USD/THB:</span>
+                        <input type="text" id="global-thb-rate" value="36.50" class="w-11 bg-transparent theme-text-main font-bold border-b border-dashed theme-border text-center focus:outline-none" oninput="syncRatesGlobal()">
                     </div>
                 </div>
 
-                <!-- Dark/Light Theme Toggle -->
-                <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-white/60 dark:bg-pink-950/30 text-pink-600 dark:text-pink-300 hover:text-rose-600 dark:hover:text-white border border-pink-100 dark:border-pink-900/60 transition-all duration-300 shadow-sm" title="Chuyển đổi giao diện sáng/tối">
-                    <!-- Sun Icon (visible in dark mode) -->
-                    <svg id="theme-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M4.22 4.22l1.58 1.58m12.42 12.42l1.58 1.58M3 12h2.25m13.5 0H21M4.22 19.78l1.58-1.58M17.62 6.38l1.58-1.58M12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z"></path></svg>
-                    <!-- Moon Icon (visible in light mode) -->
-                    <svg id="theme-moon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"></path></svg>
-                </button>
+                <!-- Segmented Feminine Theme Selector -->
+                <div class="flex items-center gap-1 p-1 bg-white/40 dark:bg-black/30 border theme-border rounded-xl shadow-sm">
+                    <button onclick="setThemeMode('rose')" id="theme-btn-rose" class="p-2 rounded-lg text-xs font-bold transition-all duration-200" title="Sweetie Rose (Sáng hồng)">
+                        <span>🌸</span>
+                    </button>
+                    <button onclick="setThemeMode('cyber')" id="theme-btn-cyber" class="p-2 rounded-lg text-xs font-bold transition-all duration-200" title="Cyber Neon (Tối hồng)">
+                        <span>🔮</span>
+                    </button>
+                    <button onclick="setThemeMode('lavender')" id="theme-btn-lavender" class="p-2 rounded-lg text-xs font-bold transition-all duration-200" title="Luxury Lavender (Oải hương)">
+                        <span>🦄</span>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Navigation / Tabs bar -->
-    <nav class="sticky top-[61px] z-20 bg-[#fff5f6]/80 dark:bg-[#0a0005]/80 backdrop-blur-md border-b border-rose-100 dark:border-pink-950 py-2.5 theme-transition">
+    <!-- Navigation Tabs bar -->
+    <nav class="sticky top-[61px] z-20 bg-white/20 dark:bg-black/20 backdrop-blur-md border-b theme-border py-2.5 theme-transition">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex space-x-1.5 p-1 bg-pink-100/40 dark:bg-pink-950/40 rounded-2xl border border-pink-200/30 dark:border-pink-900/30 overflow-x-auto">
-                <button onclick="switchTab('tab-convert')" id="btn-tab-convert" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 bg-white dark:bg-pink-950/60 text-pink-600 dark:text-pink-400 shadow-sm neon-glow-active">
+            <div class="flex space-x-1.5 p-1 bg-pink-100/30 dark:bg-pink-950/20 rounded-2xl border theme-border overflow-x-auto">
+                <button onclick="switchTab('tab-convert')" id="btn-tab-convert" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 theme-nav-btn active neon-glow-active">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 11.37 7.31 16.5 3 19"></path></svg>
                     Đọc Số Thành Chữ (3 Thứ Tiếng)
                 </button>
-                <button onclick="switchTab('tab-rates')" id="btn-tab-rates" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 text-rose-400 dark:text-pink-400/60 hover:text-rose-700 dark:hover:text-pink-200">
+                <button onclick="switchTab('tab-rates')" id="btn-tab-rates" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 theme-nav-btn">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     Quy Đổi 3 Chiều Ngoại Tệ
                 </button>
-                <button onclick="switchTab('tab-vat')" id="btn-tab-vat" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 text-rose-400 dark:text-pink-400/60 hover:text-rose-700 dark:hover:text-pink-200">
+                <button onclick="switchTab('tab-vat')" id="btn-tab-vat" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 theme-nav-btn">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l2-2 4 4m0-7l-3-3-3 3m2 8h7a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h3"></path></svg>
                     Tính Thuế & VAT Dự Án
                 </button>
-                <button onclick="switchTab('tab-fct')" id="btn-tab-fct" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 text-rose-400 dark:text-pink-400/60 hover:text-rose-700 dark:hover:text-pink-200">
+                <button onclick="switchTab('tab-fct')" id="btn-tab-fct" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 theme-nav-btn">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     Thuế Nhà Thầu (FCT)
                 </button>
@@ -204,13 +354,13 @@
                 
                 <!-- Left Input Panel -->
                 <div class="lg:col-span-5 space-y-6">
-                    <div class="glass-card rounded-2xl shadow-premium hover:shadow-premium-hover p-6 space-y-5 transition-all duration-300 neon-glow-hover">
-                        <div class="flex items-center justify-between border-b border-pink-100 dark:border-pink-900 pb-3">
-                            <h3 class="text-xs font-extrabold text-pink-700 dark:text-pink-400 uppercase tracking-wider flex items-center gap-2">
+                    <div class="theme-card rounded-2xl p-6 space-y-5 sweep-effect">
+                        <div class="flex items-center justify-between border-b theme-border pb-3">
+                            <h3 class="text-xs font-extrabold theme-text-main uppercase tracking-wider flex items-center gap-2">
                                 <span class="w-2 h-2 rounded-full bg-pink-500 shadow-[0_0_8px_#ec4899]"></span>
                                 Số liệu đầu vào
                             </h3>
-                            <button onclick="clearConvertInput()" class="text-[11px] text-pink-400 hover:text-pink-600 dark:hover:text-pink-300 transition-colors flex items-center gap-1 font-bold bg-pink-50 dark:bg-pink-950/40 px-2.5 py-1 rounded-lg">
+                            <button onclick="clearConvertInput()" class="text-[11px] theme-text-muted hover:text-pink-600 transition-colors flex items-center gap-1 font-bold bg-pink-50/50 dark:bg-pink-950/40 px-2.5 py-1 rounded-lg">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                 Xóa dữ liệu
                             </button>
@@ -218,61 +368,61 @@
 
                         <!-- Number Input Field -->
                         <div class="space-y-2">
-                            <label for="num-input" class="block text-[10px] font-extrabold text-rose-400 dark:text-pink-400 uppercase tracking-wider">Số tiền cần phân tích</label>
+                            <label for="num-input" class="block text-[10px] font-extrabold theme-text-muted uppercase tracking-wider">Số tiền cần phân tích</label>
                             <div class="relative group">
-                                <input type="text" id="num-input" placeholder="Nhập số tiền..." class="w-full text-2xl font-extrabold font-mono tracking-tight text-rose-950 dark:text-white pl-4 pr-16 py-4 bg-white/40 dark:bg-black/40 border border-pink-200/80 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-4 focus:ring-pink-500/15 focus:border-pink-400 dark:focus:border-pink-500/60 transition-all placeholder:text-pink-200 dark:placeholder:text-pink-900/60 placeholder:font-sans" oninput="formatAndConvert(this)">
-                                <div class="absolute right-3.5 top-4 bg-pink-100 dark:bg-pink-950/80 text-pink-700 dark:text-pink-300 px-3 py-1 rounded-lg text-xs font-black select-none" id="input-unit-badge">VND</div>
+                                <input type="text" id="num-input" placeholder="Nhập số tiền..." class="w-full text-2xl font-extrabold font-mono tracking-tight theme-input pl-4 pr-16 py-4 rounded-xl focus:outline-none" oninput="formatAndConvert(this)">
+                                <div class="absolute right-3.5 top-4 theme-badge px-3 py-1 rounded-lg text-xs font-black select-none" id="input-unit-badge">VND</div>
                             </div>
-                            <div id="live-formatted-preview" class="text-xs font-mono text-pink-600 dark:text-pink-400 font-bold pl-1 min-h-[16px]"></div>
+                            <div id="live-formatted-preview" class="text-xs font-mono theme-text-muted font-bold pl-1 min-h-[16px]"></div>
                         </div>
 
                         <!-- Configuration Options -->
-                        <div class="space-y-4 pt-3 border-t border-pink-100 dark:border-pink-900">
-                            <h4 class="text-[10px] font-extrabold text-rose-400 dark:text-pink-400 uppercase tracking-wider">Tùy biến đọc chuẩn tài chính</h4>
+                        <div class="space-y-4 pt-3 border-t theme-border">
+                            <h4 class="text-[10px] font-extrabold theme-text-muted uppercase tracking-wider">Tùy biến đọc chuẩn tài chính</h4>
                             
                             <!-- Base Currency Config -->
                             <div>
-                                <label for="currency-select" class="block text-[10px] font-extrabold text-rose-400 dark:text-pink-400 uppercase tracking-wider mb-2">Đồng tiền cơ sở (Currency Suffix)</label>
-                                <select id="currency-select" class="w-full bg-white/40 dark:bg-black/40 border border-pink-200/80 dark:border-pink-900 text-xs font-bold rounded-xl p-3 text-rose-950 dark:text-pink-200 focus:ring-2 focus:ring-pink-500/20 focus:outline-none" onchange="changeCurrencyType(this.value)">
-                                    <option value="vnd" class="dark:bg-pink-950">VND (Đồng Việt Nam)</option>
-                                    <option value="usd" class="dark:bg-pink-950">USD (Đô la Mỹ)</option>
-                                    <option value="thb" class="dark:bg-pink-950">THB (Thái Baht)</option>
-                                    <option value="eur" class="dark:bg-pink-950">EUR (Euro)</option>
-                                    <option value="none" class="dark:bg-pink-950">Chỉ đọc số (Không kèm đơn vị)</option>
+                                <label for="currency-select" class="block text-[10px] font-extrabold theme-text-muted uppercase tracking-wider mb-2">Đồng tiền cơ sở (Currency Suffix)</label>
+                                <select id="currency-select" class="w-full theme-input text-xs font-bold rounded-xl p-3 focus:outline-none" onchange="changeCurrencyType(this.value)">
+                                    <option value="vnd" class="dark:bg-black">VND (Đồng Việt Nam)</option>
+                                    <option value="usd" class="dark:bg-black">USD (Đô la Mỹ)</option>
+                                    <option value="thb" class="dark:bg-black">THB (Thái Baht)</option>
+                                    <option value="eur" class="dark:bg-black">EUR (Euro)</option>
+                                    <option value="none" class="dark:bg-black">Chỉ đọc số (Không kèm đơn vị)</option>
                                 </select>
                             </div>
 
                             <!-- Regional Dialect Toggle (Only for VN) -->
                             <div class="grid grid-cols-2 gap-2.5">
-                                <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-xl p-3 flex flex-col gap-1 cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 transition-all [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                <label class="border theme-border rounded-xl p-3 flex flex-col gap-1 cursor-pointer hover:border-pink-300 transition-all [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20">
                                     <div class="flex items-center gap-2">
                                         <input type="radio" name="dialect" value="north" checked class="w-4 h-4 text-pink-600 border-pink-300 focus:ring-pink-500" onchange="runConversion()">
-                                        <span class="text-xs font-bold text-rose-900 dark:text-pink-200">Kiểu Miền Bắc</span>
+                                        <span class="text-xs font-bold theme-text-main">Kiểu Miền Bắc</span>
                                     </div>
-                                    <span class="text-[10px] text-pink-400/80 pl-6">Dùng: "Nghìn", "Linh"</span>
+                                    <span class="text-[10px] theme-text-muted pl-6">Dùng: "Nghìn", "Linh"</span>
                                 </label>
-                                <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-xl p-3 flex flex-col gap-1 cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 transition-all [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                <label class="border theme-border rounded-xl p-3 flex flex-col gap-1 cursor-pointer hover:border-pink-300 transition-all [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20">
                                     <div class="flex items-center gap-2">
                                         <input type="radio" name="dialect" value="south" class="w-4 h-4 text-pink-600 border-pink-300 focus:ring-pink-500" onchange="runConversion()">
-                                        <span class="text-xs font-bold text-rose-900 dark:text-pink-200">Kiểu Miền Nam</span>
+                                        <span class="text-xs font-bold theme-text-main">Kiểu Miền Nam</span>
                                     </div>
-                                    <span class="text-[10px] text-pink-400/80 pl-6">Dùng: "Ngàn", "Lẻ"</span>
+                                    <span class="text-[10px] theme-text-muted pl-6">Dùng: "Ngàn", "Lẻ"</span>
                                 </label>
                             </div>
 
                             <!-- Text Formatting Options -->
                             <div>
-                                <label class="block text-[10px] font-extrabold text-rose-400 dark:text-pink-400 uppercase tracking-wider mb-2">Định dạng chữ cái</label>
+                                <label class="block text-[10px] font-extrabold theme-text-muted uppercase tracking-wider mb-2">Định dạng chữ cái</label>
                                 <div class="grid grid-cols-3 gap-1.5 text-[10px] font-extrabold">
-                                    <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-lg p-2.5 text-center cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:text-pink-600 dark:[&:has(input:checked)]:text-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                    <label class="border theme-border rounded-lg p-2.5 text-center cursor-pointer hover:border-pink-300 [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:text-pink-600 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20">
                                         <input type="radio" name="text-case" value="sentence" checked class="hidden" onchange="runConversion()">
                                         Viết hoa đầu
                                     </label>
-                                    <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-lg p-2.5 text-center cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:text-pink-600 dark:[&:has(input:checked)]:text-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                    <label class="border theme-border rounded-lg p-2.5 text-center cursor-pointer hover:border-pink-300 [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:text-pink-600 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20">
                                         <input type="radio" name="text-case" value="upper" class="hidden" onchange="runConversion()">
                                         VIẾT HOA
                                     </label>
-                                    <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-lg p-2.5 text-center cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:text-pink-600 dark:[&:has(input:checked)]:text-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                    <label class="border theme-border rounded-lg p-2.5 text-center cursor-pointer hover:border-pink-300 [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:text-pink-600 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20">
                                         <input type="radio" name="text-case" value="lower" class="hidden" onchange="runConversion()">
                                         viết thường
                                     </label>
@@ -281,8 +431,8 @@
                         </div>
 
                         <!-- Decimal setting -->
-                        <div class="flex items-center justify-between border-t border-pink-100 dark:border-pink-900 pt-3 text-xs">
-                            <span class="font-extrabold text-rose-500 dark:text-pink-400">Cho phép phần thập phân (số lẻ)</span>
+                        <div class="flex items-center justify-between border-t theme-border pt-3 text-xs">
+                            <span class="font-extrabold theme-text-muted">Cho phép phần thập phân</span>
                             <label class="relative inline-flex items-center cursor-pointer select-none">
                                 <input type="checkbox" id="allow-decimal" checked class="sr-only peer" onchange="runConversion()">
                                 <div class="w-10 h-6 bg-pink-100 dark:bg-pink-950/60 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-pink-300 dark:after:border-pink-800 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-500"></div>
@@ -293,69 +443,69 @@
 
                 <!-- Right Output Panel -->
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="glass-card rounded-2xl shadow-premium hover:shadow-premium-hover p-6 flex flex-col h-full justify-between transition-all duration-300 neon-glow-hover">
+                    <div class="theme-card rounded-2xl p-6 flex flex-col h-full justify-between sweep-effect">
                         <div class="space-y-5">
-                            <div class="flex items-center justify-between border-b border-pink-100 dark:border-pink-900 pb-3">
-                                <h3 class="text-xs font-extrabold text-pink-700 dark:text-pink-400 uppercase tracking-wider flex items-center gap-2">
+                            <div class="flex items-center justify-between border-b theme-border pb-3">
+                                <h3 class="text-xs font-extrabold theme-text-main uppercase tracking-wider flex items-center gap-2">
                                     <span class="w-2 h-2 rounded-full bg-pink-500 shadow-[0_0_8px_#ec4899]"></span>
                                     Dịch thuật đa ngôn ngữ tài chính
                                 </h3>
-                                <span class="text-[10px] bg-pink-100 dark:bg-pink-950 text-pink-600 dark:text-pink-400 font-bold px-2.5 py-1 rounded-lg border border-pink-200 dark:border-pink-900/60" id="status-badge">Đang đợi số liệu...</span>
+                                <span class="text-[10px] theme-badge font-bold px-2.5 py-1 rounded-lg" id="status-badge">Đang đợi số liệu...</span>
                             </div>
 
                             <!-- Vietnamese Output Card -->
-                            <div class="space-y-2 bg-pink-50/20 dark:bg-pink-950/10 rounded-2xl p-4.5 border border-pink-200/40 dark:border-pink-900/40 group relative">
+                            <div class="space-y-2 bg-pink-50/20 dark:bg-pink-950/10 rounded-2xl p-4.5 border theme-border group relative">
                                 <div class="flex justify-between items-center">
-                                    <div class="flex items-center gap-2 text-[10px] font-extrabold text-pink-700 dark:text-pink-400 tracking-wider uppercase">
+                                    <div class="flex items-center gap-2 text-[10px] font-extrabold theme-text-muted tracking-wider uppercase">
                                         <span class="w-1.5 h-3 bg-pink-500 rounded-full"></span>
                                         Tiếng Việt (Vietnamese)
                                     </div>
-                                    <button onclick="copyToClipboard('vi-output', this)" class="relative flex items-center gap-1.5 text-xs text-pink-600 dark:text-pink-400 hover:text-pink-800 dark:hover:text-pink-200 font-bold bg-white/80 dark:bg-pink-950/60 px-3 py-1.5 rounded-lg border border-pink-200/60 dark:border-pink-900/60 shadow-sm transition-all duration-200">
+                                    <button onclick="copyToClipboard('vi-output', this)" class="relative flex items-center gap-1.5 text-xs theme-text-muted hover:text-pink-600 font-bold bg-white/80 dark:bg-black/40 px-3 py-1.5 rounded-lg border theme-border shadow-sm transition-all duration-200">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                         <span class="copy-text">Copy</span>
                                     </button>
                                 </div>
-                                <div id="vi-output" class="text-sm font-semibold text-rose-950 dark:text-pink-200 leading-relaxed min-h-[40px] select-all pt-1">Vui lòng nhập số tiền để dịch.</div>
+                                <div id="vi-output" class="text-sm font-semibold leading-relaxed min-h-[40px] select-all pt-1">Vui lòng nhập số tiền để dịch.</div>
                             </div>
 
                             <!-- English Output Card -->
-                            <div class="space-y-2 bg-purple-50/20 dark:bg-purple-950/10 rounded-2xl p-4.5 border border-purple-200/30 dark:border-purple-900/30 group relative">
+                            <div class="space-y-2 bg-purple-50/20 dark:bg-purple-950/10 rounded-2xl p-4.5 border theme-border group relative">
                                 <div class="flex justify-between items-center">
                                     <div class="flex items-center gap-2 text-[10px] font-extrabold text-purple-700 dark:text-purple-400 tracking-wider uppercase">
                                         <span class="w-1.5 h-3 bg-purple-500 rounded-full"></span>
                                         Tiếng Anh (English)
                                     </div>
-                                    <button onclick="copyToClipboard('en-output', this)" class="relative flex items-center gap-1.5 text-xs text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-200 font-bold bg-white/80 dark:bg-pink-950/60 px-3 py-1.5 rounded-lg border border-purple-200/50 dark:border-purple-900/50 shadow-sm transition-all duration-200">
+                                    <button onclick="copyToClipboard('en-output', this)" class="relative flex items-center gap-1.5 text-xs text-purple-600 dark:text-purple-400 hover:text-purple-800 font-bold bg-white/80 dark:bg-black/40 px-3 py-1.5 rounded-lg border theme-border shadow-sm transition-all duration-200">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                         <span class="copy-text">Copy</span>
                                     </button>
                                 </div>
-                                <div id="en-output" class="text-sm font-semibold text-rose-950 dark:text-pink-200 leading-relaxed min-h-[40px] select-all pt-1">Please enter an amount to translate.</div>
+                                <div id="en-output" class="text-sm font-semibold leading-relaxed min-h-[40px] select-all pt-1">Please enter an amount to translate.</div>
                             </div>
 
                             <!-- Thai Output Card -->
-                            <div class="space-y-2 bg-rose-50/25 dark:bg-pink-900/5 rounded-2xl p-4.5 border border-pink-200/30 dark:border-pink-900/20 group relative">
+                            <div class="space-y-2 bg-rose-50/25 dark:bg-pink-900/5 rounded-2xl p-4.5 border theme-border group relative">
                                 <div class="flex justify-between items-center">
                                     <div class="flex items-center gap-2 text-[10px] font-extrabold text-pink-600 dark:text-pink-400 tracking-wider uppercase">
                                         <span class="w-1.5 h-3 bg-pink-400 rounded-full"></span>
                                         Tiếng Thái (Thai - ภาษาไทย)
                                     </div>
-                                    <button onclick="copyToClipboard('th-output', this)" class="relative flex items-center gap-1.5 text-xs text-pink-600 dark:text-pink-400 hover:text-pink-800 dark:hover:text-pink-200 font-bold bg-white/80 dark:bg-pink-950/60 px-3 py-1.5 rounded-lg border border-pink-200/50 dark:border-pink-900/50 shadow-sm transition-all duration-200">
+                                    <button onclick="copyToClipboard('th-output', this)" class="relative flex items-center gap-1.5 text-xs text-pink-600 dark:text-pink-400 hover:text-pink-800 font-bold bg-white/80 dark:bg-black/40 px-3 py-1.5 rounded-lg border theme-border shadow-sm transition-all duration-200">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                         <span class="copy-text">Copy</span>
                                     </button>
                                 </div>
-                                <div id="th-output" class="text-sm font-semibold text-rose-950 dark:text-pink-200 leading-relaxed min-h-[40px] select-all pt-1">กรุณากรอกจำนวนเงินเพื่อแปลภาษา</div>
+                                <div id="th-output" class="text-sm font-semibold leading-relaxed min-h-[40px] select-all pt-1">กรุณากรอกจำนวนเงินเพื่อแปลภาษา</div>
                             </div>
                         </div>
 
                         <!-- Helper Tip -->
-                        <div class="mt-6 border-t border-pink-100 dark:border-pink-900 pt-4 flex gap-3 items-start text-xs text-rose-400 dark:text-pink-400/60">
+                        <div class="mt-6 border-t theme-border pt-4 flex gap-3 items-start text-xs theme-text-muted">
                             <div class="p-1.5 bg-pink-50 dark:bg-pink-950/50 rounded-lg text-pink-500">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </div>
                             <div>
-                                <span class="font-extrabold text-pink-600 dark:text-pink-400">Mẹo nghiệp vụ dành riêng cho Sunny:</span> Chuyển đổi song ngữ & ngôn ngữ Thái Baht giúp Sunny xử lý nhanh các loại tờ khai nhập khẩu, tờ trình thiết bị, hóa đơn xuất khẩu chính xác từng cen và satang lẻ!
+                                <span class="font-extrabold text-pink-600">Mẹo nghiệp vụ dành riêng cho Sunny:</span> Chuyển đổi song ngữ & ngôn ngữ Thái Baht giúp Sunny xử lý nhanh các loại tờ khai nhập khẩu, tờ trình thiết bị, hóa đơn xuất khẩu chính xác từng cen và satang lẻ!
                             </div>
                         </div>
                     </div>
@@ -363,24 +513,24 @@
             </div>
 
             <!-- Session Conversion History -->
-            <div class="glass-card rounded-2xl shadow-premium border border-pink-100 dark:border-pink-950 p-6 transition-all duration-300">
-                <div class="flex items-center justify-between border-b border-pink-100 dark:border-pink-900 pb-3 mb-4">
-                    <h3 class="text-xs font-extrabold text-pink-700 dark:text-pink-400 uppercase tracking-wider flex items-center gap-2">
+            <div class="theme-card rounded-2xl p-6 transition-all duration-300">
+                <div class="flex items-center justify-between border-b theme-border pb-3 mb-4">
+                    <h3 class="text-xs font-extrabold theme-text-main uppercase tracking-wider flex items-center gap-2">
                         <svg class="w-5 h-5 text-pink-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         Lịch Sử Chuyển Đổi Trong Phiên
                     </h3>
-                    <button onclick="clearHistory()" class="text-xs text-pink-400 hover:text-pink-600 dark:hover:text-pink-300 transition-colors font-bold">Xóa lịch sử</button>
+                    <button onclick="clearHistory()" class="text-xs text-pink-400 hover:text-pink-600 transition-colors font-bold">Xóa lịch sử</button>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs border-collapse">
                         <thead>
-                            <tr class="text-rose-400/80 dark:text-pink-400/60 font-extrabold uppercase tracking-wider border-b border-pink-100 dark:border-pink-900">
+                            <tr class="theme-text-muted font-extrabold uppercase tracking-wider border-b theme-border">
                                 <th class="pb-3 w-1/5">Thời gian</th>
                                 <th class="pb-3 w-1/5">Số tiền bằng số</th>
                                 <th class="pb-3 w-3/5">Đọc Tiếng Việt</th>
                             </tr>
                         </thead>
-                        <tbody id="history-rows" class="divide-y divide-pink-100/60 dark:divide-pink-950/60 font-medium text-rose-950 dark:text-pink-200">
+                        <tbody id="history-rows" class="divide-y theme-border font-medium text-rose-950 dark:text-pink-200">
                             <tr id="empty-history-row">
                                 <td colspan="3" class="py-6 text-center text-pink-300 dark:text-pink-700">Chưa có hoạt động chuyển đổi nào trong phiên làm việc này.</td>
                             </tr>
@@ -392,8 +542,8 @@
 
         <!-- ================= TAB 4: QUY ĐỔI NGOẠI TỆ ================= -->
         <div id="tab-rates" class="tab-content hidden space-y-6">
-            <div class="glass-card rounded-2xl shadow-premium border border-pink-100 dark:border-pink-950 p-6 transition-all duration-300">
-                <h3 class="text-base font-extrabold text-rose-700 dark:text-pink-400 border-b border-pink-100 dark:border-pink-900 pb-4 mb-6 flex items-center gap-2.5">
+            <div class="theme-card rounded-2xl p-6 transition-all duration-300 sweep-effect">
+                <h3 class="text-base font-extrabold theme-text-main border-b theme-border pb-4 mb-6 flex items-center gap-2.5">
                     <span class="p-2 bg-pink-50 dark:bg-pink-950 rounded-xl text-pink-500 shadow-[0_0_8px_rgba(236,72,153,0.2)]">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </span>
@@ -403,34 +553,34 @@
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <!-- Grid inputs -->
                     <div class="lg:col-span-5 space-y-5">
-                        <p class="text-xs font-semibold text-rose-500/80 dark:text-pink-400/80 leading-relaxed">
+                        <p class="text-xs font-semibold theme-text-muted leading-relaxed">
                             Sunny chỉ cần nhập giá trị vào **bất kỳ** ô tiền tệ nào bên dưới. Hệ thống sẽ tự động sử dụng tỷ giá định biên quy định phía trên để quy đổi tức thời sang hai đồng tiền còn lại.
                         </p>
 
                         <div class="space-y-4">
                             <!-- Input USD -->
                             <div class="space-y-1.5">
-                                <label for="rate-usd-input" class="block text-xs font-bold text-rose-600 dark:text-pink-300">Giá trị ngoại tệ USD ($)</label>
+                                <label for="rate-usd-input" class="block text-xs font-bold theme-text-muted">Giá trị ngoại tệ USD ($)</label>
                                 <div class="relative">
-                                    <input type="text" id="rate-usd-input" placeholder="Nhập USD..." class="w-full text-base font-bold font-mono text-rose-950 dark:text-white px-4 py-3 bg-white/40 dark:bg-black/40 border border-pink-200 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 transition-all" oninput="calculateThreeWay('usd')">
+                                    <input type="text" id="rate-usd-input" placeholder="Nhập USD..." class="w-full text-base font-bold font-mono theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calculateThreeWay('usd')">
                                     <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold select-none">USD</span>
                                 </div>
                             </div>
 
                             <!-- Input VND -->
                             <div class="space-y-1.5">
-                                <label for="rate-vnd-input" class="block text-xs font-bold text-rose-600 dark:text-pink-300">Giá trị nội tệ VND (₫)</label>
+                                <label for="rate-vnd-input" class="block text-xs font-bold theme-text-muted">Giá trị nội tệ VND (₫)</label>
                                 <div class="relative">
-                                    <input type="text" id="rate-vnd-input" placeholder="Nhập VND..." class="w-full text-base font-bold font-mono text-rose-950 dark:text-white px-4 py-3 bg-white/40 dark:bg-black/40 border border-pink-200 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 transition-all" oninput="calculateThreeWay('vnd')">
+                                    <input type="text" id="rate-vnd-input" placeholder="Nhập VND..." class="w-full text-base font-bold font-mono theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calculateThreeWay('vnd')">
                                     <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold select-none">VND</span>
                                 </div>
                             </div>
 
                             <!-- Input THB -->
                             <div class="space-y-1.5">
-                                <label for="rate-thb-input" class="block text-xs font-bold text-rose-600 dark:text-pink-300">Giá trị ngoại tệ Thái Baht (฿)</label>
+                                <label for="rate-thb-input" class="block text-xs font-bold theme-text-muted">Giá trị ngoại tệ Thái Baht (฿)</label>
                                 <div class="relative">
-                                    <input type="text" id="rate-thb-input" placeholder="Nhập THB..." class="w-full text-base font-bold font-mono text-rose-950 dark:text-white px-4 py-3 bg-white/40 dark:bg-black/40 border border-pink-200 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 transition-all" oninput="calculateThreeWay('thb')">
+                                    <input type="text" id="rate-thb-input" placeholder="Nhập THB..." class="w-full text-base font-bold font-mono theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calculateThreeWay('thb')">
                                     <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold select-none">THB</span>
                                 </div>
                             </div>
@@ -438,35 +588,35 @@
                     </div>
 
                     <!-- Conversion Target Panels -->
-                    <div class="lg:col-span-7 bg-pink-50/20 dark:bg-pink-950/20 border border-pink-200/50 dark:border-pink-900/50 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300">
+                    <div class="lg:col-span-7 bg-pink-50/20 dark:bg-pink-950/20 border theme-border rounded-2xl p-6 flex flex-col justify-between transition-all duration-300">
                         <div class="space-y-4">
-                            <h4 class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider border-b border-pink-100 dark:border-pink-900 pb-2">Bản dịch thuật 3 ngôn ngữ song song</h4>
+                            <h4 class="text-[10px] font-extrabold theme-text-muted uppercase tracking-wider border-b theme-border pb-2">Bản dịch thuật 3 ngôn ngữ song song</h4>
                             
                             <!-- Tab Content USD -->
-                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border border-pink-100 dark:border-pink-900/50 space-y-2">
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border theme-border space-y-2">
                                 <div class="text-[9px] font-bold text-pink-600 dark:text-pink-400 tracking-wider uppercase">Đọc số tiền USD:</div>
                                 <div class="space-y-1 font-semibold italic text-xs">
-                                    <p id="ex-usd-vi" class="text-rose-950 dark:text-pink-200">Không đô la Mỹ.</p>
+                                    <p id="ex-usd-vi">Không đô la Mỹ.</p>
                                     <p id="ex-usd-en" class="text-purple-600 dark:text-purple-400">Zero dollars.</p>
                                     <p id="ex-usd-th" class="text-pink-500 dark:text-pink-400">ศูนย์ดอลลาร์สหรัฐ</p>
                                 </div>
                             </div>
 
                             <!-- Tab Content VND -->
-                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border border-pink-100 dark:border-pink-900/50 space-y-2">
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border theme-border space-y-2">
                                 <div class="text-[9px] font-bold text-pink-600 dark:text-pink-400 tracking-wider uppercase">Đọc số tiền VND:</div>
                                 <div class="space-y-1 font-semibold italic text-xs">
-                                    <p id="ex-vnd-vi" class="text-rose-950 dark:text-pink-200">Không đồng chẵn.</p>
+                                    <p id="ex-vnd-vi">Không đồng chẵn.</p>
                                     <p id="ex-vnd-en" class="text-purple-600 dark:text-purple-400">Zero Vietnam dongs only.</p>
                                     <p id="ex-vnd-th" class="text-pink-500 dark:text-pink-400">ศูนย์ดองเวียดนาม</p>
                                 </div>
                             </div>
 
                             <!-- Tab Content THB -->
-                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border border-pink-100 dark:border-pink-900/50 space-y-2">
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border theme-border space-y-2">
                                 <div class="text-[9px] font-bold text-pink-600 dark:text-pink-400 tracking-wider uppercase">Đọc số tiền THB:</div>
                                 <div class="space-y-1 font-semibold italic text-xs">
-                                    <p id="ex-thb-vi" class="text-rose-950 dark:text-pink-200">Không baht Thái chẵn.</p>
+                                    <p id="ex-thb-vi">Không baht Thái chẵn.</p>
                                     <p id="ex-thb-en" class="text-purple-600 dark:text-purple-400">Zero Thai Baht.</p>
                                     <p id="ex-thb-th" class="text-pink-500 dark:text-pink-400">ศูนย์บาทถ้วน</p>
                                 </div>
@@ -475,15 +625,15 @@
 
                         <!-- Copy Target Buttons -->
                         <div class="grid grid-cols-3 gap-2 mt-6 text-[10px] font-extrabold">
-                            <button onclick="copyExchangeResultWords('usd', this)" class="bg-white dark:bg-pink-950/40 border border-pink-200 dark:border-pink-900/80 hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
+                            <button onclick="copyExchangeResultWords('usd', this)" class="bg-white/80 dark:bg-pink-950/40 border theme-border hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                 <span>Copy Chữ USD</span>
                             </button>
-                            <button onclick="copyExchangeResultWords('vnd', this)" class="bg-white dark:bg-pink-950/40 border border-pink-200 dark:border-pink-900/80 hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
+                            <button onclick="copyExchangeResultWords('vnd', this)" class="bg-white/80 dark:bg-pink-950/40 border theme-border hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                 <span>Copy Chữ VND</span>
                             </button>
-                            <button onclick="copyExchangeResultWords('thb', this)" class="bg-white dark:bg-pink-950/40 border border-pink-200 dark:border-pink-900/80 hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
+                            <button onclick="copyExchangeResultWords('thb', this)" class="bg-white/80 dark:bg-pink-950/40 border theme-border hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                 <span>Copy Chữ THB</span>
                             </button>
@@ -495,8 +645,8 @@
 
         <!-- ================= TAB 2: TÍNH THUẾ & VAT ================= -->
         <div id="tab-vat" class="tab-content hidden space-y-6">
-            <div class="glass-card rounded-2xl shadow-premium hover:shadow-premium-hover p-6 transition-all duration-300 neon-glow-hover">
-                <h3 class="text-base font-extrabold text-rose-700 dark:text-pink-400 border-b border-pink-100 dark:border-pink-900 pb-4 mb-6 flex items-center gap-2.5">
+            <div class="theme-card rounded-2xl p-6 transition-all duration-300 sweep-effect">
+                <h3 class="text-base font-extrabold theme-text-main border-b theme-border pb-4 mb-6 flex items-center gap-2.5">
                     <span class="p-2 bg-pink-50 dark:bg-pink-950 rounded-xl text-pink-500 shadow-[0_0_8px_rgba(236,72,153,0.2)]">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l2-2 4 4m0-7l-3-3-3 3m2 8h7a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h3"></path></svg>
                     </span>
@@ -509,21 +659,21 @@
                         
                         <!-- Direction Selection -->
                         <div>
-                            <label class="block text-[10px] font-extrabold text-rose-400 dark:text-pink-400 uppercase tracking-wider mb-2.5">Phương thức quy đổi thuế</label>
+                            <label class="block text-[10px] font-extrabold theme-text-muted uppercase tracking-wider mb-2.5">Phương thức quy đổi thuế</label>
                             <div class="grid grid-cols-2 gap-3">
-                                <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-xl p-3 flex flex-col gap-1.5 cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 transition-all [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                <label class="border theme-border rounded-xl p-3 flex flex-col gap-1.5 cursor-pointer hover:border-pink-300 transition-all [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20">
                                     <div class="flex items-center gap-2">
                                         <input type="radio" name="vat-direction" value="forward" checked class="w-4 h-4 text-pink-600 border-pink-300 focus:ring-pink-500" onchange="toggleVatDirection()">
-                                        <span class="text-xs font-bold text-rose-900 dark:text-pink-200">Giá Chưa Thuế (NET)</span>
+                                        <span class="text-xs font-bold theme-text-main">Giá Chưa Thuế (NET)</span>
                                     </div>
-                                    <span class="text-[10px] text-pink-400/80 pl-6">Tính thêm thuế GTGT</span>
+                                    <span class="text-[10px] theme-text-muted pl-6">Tính thêm thuế GTGT</span>
                                 </label>
-                                <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-xl p-3 flex flex-col gap-1.5 cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 transition-all [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                <label class="border theme-border rounded-xl p-3 flex flex-col gap-1.5 cursor-pointer hover:border-pink-300 transition-all [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20">
                                     <div class="flex items-center gap-2">
                                         <input type="radio" name="vat-direction" value="backward" class="w-4 h-4 text-pink-600 border-pink-300 focus:ring-pink-500" onchange="toggleVatDirection()">
-                                        <span class="text-xs font-bold text-rose-900 dark:text-pink-200">Giá Gồm Thuế (GROSS)</span>
+                                        <span class="text-xs font-bold theme-text-main">Giá Gồm Thuế (GROSS)</span>
                                     </div>
-                                    <span class="text-[10px] text-pink-400/80 pl-6">Trích ngược từ tổng chi</span>
+                                    <span class="text-[10px] theme-text-muted pl-6">Trích ngược từ tổng chi</span>
                                 </label>
                             </div>
                         </div>
@@ -532,22 +682,22 @@
                         <div class="space-y-4">
                             <!-- Net Input (Before Tax) -->
                             <div id="container-net" class="space-y-1.5">
-                                <label for="vat-net" class="block text-xs font-semibold text-rose-500 dark:text-pink-300">Doanh số trước thuế (Giá NET)</label>
+                                <label for="vat-net" class="block text-xs font-semibold theme-text-muted">Doanh số trước thuế (Giá NET)</label>
                                 <div class="relative">
-                                    <input type="text" id="vat-net" placeholder="Nhập giá Net..." class="w-full text-base font-bold font-mono text-rose-950 dark:text-white px-4 py-3 bg-white/40 dark:bg-black/40 border border-pink-200/80 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 transition-all" oninput="calculateVat('net')">
+                                    <input type="text" id="vat-net" placeholder="Nhập giá Net..." class="w-full text-base font-bold font-mono theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calculateVat('net')">
                                     <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold select-none">VND</span>
                                 </div>
                             </div>
 
                             <!-- VAT Rate Selector -->
                             <div>
-                                <label class="block text-xs font-semibold text-rose-500 dark:text-pink-300 mb-2.5">Thuế suất GTGT áp dụng</label>
+                                <label class="block text-xs font-semibold theme-text-muted mb-2.5">Thuế suất GTGT áp dụng</label>
                                 <div class="grid grid-cols-4 gap-2">
-                                    <button onclick="setVatRate(5)" id="btn-vat-5" class="py-2.5 border border-pink-200 dark:border-pink-900 rounded-xl text-xs font-bold hover:bg-pink-100 dark:hover:bg-pink-900/40 text-rose-800 dark:text-pink-300 transition-all">5%</button>
-                                    <button onclick="setVatRate(8)" id="btn-vat-8" class="py-2.5 border border-pink-300 dark:border-pink-800 bg-pink-100/60 dark:bg-pink-950/50 rounded-xl text-xs font-bold text-pink-600 dark:text-pink-300 shadow-sm transition-all">8%</button>
-                                    <button onclick="setVatRate(10)" id="btn-vat-10" class="py-2.5 border border-pink-200 dark:border-pink-900 rounded-xl text-xs font-bold hover:bg-pink-100 dark:hover:bg-pink-900/40 text-rose-800 dark:text-pink-300 transition-all">10%</button>
+                                    <button onclick="setVatRate(5)" id="btn-vat-5" class="py-2.5 border theme-border rounded-xl text-xs font-bold hover:bg-pink-100 dark:hover:bg-pink-900/45 text-rose-800 dark:text-pink-300 transition-all">5%</button>
+                                    <button onclick="setVatRate(8)" id="btn-vat-8" class="py-2.5 border theme-border bg-pink-100/60 dark:bg-pink-950/50 rounded-xl text-xs font-bold text-pink-600 dark:text-pink-300 shadow-sm transition-all">8%</button>
+                                    <button onclick="setVatRate(10)" id="btn-vat-10" class="py-2.5 border theme-border rounded-xl text-xs font-bold hover:bg-pink-100 dark:hover:bg-pink-900/45 text-rose-800 dark:text-pink-300 transition-all">10%</button>
                                     <div class="relative">
-                                        <input type="number" id="vat-custom-rate" value="8" min="0" max="100" placeholder="Tự nhập" class="w-full h-full text-center border border-pink-200 dark:border-pink-900 rounded-xl text-xs font-bold bg-white/40 dark:bg-black/40 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 text-rose-950 dark:text-white" oninput="setVatCustomRate(this.value)">
+                                        <input type="number" id="vat-custom-rate" value="8" min="0" max="100" placeholder="Tự nhập" class="w-full h-full text-center border theme-border rounded-xl text-xs font-bold bg-white/40 dark:bg-black/40 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 text-rose-950 dark:text-white" oninput="setVatCustomRate(this.value)">
                                         <span class="absolute right-2 top-2.5 text-[10px] text-pink-400 font-bold">%</span>
                                     </div>
                                 </div>
@@ -555,9 +705,9 @@
 
                             <!-- Gross Input (After Tax) -->
                             <div id="container-gross" class="space-y-1.5 opacity-50">
-                                <label for="vat-gross" class="block text-xs font-semibold text-rose-500 dark:text-pink-300">Tổng thanh toán gồm thuế (Giá GROSS)</label>
+                                <label for="vat-gross" class="block text-xs font-semibold theme-text-muted">Tổng thanh toán gồm thuế (Giá GROSS)</label>
                                 <div class="relative">
-                                    <input type="text" id="vat-gross" disabled placeholder="Hệ thống tự quy đổi..." class="w-full text-base font-bold font-mono text-rose-950 dark:text-white px-4 py-3 bg-[#fff0f3] dark:bg-black/20 border border-pink-200 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 transition-all" oninput="calculateVat('gross')">
+                                    <input type="text" id="vat-gross" disabled placeholder="Hệ thống tự quy đổi..." class="w-full text-base font-bold font-mono theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calculateVat('gross')">
                                     <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold select-none">VND</span>
                                 </div>
                             </div>
@@ -565,42 +715,42 @@
                     </div>
 
                     <!-- Calculator Outputs & Visual Breakdown -->
-                    <div class="lg:col-span-7 bg-pink-50/20 dark:bg-pink-950/20 border border-pink-200/50 dark:border-pink-900/50 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300">
+                    <div class="lg:col-span-7 bg-pink-50/20 dark:bg-pink-950/20 border theme-border rounded-2xl p-6 flex flex-col justify-between transition-all duration-300">
                         <div class="space-y-4">
-                            <h4 class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider border-b border-pink-100 dark:border-pink-900 pb-2">Cơ Cấu Dòng Tiền & Thuế</h4>
+                            <h4 class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider border-b theme-border pb-2">Cơ Cấu Dòng Tiền & Thuế</h4>
                             
                             <div class="space-y-3">
-                                <div class="flex justify-between items-center text-sm py-2 border-b border-dashed border-pink-200/60 dark:border-pink-900/60">
-                                    <span class="text-rose-500/80 dark:text-pink-400/80 font-medium">Giá trị trước thuế (NET):</span>
-                                    <span class="font-mono font-bold text-rose-950 dark:text-white text-base" id="res-net">0 ₫</span>
+                                <div class="flex justify-between items-center text-sm py-2 border-b border-dashed theme-border">
+                                    <span class="theme-text-muted font-medium">Giá trị trước thuế (NET):</span>
+                                    <span class="font-mono font-bold text-base" id="res-net">0 ₫</span>
                                 </div>
-                                <div class="flex justify-between items-center text-sm py-2 border-b border-dashed border-pink-200/60 dark:border-pink-900/60">
-                                    <span class="text-rose-500/80 dark:text-pink-400/80 font-medium flex items-center gap-1.5">
+                                <div class="flex justify-between items-center text-sm py-2 border-b border-dashed theme-border">
+                                    <span class="theme-text-muted font-medium flex items-center gap-1.5">
                                         Giá trị thuế gia tăng GTGT (<span id="res-rate-label" class="text-pink-600 dark:text-pink-400 font-bold">8%</span>):
                                     </span>
                                     <span class="font-mono font-bold text-rose-500" id="res-vat-amount">0 ₫</span>
                                 </div>
-                                <div class="flex justify-between items-center text-base py-3 border-b border-pink-100 dark:border-pink-900">
-                                    <span class="font-extrabold text-rose-900 dark:text-pink-200">Tổng thanh toán (GROSS):</span>
+                                <div class="flex justify-between items-center text-base py-3 border-b theme-border">
+                                    <span class="font-extrabold theme-text-main">Tổng thanh toán (GROSS):</span>
                                     <span class="font-mono font-black text-pink-600 dark:text-pink-400 text-lg" id="res-gross">0 ₫</span>
                                 </div>
                             </div>
 
                             <!-- Read Out in Words Section (Vietnamese) -->
-                            <div class="bg-white/70 dark:bg-pink-950/40 p-4.5 rounded-xl border border-pink-100 dark:border-pink-900/40 space-y-2">
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4.5 rounded-xl border theme-border space-y-2">
                                 <div class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider">Cách đọc chữ Tiếng Việt:</div>
-                                <div id="res-words" class="text-xs font-semibold text-rose-950 dark:text-pink-200 leading-relaxed italic">Không đồng chẵn.</div>
+                                <div id="res-words" class="text-xs font-semibold leading-relaxed italic">Không đồng chẵn.</div>
                             </div>
 
                             <!-- Read Out in Words Section (English & Thai) -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                                <div class="bg-white/70 dark:bg-pink-950/40 p-3.5 rounded-xl border border-pink-100 dark:border-pink-900/40 space-y-1">
+                                <div class="bg-white/70 dark:bg-pink-950/40 p-3.5 rounded-xl border theme-border space-y-1">
                                     <span class="text-[9px] font-bold text-purple-600 dark:text-purple-400 uppercase">Tiếng Anh:</span>
-                                    <p id="res-words-en" class="text-[11px] font-semibold text-rose-950 dark:text-pink-200 italic leading-snug">Zero dongs only.</p>
+                                    <p id="res-words-en" class="text-[11px] font-semibold italic leading-snug">Zero dongs only.</p>
                                 </div>
-                                <div class="bg-white/70 dark:bg-pink-950/40 p-3.5 rounded-xl border border-pink-100 dark:border-pink-900/40 space-y-1">
+                                <div class="bg-white/70 dark:bg-pink-950/40 p-3.5 rounded-xl border theme-border space-y-1">
                                     <span class="text-[9px] font-bold text-pink-500 dark:text-pink-400 uppercase">Tiếng Thái:</span>
-                                    <p id="res-words-th" class="text-[11px] font-semibold text-rose-950 dark:text-pink-200 italic leading-snug">ศูนย์ดองเวียดนาม</p>
+                                    <p id="res-words-th" class="text-[11px] font-semibold italic leading-snug">ศูนย์ดองเวียดนาม</p>
                                 </div>
                             </div>
                         </div>
@@ -611,7 +761,7 @@
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                 Sao chép chi tiết tính thuế
                             </button>
-                            <button onclick="sendVatToReader()" class="bg-pink-50 hover:bg-pink-100 dark:bg-pink-950/40 dark:hover:bg-pink-950/80 text-pink-700 dark:text-pink-400 font-bold text-xs py-3.5 px-4 rounded-xl border border-pink-100 dark:border-pink-900 transition-all duration-300 flex items-center gap-1.5" title="Đẩy tổng tiền sang tab đọc chữ chuyên sâu">
+                            <button onclick="sendVatToReader()" class="bg-pink-50 hover:bg-pink-100 dark:bg-pink-950/40 dark:hover:bg-pink-950/80 text-pink-700 dark:text-pink-400 font-bold text-xs py-3.5 px-4 rounded-xl border theme-border transition-all duration-300 flex items-center gap-1.5" title="Đẩy tổng tiền sang tab đọc chữ chuyên sâu">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 Đọc chuyên sâu
                             </button>
@@ -623,8 +773,8 @@
 
         <!-- ================= TAB 3: THUẾ NHÀ THẦU (FCT) ================= -->
         <div id="tab-fct" class="tab-content hidden space-y-6">
-            <div class="glass-card rounded-2xl shadow-premium border border-pink-100 dark:border-pink-950 p-6 transition-all duration-300 neon-glow-hover">
-                <h3 class="text-base font-extrabold text-rose-700 dark:text-pink-400 border-b border-pink-100 dark:border-pink-900 pb-4 mb-6 flex items-center gap-2.5">
+            <div class="theme-card rounded-2xl p-6 transition-all duration-300 sweep-effect">
+                <h3 class="text-base font-extrabold theme-text-main border-b theme-border pb-4 mb-6 flex items-center gap-2.5">
                     <span class="p-2 bg-pink-50 dark:bg-pink-950 rounded-xl text-pink-500 shadow-[0_0_8px_rgba(236,72,153,0.2)]">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     </span>
@@ -637,94 +787,94 @@
                         
                         <!-- Contract Type Selection -->
                         <div>
-                            <label class="block text-[10px] font-extrabold text-rose-400 dark:text-pink-400 uppercase tracking-wider mb-2.5">Loại hợp đồng ký kết (Method)</label>
+                            <label class="block text-[10px] font-extrabold theme-text-muted uppercase tracking-wider mb-2.5">Loại hợp đồng ký kết (Method)</label>
                             <div class="grid grid-cols-2 gap-3">
-                                <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-xl p-3 flex flex-col gap-1.5 cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 transition-all [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                <label class="border theme-border rounded-xl p-3 flex flex-col gap-1.5 cursor-pointer hover:border-pink-300 transition-all [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20">
                                     <div class="flex items-center gap-2">
                                         <input type="radio" name="fct-method" value="net" checked class="w-4 h-4 text-pink-600 border-pink-300 focus:ring-pink-500" onchange="calculateFct()">
-                                        <span class="text-xs font-bold text-rose-900 dark:text-pink-200">Giá NET (CĐT nộp thuế)</span>
+                                        <span class="text-xs font-bold theme-text-main">Giá NET (CĐT nộp thuế)</span>
                                     </div>
-                                    <span class="text-[10px] text-pink-400/80 pl-6">Hệ thống thực hiện Gross-up ngược</span>
+                                    <span class="text-[10px] theme-text-muted pl-6">Hệ thống thực hiện Gross-up ngược</span>
                                 </label>
-                                <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-xl p-3 flex flex-col gap-1.5 cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 transition-all [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                <label class="border theme-border rounded-xl p-3 flex flex-col gap-1.5 cursor-pointer hover:border-pink-300 transition-all [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20">
                                     <div class="flex items-center gap-2">
                                         <input type="radio" name="fct-method" value="gross" class="w-4 h-4 text-pink-600 border-pink-300 focus:ring-pink-500" onchange="calculateFct()">
-                                        <span class="text-xs font-bold text-rose-900 dark:text-pink-200">Giá GROSS (Nhà thầu chịu)</span>
+                                        <span class="text-xs font-bold theme-text-main">Giá GROSS (Nhà thầu chịu)</span>
                                     </div>
-                                    <span class="text-[10px] text-pink-400/80 pl-6">Khấu trừ trực tiếp từ giá Gross</span>
+                                    <span class="text-[10px] theme-text-muted pl-6">Khấu trừ trực tiếp từ giá Gross</span>
                                 </label>
                             </div>
                         </div>
 
                         <!-- Amount Input -->
                         <div class="space-y-1.5">
-                            <label for="fct-amount" class="block text-xs font-semibold text-rose-500 dark:text-pink-300" id="label-fct-amount">Giá trị thanh toán thực tế</label>
+                            <label for="fct-amount" class="block text-xs font-semibold theme-text-muted" id="label-fct-amount">Giá trị thanh toán thực tế</label>
                             <div class="relative">
-                                <input type="text" id="fct-amount" placeholder="Nhập giá trị hợp đồng..." class="w-full text-base font-bold font-mono text-rose-950 dark:text-white px-4 py-3 bg-white/40 dark:bg-black/40 border border-pink-200 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 transition-all" oninput="formatAndCalculateFct(this)">
+                                <input type="text" id="fct-amount" placeholder="Nhập giá trị hợp đồng..." class="w-full text-base font-bold font-mono theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="formatAndCalculateFct(this)">
                                 <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold select-none">VND</span>
                             </div>
                         </div>
 
                         <!-- Sector Selection -->
                         <div class="space-y-1.5">
-                            <label for="fct-sector" class="block text-xs font-semibold text-rose-500 dark:text-pink-300">Nhóm ngành nghề hoạt động & Tỷ lệ thuế quy định</label>
-                            <select id="fct-sector" class="w-full bg-white/40 dark:bg-black/40 border border-pink-200 dark:border-pink-900 text-xs font-bold rounded-xl p-3 text-rose-950 dark:text-pink-200 focus:ring-2 focus:ring-pink-500/20 focus:outline-none" onchange="handleFctSectorChange()">
-                                <option value="5-5" class="dark:bg-pink-950">Dịch vụ, cho thuê thiết bị (VAT: 5%, TNDN: 5%)</option>
-                                <option value="3-2" class="dark:bg-pink-950">Hàng hoá kèm dịch vụ / Lắp đặt kèm vật tư (VAT: 3%, TNDN: 2%)</option>
-                                <option value="5-2" class="dark:bg-pink-950">Xây dựng, lắp đặt không bao thầu vật tư (VAT: 5%, TNDN: 2%)</option>
-                                <option value="2-1" class="dark:bg-pink-950">Hoạt động thương mại, phân phối hàng hóa (VAT: 2%, TNDN: 1%)</option>
-                                <option value="0-10" class="dark:bg-pink-950">Bản quyền, chuyển giao công nghệ (VAT: Miễn thuế, TNDN: 10%)</option>
-                                <option value="0-5" class="dark:bg-pink-950">Lãi tiền vay ngân hàng, tài chính (VAT: Miễn thuế, TNDN: 5%)</option>
-                                <option value="custom" class="dark:bg-pink-950">Tùy biến nâng cao (Tự cấu hình tỷ lệ %)</option>
+                            <label for="fct-sector" class="block text-xs font-semibold theme-text-muted">Nhóm ngành nghề hoạt động & Tỷ lệ thuế quy định</label>
+                            <select id="fct-sector" class="w-full theme-input text-xs font-bold rounded-xl p-3 focus:outline-none" onchange="handleFctSectorChange()">
+                                <option value="5-5" class="dark:bg-black">Dịch vụ, cho thuê thiết bị (VAT: 5%, TNDN: 5%)</option>
+                                <option value="3-2" class="dark:bg-black">Hàng hoá kèm dịch vụ / Lắp đặt kèm vật tư (VAT: 3%, TNDN: 2%)</option>
+                                <option value="5-2" class="dark:bg-black">Xây dựng, lắp đặt không bao thầu vật tư (VAT: 5%, TNDN: 2%)</option>
+                                <option value="2-1" class="dark:bg-black">Hoạt động thương mại, phân phối hàng hóa (VAT: 2%, TNDN: 1%)</option>
+                                <option value="0-10" class="dark:bg-black">Bản quyền, chuyển giao công nghệ (VAT: Miễn thuế, TNDN: 10%)</option>
+                                <option value="0-5" class="dark:bg-black">Lãi tiền vay ngân hàng, tài chính (VAT: Miễn thuế, TNDN: 5%)</option>
+                                <option value="custom" class="dark:bg-black">Tùy biến nâng cao (Tự cấu hình tỷ lệ %)</option>
                             </select>
                         </div>
 
                         <!-- Specific Rates Rows -->
                         <div class="grid grid-cols-2 gap-4">
                             <div class="space-y-1.5">
-                                <label for="fct-vat-rate" class="block text-xs font-semibold text-rose-500 dark:text-pink-300">Tỷ lệ thuế GTGT (%)</label>
-                                <input type="number" id="fct-vat-rate" value="5" disabled class="w-full text-sm font-bold font-mono text-rose-800 dark:text-pink-300 px-3.5 py-2.5 bg-[#fff0f3] dark:bg-pink-950/40 border border-pink-200 dark:border-pink-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500/20" oninput="calculateFct()">
+                                <label for="fct-vat-rate" class="block text-xs font-semibold theme-text-muted">Tỷ lệ thuế GTGT (%)</label>
+                                <input type="number" id="fct-vat-rate" value="5" disabled class="w-full text-sm font-bold font-mono theme-text-muted px-3.5 py-2.5 bg-[#fff0f3] dark:bg-pink-950/40 border theme-border rounded-lg focus:outline-none" oninput="calculateFct()">
                             </div>
                             <div class="space-y-1.5">
-                                <label for="fct-cit-rate" class="block text-xs font-semibold text-rose-500 dark:text-pink-300">Tỷ lệ thuế TNDN (%)</label>
-                                <input type="number" id="fct-cit-rate" value="5" disabled class="w-full text-sm font-bold font-mono text-rose-800 dark:text-pink-300 px-3.5 py-2.5 bg-[#fff0f3] dark:bg-pink-950/40 border border-pink-200 dark:border-pink-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500/20" oninput="calculateFct()">
+                                <label for="fct-cit-rate" class="block text-xs font-semibold theme-text-muted">Tỷ lệ thuế TNDN (%)</label>
+                                <input type="number" id="fct-cit-rate" value="5" disabled class="w-full text-sm font-bold font-mono theme-text-muted px-3.5 py-2.5 bg-[#fff0f3] dark:bg-pink-950/40 border theme-border rounded-lg focus:outline-none" oninput="calculateFct()">
                             </div>
                         </div>
                     </div>
 
                     <!-- Calculator Outputs -->
-                    <div class="lg:col-span-7 bg-pink-50/20 dark:bg-pink-950/20 border border-pink-200/50 dark:border-pink-900/50 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300">
+                    <div class="lg:col-span-7 bg-pink-50/20 dark:bg-pink-950/20 border theme-border rounded-2xl p-6 flex flex-col justify-between transition-all duration-300">
                         <div class="space-y-4">
-                            <h4 class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider border-b border-pink-100 dark:border-pink-900 pb-2">Hạch Toán Chi Tiết Gói Thầu</h4>
+                            <h4 class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider border-b theme-border pb-2">Hạch Toán Chi Tiết Gói Thầu</h4>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <!-- CIT Component -->
-                                <div class="bg-white/70 dark:bg-pink-950/40 rounded-xl p-4 border border-pink-100 dark:border-pink-900/40 space-y-2">
+                                <div class="bg-white/70 dark:bg-pink-950/40 rounded-xl p-4 border theme-border space-y-2">
                                     <div class="text-[10px] font-bold text-pink-600 dark:text-pink-400 tracking-wider uppercase flex items-center justify-between">
                                         <span>Thuế TNDN (CIT)</span>
                                         <span class="text-pink-400 dark:text-pink-500 font-mono font-bold" id="fct-cit-rate-badge">5%</span>
                                     </div>
                                     <div class="space-y-1">
                                         <span class="text-[9px] text-pink-400 block">Doanh thu tính thuế CIT:</span>
-                                        <span class="font-mono font-bold text-rose-950 dark:text-pink-200 text-sm" id="fct-res-cit-revenue">0 ₫</span>
+                                        <span class="font-mono font-bold text-sm" id="fct-res-cit-revenue">0 ₫</span>
                                     </div>
-                                    <div class="space-y-1 border-t border-pink-100 dark:border-pink-900/40 pt-1.5">
+                                    <div class="space-y-1 border-t theme-border pt-1.5">
                                         <span class="text-[9px] text-pink-400 block">Tiền thuế TNDN trích nộp:</span>
                                         <span class="font-mono font-extrabold text-pink-600 dark:text-pink-400 text-base" id="fct-res-cit-tax">0 ₫</span>
                                     </div>
                                 </div>
 
                                 <!-- VAT Component -->
-                                <div class="bg-white/70 dark:bg-pink-950/40 rounded-xl p-4 border border-pink-100 dark:border-pink-900/40 space-y-2">
+                                <div class="bg-white/70 dark:bg-pink-950/40 rounded-xl p-4 border theme-border space-y-2">
                                     <div class="text-[10px] font-bold text-purple-600 dark:text-purple-400 tracking-wider uppercase flex items-center justify-between">
                                         <span>Thuế GTGT (VAT)</span>
                                         <span class="text-purple-400 dark:text-purple-500 font-mono font-bold" id="fct-vat-rate-badge">5%</span>
                                     </div>
                                     <div class="space-y-1">
                                         <span class="text-[9px] text-pink-400 block">Doanh thu tính thuế VAT:</span>
-                                        <span class="font-mono font-bold text-rose-950 dark:text-pink-200 text-sm" id="fct-res-vat-revenue">0 ₫</span>
+                                        <span class="font-mono font-bold text-sm" id="fct-res-vat-revenue">0 ₫</span>
                                     </div>
-                                    <div class="space-y-1 border-t border-pink-100 dark:border-pink-900/40 pt-1.5">
+                                    <div class="space-y-1 border-t theme-border pt-1.5">
                                         <span class="text-[9px] text-pink-400 block">Tiền thuế GTGT trích nộp:</span>
                                         <span class="font-mono font-extrabold text-purple-600 dark:text-purple-400 text-base" id="fct-res-vat-tax">0 ₫</span>
                                     </div>
@@ -732,29 +882,29 @@
                             </div>
 
                             <!-- Financial Breakdown Summary -->
-                            <div class="space-y-2.5 bg-white/70 dark:bg-pink-950/40 rounded-xl p-4 border border-pink-100 dark:border-pink-900/40">
-                                <div class="flex justify-between items-center text-xs py-1 border-b border-dashed border-pink-100 dark:border-pink-900/40">
-                                    <span class="text-rose-500 dark:text-pink-400/80 font-bold">Nhà thầu thực nhận về ví (Net):</span>
-                                    <span class="font-mono font-bold text-rose-950 dark:text-pink-100" id="fct-res-contractor-get">0 ₫</span>
+                            <div class="space-y-2.5 bg-white/70 dark:bg-pink-950/40 rounded-xl p-4 border theme-border">
+                                <div class="flex justify-between items-center text-xs py-1 border-b border-dashed theme-border">
+                                    <span class="theme-text-muted font-bold">Nhà thầu thực nhận về ví (Net):</span>
+                                    <span class="font-mono font-bold" id="fct-res-contractor-get">0 ₫</span>
                                 </div>
-                                <div class="flex justify-between items-center text-xs py-1 border-b border-dashed border-pink-100 dark:border-pink-900/40">
-                                    <span class="text-rose-500 dark:text-pink-400/80 font-bold">Tổng thuế FCT phải nộp (GTGT + TNDN):</span>
+                                <div class="flex justify-between items-center text-xs py-1 border-b border-dashed theme-border">
+                                    <span class="theme-text-muted font-bold">Tổng thuế FCT phải nộp (GTGT + TNDN):</span>
                                     <span class="font-mono font-bold text-rose-500" id="fct-res-total-tax">0 ₫</span>
                                 </div>
                                 <div class="flex justify-between items-center text-sm py-1.5">
-                                    <span class="font-bold text-rose-800 dark:text-pink-200" id="label-fct-cdt-cost">Chi phí chủ đầu tư ghi nhận (Gross-up):</span>
+                                    <span class="font-bold" id="label-fct-cdt-cost">Chi phí chủ đầu tư ghi nhận (Gross-up):</span>
                                     <span class="font-mono font-extrabold text-pink-600 dark:text-pink-400 text-base" id="fct-res-cdt-cost">0 ₫</span>
                                 </div>
                             </div>
 
                             <!-- Reading Tax Words -->
-                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border border-pink-100 dark:border-pink-900/40 space-y-2">
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border theme-border space-y-2">
                                 <div class="text-[9px] font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider flex items-center gap-2">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                     Đọc tiền thuế FCT bằng chữ (Viết Giấy nộp tiền vào NSNN)
                                 </div>
                                 <div class="space-y-1 font-semibold italic text-xs">
-                                    <p id="fct-res-words-vi" class="text-rose-950 dark:text-pink-200">Không đồng chẵn.</p>
+                                    <p id="fct-res-words-vi">Không đồng chẵn.</p>
                                     <p id="fct-res-words-en" class="text-purple-600 dark:text-purple-400">Zero dongs only.</p>
                                     <p id="fct-res-words-th" class="text-pink-500 dark:text-pink-400">ศูนย์ดองเวียดนาม</p>
                                 </div>
@@ -775,7 +925,7 @@
     </main>
 
     <!-- Footer Area -->
-    <footer class="bg-white/40 dark:bg-[#060004]/60 backdrop-blur-md border-t border-pink-100 dark:border-pink-950 text-rose-400/80 dark:text-pink-400/50 py-6 mt-auto text-[11px] text-center theme-transition relative z-10">
+    <footer class="bg-white/40 dark:bg-black/60 backdrop-blur-md border-t theme-border text-rose-400/80 dark:text-pink-400/50 py-6 mt-auto text-[11px] text-center theme-transition relative z-10">
         <div class="max-w-7xl mx-auto px-4 space-y-2">
             <p class="font-extrabold text-pink-600 dark:text-pink-400/80 tracking-wide text-xs">© 2026 SWEETIE SUNNY'S APP TOOL. Thiết kế độc bản cho Sunny.</p>
             <p class="max-w-2xl mx-auto leading-relaxed">Thuật toán xử lý ngoại hối 3 chiều, hạch toán chính sách thuế suất GTGT & thuế nhà thầu FCT quốc tế biên dịch tự động chuẩn tài chính Việt Nam (VAS) và thông lệ kế toán quốc tế.</p>
@@ -783,7 +933,7 @@
     </footer>
 
     <!-- Smooth Toast System -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 ease-out bg-rose-950/95 dark:bg-pink-950/95 backdrop-blur text-white px-4 py-3.5 rounded-xl shadow-xl flex items-center gap-2 border border-pink-200/40 dark:border-pink-900/60">
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 ease-out bg-rose-950/95 dark:bg-pink-950/95 backdrop-blur text-white px-4 py-3.5 rounded-xl shadow-xl flex items-center gap-2 border theme-border">
         <div class="p-1 bg-pink-500/10 rounded-lg text-pink-400">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
         </div>
@@ -792,30 +942,28 @@
 
     <!-- Javascript System Code -->
     <script>
-        // Check theme preferences
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            document.getElementById('theme-sun').classList.remove('hidden');
-            document.getElementById('theme-moon').classList.add('hidden');
-        } else {
-            document.documentElement.classList.remove('dark');
-            document.getElementById('theme-sun').classList.add('hidden');
-            document.getElementById('theme-moon').classList.remove('hidden');
-        }
+        // Check and Initialize Theme Mode on Startup
+        let activeTheme = localStorage.getItem('theme') || 'rose';
+        setThemeMode(activeTheme);
 
-        function toggleTheme() {
-            const doc = document.documentElement;
-            const isDark = doc.classList.contains('dark');
-            if (isDark) {
-                doc.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                document.getElementById('theme-sun').classList.add('hidden');
-                document.getElementById('theme-moon').classList.remove('hidden');
+        function setThemeMode(themeName) {
+            activeTheme = themeName;
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('theme', themeName);
+
+            if (themeName === 'cyber') {
+                document.documentElement.classList.add('dark');
             } else {
-                doc.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                document.getElementById('theme-sun').classList.remove('hidden');
-                document.getElementById('theme-moon').classList.add('hidden');
+                document.documentElement.classList.remove('dark');
+            }
+
+            // Update theme switcher UI segments styling
+            document.querySelectorAll('[id^="theme-btn-"]').forEach(btn => {
+                btn.className = "p-2 rounded-lg text-xs font-bold transition-all duration-200 opacity-40 hover:opacity-100";
+            });
+            const activeBtn = document.getElementById(`theme-btn-${themeName}`);
+            if (activeBtn) {
+                activeBtn.className = "p-2 rounded-lg text-xs font-bold transition-all duration-200 opacity-100 bg-pink-500/15 border border-pink-500/40 shadow-sm scale-110";
             }
         }
 
@@ -827,12 +975,12 @@
             document.getElementById(tabId).classList.remove('hidden');
 
             document.querySelectorAll('.nav-tab').forEach(btn => {
-                btn.className = "nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 text-rose-400 dark:text-pink-400/60 hover:text-rose-700 dark:hover:text-pink-200 shrink-0";
+                btn.className = "nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 theme-nav-btn";
             });
 
             const activeBtn = document.getElementById(`btn-${tabId}`);
             if (activeBtn) {
-                activeBtn.className = "nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shadow-sm bg-white dark:bg-pink-950/60 text-pink-600 dark:text-pink-400 shrink-0 neon-glow-active";
+                activeBtn.className = "nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 theme-nav-btn active neon-glow-active";
             }
         }
 
@@ -1107,10 +1255,26 @@
                     }
                 }
             } else {
-                result = mainWords + " " + unit.main;
-                if (hasDecimal && unit.sub !== "") {
-                    result += " and " + decWords + " " + unit.sub;
-                } else if (hasDecimal && unit.sub === "") {
+                // Highly premium singular vs plural handling
+                let mainUnit = unit.main;
+                let subUnit = unit.sub;
+                
+                if (cleanMain === "1") {
+                    if (currencyType === "usd") mainUnit = "dollar";
+                    else if (currencyType === "eur") mainUnit = "Euro";
+                    else if (currencyType === "thb") mainUnit = "Thai Baht";
+                }
+
+                result = mainWords + " " + mainUnit;
+                if (hasDecimal && subUnit !== "") {
+                    let cleanDec = decimalPart.replace(/[^\d]/g, '').slice(0, 2);
+                    if (cleanDec.length === 1) cleanDec += "0";
+                    if (parseInt(cleanDec) === 1) {
+                        if (currencyType === "usd" || currencyType === "eur") subUnit = "cent";
+                        else if (currencyType === "thb") subUnit = "satang";
+                    }
+                    result += " and " + decWords + " " + subUnit;
+                } else if (hasDecimal && subUnit === "") {
                     result += " point";
                     let cleanDec = decimalPart.replace(/[^\d]/g, '');
                     for (let char of cleanDec) {
@@ -1345,11 +1509,11 @@
             const statusBadge = document.getElementById('status-badge');
 
             if (!numericString || isNaN(numericString) || parseFloat(numericString) === 0) {
-                viOutput.innerText = "Vui lòng nhập số tiền để đọc.";
-                enOutput.innerText = "Please enter an amount to read.";
+                viOutput.innerText = "Vui lòng nhập số tiền để dịch.";
+                enOutput.innerText = "Please enter an amount to translate.";
                 thOutput.innerText = "กรุณากรอกจำนวนเงินเพื่อแปลภาษา";
                 statusBadge.textContent = "Đang đợi số liệu...";
-                statusBadge.className = "text-[10px] bg-pink-100 dark:bg-pink-950 text-pink-500 font-bold px-2.5 py-1 rounded-md";
+                statusBadge.className = "text-[10px] theme-badge font-bold px-2.5 py-1 rounded-md";
                 return;
             }
 
@@ -1399,11 +1563,11 @@
 
             historyList.forEach(item => {
                 const tr = document.createElement('tr');
-                tr.className = 'history-item-row border-b border-pink-100 dark:border-pink-900/40 hover:bg-pink-50 dark:hover:bg-pink-950/20 transition-colors duration-150';
+                tr.className = 'history-item-row border-b theme-border hover:bg-pink-50/10 dark:hover:bg-pink-950/10 transition-colors duration-150';
                 tr.innerHTML = `
-                    <td class="py-3 text-pink-400 dark:text-pink-500 font-mono font-bold">${item.time}</td>
+                    <td class="py-3 text-pink-400 font-mono font-bold">${item.time}</td>
                     <td class="py-3 font-mono text-pink-600 dark:text-pink-400 font-extrabold text-sm">${item.num}</td>
-                    <td class="py-3 pr-2 text-rose-950 dark:text-pink-200 text-xs font-semibold">${item.text}</td>
+                    <td class="py-3 pr-2 text-xs font-semibold">${item.text}</td>
                 `;
                 rowsContainer.appendChild(tr);
             });
@@ -1454,12 +1618,12 @@
             currentVatRate = rate;
             
             document.querySelectorAll('[id^="btn-vat-"]').forEach(btn => {
-                btn.className = "py-2.5 border border-pink-200 dark:border-pink-900 rounded-xl text-xs font-bold hover:bg-pink-100 dark:hover:bg-pink-900/40 text-rose-800 dark:text-pink-300 transition-all";
+                btn.className = "py-2.5 border theme-border rounded-xl text-xs font-bold hover:bg-pink-100 dark:hover:bg-pink-900/40 text-rose-855 dark:text-pink-300 transition-all";
             });
             
             const activeBtn = document.getElementById(`btn-vat-${rate}`);
             if (activeBtn) {
-                activeBtn.className = "py-2.5 border border-pink-300 dark:border-pink-800 bg-pink-100/60 dark:bg-pink-950/50 rounded-xl text-xs font-bold text-pink-600 dark:text-pink-300 shadow-sm transition-all";
+                activeBtn.className = "py-2.5 border theme-border bg-pink-100/60 dark:bg-pink-950/50 rounded-xl text-xs font-bold text-pink-600 dark:text-pink-300 shadow-sm transition-all";
             }
 
             document.getElementById('vat-custom-rate').value = rate;
@@ -1474,7 +1638,7 @@
             currentVatRate = num;
 
             document.querySelectorAll('[id^="btn-vat-"]').forEach(btn => {
-                btn.className = "py-2.5 border border-pink-200 dark:border-pink-900 rounded-xl text-xs font-bold hover:bg-pink-100 dark:hover:bg-pink-900/40 text-rose-800 dark:text-pink-300 transition-all";
+                btn.className = "py-2.5 border theme-border rounded-xl text-xs font-bold hover:bg-pink-100 dark:hover:bg-pink-900/40 text-rose-855 dark:text-pink-300 transition-all";
             });
 
             const direction = document.querySelector('input[name="vat-direction"]:checked').value;
