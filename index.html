@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWEETIE SUNNY'S APP TOOL - Premium Finance Assistant</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Be Vietnam Pro', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'pink-glow': '0 0 15px rgba(244, 63, 94, 0.2)',
+                        'pink-glow-hover': '0 0 25px rgba(236, 72, 153, 0.45)',
+                        'premium': '0 10px 30px -10px rgba(244, 63, 94, 0.08), 0 1px 3px rgba(244, 63, 94, 0.02)',
+                        'premium-hover': '0 20px 40px -15px rgba(236, 72, 153, 0.12), 0 1px 10px rgba(236, 72, 153, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* CSS Variables for custom soft theme */
+        :root {
+            --neon-color-rgba: 244, 63, 94;
+        }
+
+        /* Smooth Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #11030a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #fbcfe8;
+            border-radius: 99px;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #db2777;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f472b6;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #ec4899;
+        }
+
+        /* Neon Breathing Borders Effect */
+        @keyframes neon-breath {
+            0%, 100% {
+                border-color: rgba(244, 63, 94, 0.25);
+                box-shadow: 0 0 8px rgba(244, 63, 94, 0.1), inset 0 0 4px rgba(244, 63, 94, 0.02);
+            }
+            50% {
+                border-color: rgba(236, 72, 153, 0.85);
+                box-shadow: 0 0 22px rgba(236, 72, 153, 0.45), inset 0 0 10px rgba(236, 72, 153, 0.15);
+            }
+        }
+        .neon-glow-active {
+            animation: neon-breath 3.5s infinite ease-in-out;
+        }
+        .neon-glow-hover:hover {
+            animation: neon-breath 2s infinite ease-in-out;
+            transition: all 0.3s ease;
+        }
+
+        /* Premium Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(251, 113, 133, 0.18);
+        }
+        .dark .glass-card {
+            background: rgba(18, 4, 12, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(236, 72, 153, 0.25);
+        }
+
+        /* Tab transitions */
+        .tab-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .theme-transition {
+            transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* Remove input spin buttons */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-tr from-[#fff5f6] via-white to-[#fff0f3] dark:from-[#0a0005] dark:via-[#0f040d] dark:to-[#14000e] text-rose-950 dark:text-pink-100 font-sans min-h-screen flex flex-col theme-transition">
+    <!-- Beautiful Floating Decorative Pink Orbs -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-rose-200/30 dark:bg-pink-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-pink-200/20 dark:bg-purple-900/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+    <!-- Header Section -->
+    <header class="relative z-10 bg-white/50 dark:bg-pink-950/20 backdrop-blur-md border-b border-rose-100 dark:border-pink-950 theme-transition sticky top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-4">
+            
+            <!-- Branding -->
+            <div class="flex items-center gap-3.5">
+                <div class="relative group">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-rose-400 rounded-xl blur opacity-40 group-hover:opacity-75 transition duration-1000"></div>
+                    <div class="relative p-2.5 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl shadow-md text-white">
+                        <!-- Premium Heart Crown Icon for Sweetie Sunny -->
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-lg font-extrabold tracking-tight flex items-center gap-2 text-rose-600 dark:text-pink-400">
+                        SWEETIE SUNNY'S APP TOOL
+                        <span class="text-[9px] bg-pink-100 dark:bg-pink-950/80 text-pink-600 dark:text-pink-400 border border-pink-200 dark:border-pink-900 px-2.5 py-0.5 rounded-full font-mono font-bold tracking-wider">PRO v2.5</span>
+                    </h1>
+                    <p class="text-[11px] text-rose-400/80 dark:text-pink-400/60 font-medium">Hệ thống Phân tích Thuế, VAT & Quy đổi Đa Quốc Gia</p>
+                </div>
+            </div>
+            
+            <!-- Actions & Global Exchange Ticker -->
+            <div class="flex items-center gap-4 flex-wrap sm:flex-nowrap">
+                <!-- Global Exchange Rate Indicators -->
+                <div class="bg-white/60 dark:bg-pink-950/30 border border-pink-100 dark:border-pink-900/60 rounded-xl px-3.5 py-1.5 flex items-center gap-3 shadow-sm text-xs font-semibold">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-rose-500">USD/VND:</span>
+                        <input type="text" id="global-usd-rate" value="25,450" class="w-14 bg-transparent text-pink-600 dark:text-pink-400 font-bold border-b border-dashed border-pink-300 dark:border-pink-700 text-center focus:outline-none focus:border-pink-500 font-mono" oninput="syncRatesGlobal()">
+                    </div>
+                    <div class="h-4 w-[1px] bg-pink-100 dark:bg-pink-900"></div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-rose-500">USD/THB:</span>
+                        <input type="text" id="global-thb-rate" value="36.50" class="w-12 bg-transparent text-pink-600 dark:text-pink-400 font-bold border-b border-dashed border-pink-300 dark:border-pink-700 text-center focus:outline-none focus:border-pink-500 font-mono" oninput="syncRatesGlobal()">
+                    </div>
+                </div>
+
+                <!-- Dark/Light Theme Toggle -->
+                <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-white/60 dark:bg-pink-950/30 text-pink-600 dark:text-pink-300 hover:text-rose-600 dark:hover:text-white border border-pink-100 dark:border-pink-900/60 transition-all duration-300 shadow-sm" title="Chuyển đổi giao diện sáng/tối">
+                    <!-- Sun Icon (visible in dark mode) -->
+                    <svg id="theme-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M4.22 4.22l1.58 1.58m12.42 12.42l1.58 1.58M3 12h2.25m13.5 0H21M4.22 19.78l1.58-1.58M17.62 6.38l1.58-1.58M12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z"></path></svg>
+                    <!-- Moon Icon (visible in light mode) -->
+                    <svg id="theme-moon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation / Tabs bar -->
+    <nav class="sticky top-[61px] z-20 bg-[#fff5f6]/80 dark:bg-[#0a0005]/80 backdrop-blur-md border-b border-rose-100 dark:border-pink-950 py-2.5 theme-transition">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-1.5 p-1 bg-pink-100/40 dark:bg-pink-950/40 rounded-2xl border border-pink-200/30 dark:border-pink-900/30 overflow-x-auto">
+                <button onclick="switchTab('tab-convert')" id="btn-tab-convert" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 bg-white dark:bg-pink-950/60 text-pink-600 dark:text-pink-400 shadow-sm neon-glow-active">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 11.37 7.31 16.5 3 19"></path></svg>
+                    Đọc Số Thành Chữ (3 Thứ Tiếng)
+                </button>
+                <button onclick="switchTab('tab-rates')" id="btn-tab-rates" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 text-rose-400 dark:text-pink-400/60 hover:text-rose-700 dark:hover:text-pink-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Quy Đổi 3 Chiều Ngoại Tệ
+                </button>
+                <button onclick="switchTab('tab-vat')" id="btn-tab-vat" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 text-rose-400 dark:text-pink-400/60 hover:text-rose-700 dark:hover:text-pink-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l2-2 4 4m0-7l-3-3-3 3m2 8h7a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h3"></path></svg>
+                    Tính Thuế & VAT Dự Án
+                </button>
+                <button onclick="switchTab('tab-fct')" id="btn-tab-fct" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 text-rose-400 dark:text-pink-400/60 hover:text-rose-700 dark:hover:text-pink-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    Thuế Nhà Thầu (FCT)
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Grid -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-10">
+        
+        <!-- ================= TAB 1: ĐỌC SỐ THÀNH CHỮ ================= -->
+        <div id="tab-convert" class="tab-content space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- Left Input Panel -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-card rounded-2xl shadow-premium hover:shadow-premium-hover p-6 space-y-5 transition-all duration-300 neon-glow-hover">
+                        <div class="flex items-center justify-between border-b border-pink-100 dark:border-pink-900 pb-3">
+                            <h3 class="text-xs font-extrabold text-pink-700 dark:text-pink-400 uppercase tracking-wider flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-pink-500 shadow-[0_0_8px_#ec4899]"></span>
+                                Số liệu đầu vào
+                            </h3>
+                            <button onclick="clearConvertInput()" class="text-[11px] text-pink-400 hover:text-pink-600 dark:hover:text-pink-300 transition-colors flex items-center gap-1 font-bold bg-pink-50 dark:bg-pink-950/40 px-2.5 py-1 rounded-lg">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                Xóa dữ liệu
+                            </button>
+                        </div>
+
+                        <!-- Number Input Field -->
+                        <div class="space-y-2">
+                            <label for="num-input" class="block text-[10px] font-extrabold text-rose-400 dark:text-pink-400 uppercase tracking-wider">Số tiền cần phân tích</label>
+                            <div class="relative group">
+                                <input type="text" id="num-input" placeholder="Nhập số tiền..." class="w-full text-2xl font-extrabold font-mono tracking-tight text-rose-950 dark:text-white pl-4 pr-16 py-4 bg-white/40 dark:bg-black/40 border border-pink-200/80 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-4 focus:ring-pink-500/15 focus:border-pink-400 dark:focus:border-pink-500/60 transition-all placeholder:text-pink-200 dark:placeholder:text-pink-900/60 placeholder:font-sans" oninput="formatAndConvert(this)">
+                                <div class="absolute right-3.5 top-4 bg-pink-100 dark:bg-pink-950/80 text-pink-700 dark:text-pink-300 px-3 py-1 rounded-lg text-xs font-black select-none" id="input-unit-badge">VND</div>
+                            </div>
+                            <div id="live-formatted-preview" class="text-xs font-mono text-pink-600 dark:text-pink-400 font-bold pl-1 min-h-[16px]"></div>
+                        </div>
+
+                        <!-- Configuration Options -->
+                        <div class="space-y-4 pt-3 border-t border-pink-100 dark:border-pink-900">
+                            <h4 class="text-[10px] font-extrabold text-rose-400 dark:text-pink-400 uppercase tracking-wider">Tùy biến đọc chuẩn tài chính</h4>
+                            
+                            <!-- Base Currency Config -->
+                            <div>
+                                <label for="currency-select" class="block text-[10px] font-extrabold text-rose-400 dark:text-pink-400 uppercase tracking-wider mb-2">Đồng tiền cơ sở (Currency Suffix)</label>
+                                <select id="currency-select" class="w-full bg-white/40 dark:bg-black/40 border border-pink-200/80 dark:border-pink-900 text-xs font-bold rounded-xl p-3 text-rose-950 dark:text-pink-200 focus:ring-2 focus:ring-pink-500/20 focus:outline-none" onchange="changeCurrencyType(this.value)">
+                                    <option value="vnd" class="dark:bg-pink-950">VND (Đồng Việt Nam)</option>
+                                    <option value="usd" class="dark:bg-pink-950">USD (Đô la Mỹ)</option>
+                                    <option value="thb" class="dark:bg-pink-950">THB (Thái Baht)</option>
+                                    <option value="eur" class="dark:bg-pink-950">EUR (Euro)</option>
+                                    <option value="none" class="dark:bg-pink-950">Chỉ đọc số (Không kèm đơn vị)</option>
+                                </select>
+                            </div>
+
+                            <!-- Regional Dialect Toggle (Only for VN) -->
+                            <div class="grid grid-cols-2 gap-2.5">
+                                <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-xl p-3 flex flex-col gap-1 cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 transition-all [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                    <div class="flex items-center gap-2">
+                                        <input type="radio" name="dialect" value="north" checked class="w-4 h-4 text-pink-600 border-pink-300 focus:ring-pink-500" onchange="runConversion()">
+                                        <span class="text-xs font-bold text-rose-900 dark:text-pink-200">Kiểu Miền Bắc</span>
+                                    </div>
+                                    <span class="text-[10px] text-pink-400/80 pl-6">Dùng: "Nghìn", "Linh"</span>
+                                </label>
+                                <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-xl p-3 flex flex-col gap-1 cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 transition-all [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                    <div class="flex items-center gap-2">
+                                        <input type="radio" name="dialect" value="south" class="w-4 h-4 text-pink-600 border-pink-300 focus:ring-pink-500" onchange="runConversion()">
+                                        <span class="text-xs font-bold text-rose-900 dark:text-pink-200">Kiểu Miền Nam</span>
+                                    </div>
+                                    <span class="text-[10px] text-pink-400/80 pl-6">Dùng: "Ngàn", "Lẻ"</span>
+                                </label>
+                            </div>
+
+                            <!-- Text Formatting Options -->
+                            <div>
+                                <label class="block text-[10px] font-extrabold text-rose-400 dark:text-pink-400 uppercase tracking-wider mb-2">Định dạng chữ cái</label>
+                                <div class="grid grid-cols-3 gap-1.5 text-[10px] font-extrabold">
+                                    <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-lg p-2.5 text-center cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:text-pink-600 dark:[&:has(input:checked)]:text-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                        <input type="radio" name="text-case" value="sentence" checked class="hidden" onchange="runConversion()">
+                                        Viết hoa đầu
+                                    </label>
+                                    <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-lg p-2.5 text-center cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:text-pink-600 dark:[&:has(input:checked)]:text-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                        <input type="radio" name="text-case" value="upper" class="hidden" onchange="runConversion()">
+                                        VIẾT HOA
+                                    </label>
+                                    <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-lg p-2.5 text-center cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:text-pink-600 dark:[&:has(input:checked)]:text-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                        <input type="radio" name="text-case" value="lower" class="hidden" onchange="runConversion()">
+                                        viết thường
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Decimal setting -->
+                        <div class="flex items-center justify-between border-t border-pink-100 dark:border-pink-900 pt-3 text-xs">
+                            <span class="font-extrabold text-rose-500 dark:text-pink-400">Cho phép phần thập phân (số lẻ)</span>
+                            <label class="relative inline-flex items-center cursor-pointer select-none">
+                                <input type="checkbox" id="allow-decimal" checked class="sr-only peer" onchange="runConversion()">
+                                <div class="w-10 h-6 bg-pink-100 dark:bg-pink-950/60 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-pink-300 dark:after:border-pink-800 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-500"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Output Panel -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="glass-card rounded-2xl shadow-premium hover:shadow-premium-hover p-6 flex flex-col h-full justify-between transition-all duration-300 neon-glow-hover">
+                        <div class="space-y-5">
+                            <div class="flex items-center justify-between border-b border-pink-100 dark:border-pink-900 pb-3">
+                                <h3 class="text-xs font-extrabold text-pink-700 dark:text-pink-400 uppercase tracking-wider flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-pink-500 shadow-[0_0_8px_#ec4899]"></span>
+                                    Dịch thuật đa ngôn ngữ tài chính
+                                </h3>
+                                <span class="text-[10px] bg-pink-100 dark:bg-pink-950 text-pink-600 dark:text-pink-400 font-bold px-2.5 py-1 rounded-lg border border-pink-200 dark:border-pink-900/60" id="status-badge">Đang đợi số liệu...</span>
+                            </div>
+
+                            <!-- Vietnamese Output Card -->
+                            <div class="space-y-2 bg-pink-50/20 dark:bg-pink-950/10 rounded-2xl p-4.5 border border-pink-200/40 dark:border-pink-900/40 group relative">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center gap-2 text-[10px] font-extrabold text-pink-700 dark:text-pink-400 tracking-wider uppercase">
+                                        <span class="w-1.5 h-3 bg-pink-500 rounded-full"></span>
+                                        Tiếng Việt (Vietnamese)
+                                    </div>
+                                    <button onclick="copyToClipboard('vi-output', this)" class="relative flex items-center gap-1.5 text-xs text-pink-600 dark:text-pink-400 hover:text-pink-800 dark:hover:text-pink-200 font-bold bg-white/80 dark:bg-pink-950/60 px-3 py-1.5 rounded-lg border border-pink-200/60 dark:border-pink-900/60 shadow-sm transition-all duration-200">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                </div>
+                                <div id="vi-output" class="text-sm font-semibold text-rose-950 dark:text-pink-200 leading-relaxed min-h-[40px] select-all pt-1">Vui lòng nhập số tiền để dịch.</div>
+                            </div>
+
+                            <!-- English Output Card -->
+                            <div class="space-y-2 bg-purple-50/20 dark:bg-purple-950/10 rounded-2xl p-4.5 border border-purple-200/30 dark:border-purple-900/30 group relative">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center gap-2 text-[10px] font-extrabold text-purple-700 dark:text-purple-400 tracking-wider uppercase">
+                                        <span class="w-1.5 h-3 bg-purple-500 rounded-full"></span>
+                                        Tiếng Anh (English)
+                                    </div>
+                                    <button onclick="copyToClipboard('en-output', this)" class="relative flex items-center gap-1.5 text-xs text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-200 font-bold bg-white/80 dark:bg-pink-950/60 px-3 py-1.5 rounded-lg border border-purple-200/50 dark:border-purple-900/50 shadow-sm transition-all duration-200">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                </div>
+                                <div id="en-output" class="text-sm font-semibold text-rose-950 dark:text-pink-200 leading-relaxed min-h-[40px] select-all pt-1">Please enter an amount to translate.</div>
+                            </div>
+
+                            <!-- Thai Output Card -->
+                            <div class="space-y-2 bg-rose-50/25 dark:bg-pink-900/5 rounded-2xl p-4.5 border border-pink-200/30 dark:border-pink-900/20 group relative">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center gap-2 text-[10px] font-extrabold text-pink-600 dark:text-pink-400 tracking-wider uppercase">
+                                        <span class="w-1.5 h-3 bg-pink-400 rounded-full"></span>
+                                        Tiếng Thái (Thai - ภาษาไทย)
+                                    </div>
+                                    <button onclick="copyToClipboard('th-output', this)" class="relative flex items-center gap-1.5 text-xs text-pink-600 dark:text-pink-400 hover:text-pink-800 dark:hover:text-pink-200 font-bold bg-white/80 dark:bg-pink-950/60 px-3 py-1.5 rounded-lg border border-pink-200/50 dark:border-pink-900/50 shadow-sm transition-all duration-200">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                        <span class="copy-text">Copy</span>
+                                    </button>
+                                </div>
+                                <div id="th-output" class="text-sm font-semibold text-rose-950 dark:text-pink-200 leading-relaxed min-h-[40px] select-all pt-1">กรุณากรอกจำนวนเงินเพื่อแปลภาษา</div>
+                            </div>
+                        </div>
+
+                        <!-- Helper Tip -->
+                        <div class="mt-6 border-t border-pink-100 dark:border-pink-900 pt-4 flex gap-3 items-start text-xs text-rose-400 dark:text-pink-400/60">
+                            <div class="p-1.5 bg-pink-50 dark:bg-pink-950/50 rounded-lg text-pink-500">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <span class="font-extrabold text-pink-600 dark:text-pink-400">Mẹo nghiệp vụ dành riêng cho Sunny:</span> Chuyển đổi song ngữ & ngôn ngữ Thái Baht giúp Sunny xử lý nhanh các loại tờ khai nhập khẩu, tờ trình thiết bị, hóa đơn xuất khẩu chính xác từng cen và satang lẻ!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Session Conversion History -->
+            <div class="glass-card rounded-2xl shadow-premium border border-pink-100 dark:border-pink-950 p-6 transition-all duration-300">
+                <div class="flex items-center justify-between border-b border-pink-100 dark:border-pink-900 pb-3 mb-4">
+                    <h3 class="text-xs font-extrabold text-pink-700 dark:text-pink-400 uppercase tracking-wider flex items-center gap-2">
+                        <svg class="w-5 h-5 text-pink-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Lịch Sử Chuyển Đổi Trong Phiên
+                    </h3>
+                    <button onclick="clearHistory()" class="text-xs text-pink-400 hover:text-pink-600 dark:hover:text-pink-300 transition-colors font-bold">Xóa lịch sử</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="text-rose-400/80 dark:text-pink-400/60 font-extrabold uppercase tracking-wider border-b border-pink-100 dark:border-pink-900">
+                                <th class="pb-3 w-1/5">Thời gian</th>
+                                <th class="pb-3 w-1/5">Số tiền bằng số</th>
+                                <th class="pb-3 w-3/5">Đọc Tiếng Việt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-rows" class="divide-y divide-pink-100/60 dark:divide-pink-950/60 font-medium text-rose-950 dark:text-pink-200">
+                            <tr id="empty-history-row">
+                                <td colspan="3" class="py-6 text-center text-pink-300 dark:text-pink-700">Chưa có hoạt động chuyển đổi nào trong phiên làm việc này.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 4: QUY ĐỔI NGOẠI TỆ ================= -->
+        <div id="tab-rates" class="tab-content hidden space-y-6">
+            <div class="glass-card rounded-2xl shadow-premium border border-pink-100 dark:border-pink-950 p-6 transition-all duration-300">
+                <h3 class="text-base font-extrabold text-rose-700 dark:text-pink-400 border-b border-pink-100 dark:border-pink-900 pb-4 mb-6 flex items-center gap-2.5">
+                    <span class="p-2 bg-pink-50 dark:bg-pink-950 rounded-xl text-pink-500 shadow-[0_0_8px_rgba(236,72,153,0.2)]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </span>
+                    Ma Trận Quy Đổi Ngoại Tệ 3 Chiều (Real-Time 3-Way Grid)
+                </h3>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Grid inputs -->
+                    <div class="lg:col-span-5 space-y-5">
+                        <p class="text-xs font-semibold text-rose-500/80 dark:text-pink-400/80 leading-relaxed">
+                            Sunny chỉ cần nhập giá trị vào **bất kỳ** ô tiền tệ nào bên dưới. Hệ thống sẽ tự động sử dụng tỷ giá định biên quy định phía trên để quy đổi tức thời sang hai đồng tiền còn lại.
+                        </p>
+
+                        <div class="space-y-4">
+                            <!-- Input USD -->
+                            <div class="space-y-1.5">
+                                <label for="rate-usd-input" class="block text-xs font-bold text-rose-600 dark:text-pink-300">Giá trị ngoại tệ USD ($)</label>
+                                <div class="relative">
+                                    <input type="text" id="rate-usd-input" placeholder="Nhập USD..." class="w-full text-base font-bold font-mono text-rose-950 dark:text-white px-4 py-3 bg-white/40 dark:bg-black/40 border border-pink-200 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 transition-all" oninput="calculateThreeWay('usd')">
+                                    <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold select-none">USD</span>
+                                </div>
+                            </div>
+
+                            <!-- Input VND -->
+                            <div class="space-y-1.5">
+                                <label for="rate-vnd-input" class="block text-xs font-bold text-rose-600 dark:text-pink-300">Giá trị nội tệ VND (₫)</label>
+                                <div class="relative">
+                                    <input type="text" id="rate-vnd-input" placeholder="Nhập VND..." class="w-full text-base font-bold font-mono text-rose-950 dark:text-white px-4 py-3 bg-white/40 dark:bg-black/40 border border-pink-200 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 transition-all" oninput="calculateThreeWay('vnd')">
+                                    <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold select-none">VND</span>
+                                </div>
+                            </div>
+
+                            <!-- Input THB -->
+                            <div class="space-y-1.5">
+                                <label for="rate-thb-input" class="block text-xs font-bold text-rose-600 dark:text-pink-300">Giá trị ngoại tệ Thái Baht (฿)</label>
+                                <div class="relative">
+                                    <input type="text" id="rate-thb-input" placeholder="Nhập THB..." class="w-full text-base font-bold font-mono text-rose-950 dark:text-white px-4 py-3 bg-white/40 dark:bg-black/40 border border-pink-200 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 transition-all" oninput="calculateThreeWay('thb')">
+                                    <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold select-none">THB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conversion Target Panels -->
+                    <div class="lg:col-span-7 bg-pink-50/20 dark:bg-pink-950/20 border border-pink-200/50 dark:border-pink-900/50 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300">
+                        <div class="space-y-4">
+                            <h4 class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider border-b border-pink-100 dark:border-pink-900 pb-2">Bản dịch thuật 3 ngôn ngữ song song</h4>
+                            
+                            <!-- Tab Content USD -->
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border border-pink-100 dark:border-pink-900/50 space-y-2">
+                                <div class="text-[9px] font-bold text-pink-600 dark:text-pink-400 tracking-wider uppercase">Đọc số tiền USD:</div>
+                                <div class="space-y-1 font-semibold italic text-xs">
+                                    <p id="ex-usd-vi" class="text-rose-950 dark:text-pink-200">Không đô la Mỹ.</p>
+                                    <p id="ex-usd-en" class="text-purple-600 dark:text-purple-400">Zero dollars.</p>
+                                    <p id="ex-usd-th" class="text-pink-500 dark:text-pink-400">ศูนย์ดอลลาร์สหรัฐ</p>
+                                </div>
+                            </div>
+
+                            <!-- Tab Content VND -->
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border border-pink-100 dark:border-pink-900/50 space-y-2">
+                                <div class="text-[9px] font-bold text-pink-600 dark:text-pink-400 tracking-wider uppercase">Đọc số tiền VND:</div>
+                                <div class="space-y-1 font-semibold italic text-xs">
+                                    <p id="ex-vnd-vi" class="text-rose-950 dark:text-pink-200">Không đồng chẵn.</p>
+                                    <p id="ex-vnd-en" class="text-purple-600 dark:text-purple-400">Zero Vietnam dongs only.</p>
+                                    <p id="ex-vnd-th" class="text-pink-500 dark:text-pink-400">ศูนย์ดองเวียดนาม</p>
+                                </div>
+                            </div>
+
+                            <!-- Tab Content THB -->
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border border-pink-100 dark:border-pink-900/50 space-y-2">
+                                <div class="text-[9px] font-bold text-pink-600 dark:text-pink-400 tracking-wider uppercase">Đọc số tiền THB:</div>
+                                <div class="space-y-1 font-semibold italic text-xs">
+                                    <p id="ex-thb-vi" class="text-rose-950 dark:text-pink-200">Không baht Thái chẵn.</p>
+                                    <p id="ex-thb-en" class="text-purple-600 dark:text-purple-400">Zero Thai Baht.</p>
+                                    <p id="ex-thb-th" class="text-pink-500 dark:text-pink-400">ศูนย์บาทถ้วน</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Copy Target Buttons -->
+                        <div class="grid grid-cols-3 gap-2 mt-6 text-[10px] font-extrabold">
+                            <button onclick="copyExchangeResultWords('usd', this)" class="bg-white dark:bg-pink-950/40 border border-pink-200 dark:border-pink-900/80 hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                <span>Copy Chữ USD</span>
+                            </button>
+                            <button onclick="copyExchangeResultWords('vnd', this)" class="bg-white dark:bg-pink-950/40 border border-pink-200 dark:border-pink-900/80 hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                <span>Copy Chữ VND</span>
+                            </button>
+                            <button onclick="copyExchangeResultWords('thb', this)" class="bg-white dark:bg-pink-950/40 border border-pink-200 dark:border-pink-900/80 hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                <span>Copy Chữ THB</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 2: TÍNH THUẾ & VAT ================= -->
+        <div id="tab-vat" class="tab-content hidden space-y-6">
+            <div class="glass-card rounded-2xl shadow-premium hover:shadow-premium-hover p-6 transition-all duration-300 neon-glow-hover">
+                <h3 class="text-base font-extrabold text-rose-700 dark:text-pink-400 border-b border-pink-100 dark:border-pink-900 pb-4 mb-6 flex items-center gap-2.5">
+                    <span class="p-2 bg-pink-50 dark:bg-pink-950 rounded-xl text-pink-500 shadow-[0_0_8px_rgba(236,72,153,0.2)]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 14l2-2 4 4m0-7l-3-3-3 3m2 8h7a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h3"></path></svg>
+                    </span>
+                    Bảng Tính Thuế Suất Dự Án Song Chiều
+                </h3>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Calculator Inputs -->
+                    <div class="lg:col-span-5 space-y-6">
+                        
+                        <!-- Direction Selection -->
+                        <div>
+                            <label class="block text-[10px] font-extrabold text-rose-400 dark:text-pink-400 uppercase tracking-wider mb-2.5">Phương thức quy đổi thuế</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-xl p-3 flex flex-col gap-1.5 cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 transition-all [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                    <div class="flex items-center gap-2">
+                                        <input type="radio" name="vat-direction" value="forward" checked class="w-4 h-4 text-pink-600 border-pink-300 focus:ring-pink-500" onchange="toggleVatDirection()">
+                                        <span class="text-xs font-bold text-rose-900 dark:text-pink-200">Giá Chưa Thuế (NET)</span>
+                                    </div>
+                                    <span class="text-[10px] text-pink-400/80 pl-6">Tính thêm thuế GTGT</span>
+                                </label>
+                                <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-xl p-3 flex flex-col gap-1.5 cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 transition-all [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                    <div class="flex items-center gap-2">
+                                        <input type="radio" name="vat-direction" value="backward" class="w-4 h-4 text-pink-600 border-pink-300 focus:ring-pink-500" onchange="toggleVatDirection()">
+                                        <span class="text-xs font-bold text-rose-900 dark:text-pink-200">Giá Gồm Thuế (GROSS)</span>
+                                    </div>
+                                    <span class="text-[10px] text-pink-400/80 pl-6">Trích ngược từ tổng chi</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Value inputs -->
+                        <div class="space-y-4">
+                            <!-- Net Input (Before Tax) -->
+                            <div id="container-net" class="space-y-1.5">
+                                <label for="vat-net" class="block text-xs font-semibold text-rose-500 dark:text-pink-300">Doanh số trước thuế (Giá NET)</label>
+                                <div class="relative">
+                                    <input type="text" id="vat-net" placeholder="Nhập giá Net..." class="w-full text-base font-bold font-mono text-rose-950 dark:text-white px-4 py-3 bg-white/40 dark:bg-black/40 border border-pink-200/80 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 transition-all" oninput="calculateVat('net')">
+                                    <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold select-none">VND</span>
+                                </div>
+                            </div>
+
+                            <!-- VAT Rate Selector -->
+                            <div>
+                                <label class="block text-xs font-semibold text-rose-500 dark:text-pink-300 mb-2.5">Thuế suất GTGT áp dụng</label>
+                                <div class="grid grid-cols-4 gap-2">
+                                    <button onclick="setVatRate(5)" id="btn-vat-5" class="py-2.5 border border-pink-200 dark:border-pink-900 rounded-xl text-xs font-bold hover:bg-pink-100 dark:hover:bg-pink-900/40 text-rose-800 dark:text-pink-300 transition-all">5%</button>
+                                    <button onclick="setVatRate(8)" id="btn-vat-8" class="py-2.5 border border-pink-300 dark:border-pink-800 bg-pink-100/60 dark:bg-pink-950/50 rounded-xl text-xs font-bold text-pink-600 dark:text-pink-300 shadow-sm transition-all">8%</button>
+                                    <button onclick="setVatRate(10)" id="btn-vat-10" class="py-2.5 border border-pink-200 dark:border-pink-900 rounded-xl text-xs font-bold hover:bg-pink-100 dark:hover:bg-pink-900/40 text-rose-800 dark:text-pink-300 transition-all">10%</button>
+                                    <div class="relative">
+                                        <input type="number" id="vat-custom-rate" value="8" min="0" max="100" placeholder="Tự nhập" class="w-full h-full text-center border border-pink-200 dark:border-pink-900 rounded-xl text-xs font-bold bg-white/40 dark:bg-black/40 focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 text-rose-950 dark:text-white" oninput="setVatCustomRate(this.value)">
+                                        <span class="absolute right-2 top-2.5 text-[10px] text-pink-400 font-bold">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gross Input (After Tax) -->
+                            <div id="container-gross" class="space-y-1.5 opacity-50">
+                                <label for="vat-gross" class="block text-xs font-semibold text-rose-500 dark:text-pink-300">Tổng thanh toán gồm thuế (Giá GROSS)</label>
+                                <div class="relative">
+                                    <input type="text" id="vat-gross" disabled placeholder="Hệ thống tự quy đổi..." class="w-full text-base font-bold font-mono text-rose-950 dark:text-white px-4 py-3 bg-[#fff0f3] dark:bg-black/20 border border-pink-200 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 transition-all" oninput="calculateVat('gross')">
+                                    <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold select-none">VND</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculator Outputs & Visual Breakdown -->
+                    <div class="lg:col-span-7 bg-pink-50/20 dark:bg-pink-950/20 border border-pink-200/50 dark:border-pink-900/50 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300">
+                        <div class="space-y-4">
+                            <h4 class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider border-b border-pink-100 dark:border-pink-900 pb-2">Cơ Cấu Dòng Tiền & Thuế</h4>
+                            
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center text-sm py-2 border-b border-dashed border-pink-200/60 dark:border-pink-900/60">
+                                    <span class="text-rose-500/80 dark:text-pink-400/80 font-medium">Giá trị trước thuế (NET):</span>
+                                    <span class="font-mono font-bold text-rose-950 dark:text-white text-base" id="res-net">0 ₫</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm py-2 border-b border-dashed border-pink-200/60 dark:border-pink-900/60">
+                                    <span class="text-rose-500/80 dark:text-pink-400/80 font-medium flex items-center gap-1.5">
+                                        Giá trị thuế gia tăng GTGT (<span id="res-rate-label" class="text-pink-600 dark:text-pink-400 font-bold">8%</span>):
+                                    </span>
+                                    <span class="font-mono font-bold text-rose-500" id="res-vat-amount">0 ₫</span>
+                                </div>
+                                <div class="flex justify-between items-center text-base py-3 border-b border-pink-100 dark:border-pink-900">
+                                    <span class="font-extrabold text-rose-900 dark:text-pink-200">Tổng thanh toán (GROSS):</span>
+                                    <span class="font-mono font-black text-pink-600 dark:text-pink-400 text-lg" id="res-gross">0 ₫</span>
+                                </div>
+                            </div>
+
+                            <!-- Read Out in Words Section (Vietnamese) -->
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4.5 rounded-xl border border-pink-100 dark:border-pink-900/40 space-y-2">
+                                <div class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider">Cách đọc chữ Tiếng Việt:</div>
+                                <div id="res-words" class="text-xs font-semibold text-rose-950 dark:text-pink-200 leading-relaxed italic">Không đồng chẵn.</div>
+                            </div>
+
+                            <!-- Read Out in Words Section (English & Thai) -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                                <div class="bg-white/70 dark:bg-pink-950/40 p-3.5 rounded-xl border border-pink-100 dark:border-pink-900/40 space-y-1">
+                                    <span class="text-[9px] font-bold text-purple-600 dark:text-purple-400 uppercase">Tiếng Anh:</span>
+                                    <p id="res-words-en" class="text-[11px] font-semibold text-rose-950 dark:text-pink-200 italic leading-snug">Zero dongs only.</p>
+                                </div>
+                                <div class="bg-white/70 dark:bg-pink-950/40 p-3.5 rounded-xl border border-pink-100 dark:border-pink-900/40 space-y-1">
+                                    <span class="text-[9px] font-bold text-pink-500 dark:text-pink-400 uppercase">Tiếng Thái:</span>
+                                    <p id="res-words-th" class="text-[11px] font-semibold text-rose-950 dark:text-pink-200 italic leading-snug">ศูนย์ดองเวียดนาม</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Utility Actions -->
+                        <div class="flex gap-3 mt-6">
+                            <button onclick="copyVatResult()" class="flex-grow flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold text-xs py-3.5 px-4 rounded-xl shadow-md transition-all duration-300">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                Sao chép chi tiết tính thuế
+                            </button>
+                            <button onclick="sendVatToReader()" class="bg-pink-50 hover:bg-pink-100 dark:bg-pink-950/40 dark:hover:bg-pink-950/80 text-pink-700 dark:text-pink-400 font-bold text-xs py-3.5 px-4 rounded-xl border border-pink-100 dark:border-pink-900 transition-all duration-300 flex items-center gap-1.5" title="Đẩy tổng tiền sang tab đọc chữ chuyên sâu">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                Đọc chuyên sâu
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 3: THUẾ NHÀ THẦU (FCT) ================= -->
+        <div id="tab-fct" class="tab-content hidden space-y-6">
+            <div class="glass-card rounded-2xl shadow-premium border border-pink-100 dark:border-pink-950 p-6 transition-all duration-300 neon-glow-hover">
+                <h3 class="text-base font-extrabold text-rose-700 dark:text-pink-400 border-b border-pink-100 dark:border-pink-900 pb-4 mb-6 flex items-center gap-2.5">
+                    <span class="p-2 bg-pink-50 dark:bg-pink-950 rounded-xl text-pink-500 shadow-[0_0_8px_rgba(236,72,153,0.2)]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </span>
+                    Bảng Tính Thuế Nhà Thầu Nước Ngoài (FCT) - Cập nhật Thông tư 103/2014/TT-BTC
+                </h3>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Calculator Inputs -->
+                    <div class="lg:col-span-5 space-y-5">
+                        
+                        <!-- Contract Type Selection -->
+                        <div>
+                            <label class="block text-[10px] font-extrabold text-rose-400 dark:text-pink-400 uppercase tracking-wider mb-2.5">Loại hợp đồng ký kết (Method)</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-xl p-3 flex flex-col gap-1.5 cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 transition-all [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                    <div class="flex items-center gap-2">
+                                        <input type="radio" name="fct-method" value="net" checked class="w-4 h-4 text-pink-600 border-pink-300 focus:ring-pink-500" onchange="calculateFct()">
+                                        <span class="text-xs font-bold text-rose-900 dark:text-pink-200">Giá NET (CĐT nộp thuế)</span>
+                                    </div>
+                                    <span class="text-[10px] text-pink-400/80 pl-6">Hệ thống thực hiện Gross-up ngược</span>
+                                </label>
+                                <label class="border border-pink-200/60 dark:border-pink-900/60 rounded-xl p-3 flex flex-col gap-1.5 cursor-pointer hover:border-pink-300 dark:hover:border-pink-800 transition-all [&:has(input:checked)]:border-pink-500 dark:[&:has(input:checked)]:border-pink-400 [&:has(input:checked)]:bg-pink-50/40 dark:[&:has(input:checked)]:bg-pink-950/20">
+                                    <div class="flex items-center gap-2">
+                                        <input type="radio" name="fct-method" value="gross" class="w-4 h-4 text-pink-600 border-pink-300 focus:ring-pink-500" onchange="calculateFct()">
+                                        <span class="text-xs font-bold text-rose-900 dark:text-pink-200">Giá GROSS (Nhà thầu chịu)</span>
+                                    </div>
+                                    <span class="text-[10px] text-pink-400/80 pl-6">Khấu trừ trực tiếp từ giá Gross</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Amount Input -->
+                        <div class="space-y-1.5">
+                            <label for="fct-amount" class="block text-xs font-semibold text-rose-500 dark:text-pink-300" id="label-fct-amount">Giá trị thanh toán thực tế</label>
+                            <div class="relative">
+                                <input type="text" id="fct-amount" placeholder="Nhập giá trị hợp đồng..." class="w-full text-base font-bold font-mono text-rose-950 dark:text-white px-4 py-3 bg-white/40 dark:bg-black/40 border border-pink-200 dark:border-pink-900 rounded-xl focus:bg-white dark:focus:bg-black focus:ring-2 focus:ring-pink-500/20 focus:border-pink-400 transition-all" oninput="formatAndCalculateFct(this)">
+                                <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold select-none">VND</span>
+                            </div>
+                        </div>
+
+                        <!-- Sector Selection -->
+                        <div class="space-y-1.5">
+                            <label for="fct-sector" class="block text-xs font-semibold text-rose-500 dark:text-pink-300">Nhóm ngành nghề hoạt động & Tỷ lệ thuế quy định</label>
+                            <select id="fct-sector" class="w-full bg-white/40 dark:bg-black/40 border border-pink-200 dark:border-pink-900 text-xs font-bold rounded-xl p-3 text-rose-950 dark:text-pink-200 focus:ring-2 focus:ring-pink-500/20 focus:outline-none" onchange="handleFctSectorChange()">
+                                <option value="5-5" class="dark:bg-pink-950">Dịch vụ, cho thuê thiết bị (VAT: 5%, TNDN: 5%)</option>
+                                <option value="3-2" class="dark:bg-pink-950">Hàng hoá kèm dịch vụ / Lắp đặt kèm vật tư (VAT: 3%, TNDN: 2%)</option>
+                                <option value="5-2" class="dark:bg-pink-950">Xây dựng, lắp đặt không bao thầu vật tư (VAT: 5%, TNDN: 2%)</option>
+                                <option value="2-1" class="dark:bg-pink-950">Hoạt động thương mại, phân phối hàng hóa (VAT: 2%, TNDN: 1%)</option>
+                                <option value="0-10" class="dark:bg-pink-950">Bản quyền, chuyển giao công nghệ (VAT: Miễn thuế, TNDN: 10%)</option>
+                                <option value="0-5" class="dark:bg-pink-950">Lãi tiền vay ngân hàng, tài chính (VAT: Miễn thuế, TNDN: 5%)</option>
+                                <option value="custom" class="dark:bg-pink-950">Tùy biến nâng cao (Tự cấu hình tỷ lệ %)</option>
+                            </select>
+                        </div>
+
+                        <!-- Specific Rates Rows -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label for="fct-vat-rate" class="block text-xs font-semibold text-rose-500 dark:text-pink-300">Tỷ lệ thuế GTGT (%)</label>
+                                <input type="number" id="fct-vat-rate" value="5" disabled class="w-full text-sm font-bold font-mono text-rose-800 dark:text-pink-300 px-3.5 py-2.5 bg-[#fff0f3] dark:bg-pink-950/40 border border-pink-200 dark:border-pink-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500/20" oninput="calculateFct()">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label for="fct-cit-rate" class="block text-xs font-semibold text-rose-500 dark:text-pink-300">Tỷ lệ thuế TNDN (%)</label>
+                                <input type="number" id="fct-cit-rate" value="5" disabled class="w-full text-sm font-bold font-mono text-rose-800 dark:text-pink-300 px-3.5 py-2.5 bg-[#fff0f3] dark:bg-pink-950/40 border border-pink-200 dark:border-pink-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500/20" oninput="calculateFct()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculator Outputs -->
+                    <div class="lg:col-span-7 bg-pink-50/20 dark:bg-pink-950/20 border border-pink-200/50 dark:border-pink-900/50 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300">
+                        <div class="space-y-4">
+                            <h4 class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider border-b border-pink-100 dark:border-pink-900 pb-2">Hạch Toán Chi Tiết Gói Thầu</h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- CIT Component -->
+                                <div class="bg-white/70 dark:bg-pink-950/40 rounded-xl p-4 border border-pink-100 dark:border-pink-900/40 space-y-2">
+                                    <div class="text-[10px] font-bold text-pink-600 dark:text-pink-400 tracking-wider uppercase flex items-center justify-between">
+                                        <span>Thuế TNDN (CIT)</span>
+                                        <span class="text-pink-400 dark:text-pink-500 font-mono font-bold" id="fct-cit-rate-badge">5%</span>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <span class="text-[9px] text-pink-400 block">Doanh thu tính thuế CIT:</span>
+                                        <span class="font-mono font-bold text-rose-950 dark:text-pink-200 text-sm" id="fct-res-cit-revenue">0 ₫</span>
+                                    </div>
+                                    <div class="space-y-1 border-t border-pink-100 dark:border-pink-900/40 pt-1.5">
+                                        <span class="text-[9px] text-pink-400 block">Tiền thuế TNDN trích nộp:</span>
+                                        <span class="font-mono font-extrabold text-pink-600 dark:text-pink-400 text-base" id="fct-res-cit-tax">0 ₫</span>
+                                    </div>
+                                </div>
+
+                                <!-- VAT Component -->
+                                <div class="bg-white/70 dark:bg-pink-950/40 rounded-xl p-4 border border-pink-100 dark:border-pink-900/40 space-y-2">
+                                    <div class="text-[10px] font-bold text-purple-600 dark:text-purple-400 tracking-wider uppercase flex items-center justify-between">
+                                        <span>Thuế GTGT (VAT)</span>
+                                        <span class="text-purple-400 dark:text-purple-500 font-mono font-bold" id="fct-vat-rate-badge">5%</span>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <span class="text-[9px] text-pink-400 block">Doanh thu tính thuế VAT:</span>
+                                        <span class="font-mono font-bold text-rose-950 dark:text-pink-200 text-sm" id="fct-res-vat-revenue">0 ₫</span>
+                                    </div>
+                                    <div class="space-y-1 border-t border-pink-100 dark:border-pink-900/40 pt-1.5">
+                                        <span class="text-[9px] text-pink-400 block">Tiền thuế GTGT trích nộp:</span>
+                                        <span class="font-mono font-extrabold text-purple-600 dark:text-purple-400 text-base" id="fct-res-vat-tax">0 ₫</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Financial Breakdown Summary -->
+                            <div class="space-y-2.5 bg-white/70 dark:bg-pink-950/40 rounded-xl p-4 border border-pink-100 dark:border-pink-900/40">
+                                <div class="flex justify-between items-center text-xs py-1 border-b border-dashed border-pink-100 dark:border-pink-900/40">
+                                    <span class="text-rose-500 dark:text-pink-400/80 font-bold">Nhà thầu thực nhận về ví (Net):</span>
+                                    <span class="font-mono font-bold text-rose-950 dark:text-pink-100" id="fct-res-contractor-get">0 ₫</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs py-1 border-b border-dashed border-pink-100 dark:border-pink-900/40">
+                                    <span class="text-rose-500 dark:text-pink-400/80 font-bold">Tổng thuế FCT phải nộp (GTGT + TNDN):</span>
+                                    <span class="font-mono font-bold text-rose-500" id="fct-res-total-tax">0 ₫</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm py-1.5">
+                                    <span class="font-bold text-rose-800 dark:text-pink-200" id="label-fct-cdt-cost">Chi phí chủ đầu tư ghi nhận (Gross-up):</span>
+                                    <span class="font-mono font-extrabold text-pink-600 dark:text-pink-400 text-base" id="fct-res-cdt-cost">0 ₫</span>
+                                </div>
+                            </div>
+
+                            <!-- Reading Tax Words -->
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border border-pink-100 dark:border-pink-900/40 space-y-2">
+                                <div class="text-[9px] font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider flex items-center gap-2">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                    Đọc tiền thuế FCT bằng chữ (Viết Giấy nộp tiền vào NSNN)
+                                </div>
+                                <div class="space-y-1 font-semibold italic text-xs">
+                                    <p id="fct-res-words-vi" class="text-rose-950 dark:text-pink-200">Không đồng chẵn.</p>
+                                    <p id="fct-res-words-en" class="text-purple-600 dark:text-purple-400">Zero dongs only.</p>
+                                    <p id="fct-res-words-th" class="text-pink-500 dark:text-pink-400">ศูนย์ดองเวียดนาม</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="mt-6">
+                            <button onclick="copyFctResult()" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold text-xs py-3.5 px-4 rounded-xl shadow-md transition-all duration-300">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                Sao chép báo cáo chi tiết thuế FCT
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Area -->
+    <footer class="bg-white/40 dark:bg-[#060004]/60 backdrop-blur-md border-t border-pink-100 dark:border-pink-950 text-rose-400/80 dark:text-pink-400/50 py-6 mt-auto text-[11px] text-center theme-transition relative z-10">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="font-extrabold text-pink-600 dark:text-pink-400/80 tracking-wide text-xs">© 2026 SWEETIE SUNNY'S APP TOOL. Thiết kế độc bản cho Sunny.</p>
+            <p class="max-w-2xl mx-auto leading-relaxed">Thuật toán xử lý ngoại hối 3 chiều, hạch toán chính sách thuế suất GTGT & thuế nhà thầu FCT quốc tế biên dịch tự động chuẩn tài chính Việt Nam (VAS) và thông lệ kế toán quốc tế.</p>
+        </div>
+    </footer>
+
+    <!-- Smooth Toast System -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 ease-out bg-rose-950/95 dark:bg-pink-950/95 backdrop-blur text-white px-4 py-3.5 rounded-xl shadow-xl flex items-center gap-2 border border-pink-200/40 dark:border-pink-900/60">
+        <div class="p-1 bg-pink-500/10 rounded-lg text-pink-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold" id="toast-message">Đã sao chép nội dung thành công!</span>
+    </div>
+
+    <!-- Javascript System Code -->
+    <script>
+        // Check theme preferences
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('theme-sun').classList.remove('hidden');
+            document.getElementById('theme-moon').classList.add('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.getElementById('theme-sun').classList.add('hidden');
+            document.getElementById('theme-moon').classList.remove('hidden');
+        }
+
+        function toggleTheme() {
+            const doc = document.documentElement;
+            const isDark = doc.classList.contains('dark');
+            if (isDark) {
+                doc.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                document.getElementById('theme-sun').classList.add('hidden');
+                document.getElementById('theme-moon').classList.remove('hidden');
+            } else {
+                doc.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                document.getElementById('theme-sun').classList.remove('hidden');
+                document.getElementById('theme-moon').classList.add('hidden');
+            }
+        }
+
+        // Tab switching logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-tab').forEach(btn => {
+                btn.className = "nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 text-rose-400 dark:text-pink-400/60 hover:text-rose-700 dark:hover:text-pink-200 shrink-0";
+            });
+
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.className = "nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shadow-sm bg-white dark:bg-pink-950/60 text-pink-600 dark:text-pink-400 shrink-0 neon-glow-active";
+            }
+        }
+
+        // Custom Toast system
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        // Copy mechanism with animated feedback directly on the active button
+        function copyToClipboard(elementId, buttonElement) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            if (textToCopy.startsWith("Vui lòng nhập") || textToCopy.startsWith("Please enter") || textToCopy.startsWith("กรุณากรอก") || textToCopy === "Không đồng chẵn." || textToCopy === "Zero.") {
+                showToast("Không có thông tin hợp lệ để sao chép!");
+                return;
+            }
+            
+            const tempInput = document.createElement("textarea");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast("Đã sao chép nội dung thành công!");
+                
+                if (buttonElement) {
+                    const iconEl = buttonElement.querySelector('svg');
+                    const textEl = buttonElement.querySelector('.copy-text');
+                    const originalHTML = iconEl ? iconEl.outerHTML : '';
+                    const originalText = textEl ? textEl.textContent : 'Copy';
+                    
+                    if (textEl) textEl.textContent = 'Đã Copy!';
+                    if (iconEl) {
+                        iconEl.outerHTML = `<svg class="w-3.5 h-3.5 text-emerald-500 animate-bounce" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>`;
+                    }
+                    buttonElement.classList.add('border-pink-500', 'text-pink-500');
+                    
+                    setTimeout(() => {
+                        const newIcon = buttonElement.querySelector('svg');
+                        if (newIcon) newIcon.outerHTML = originalHTML;
+                        if (textEl) textEl.textContent = originalText;
+                        buttonElement.classList.remove('border-pink-500', 'text-pink-500');
+                    }, 1500);
+                }
+            } catch (err) {
+                showToast("Không thể sao chép, vui lòng thử lại!");
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        // ================= ALGORITHMS: NUMBERS TO WORDS SYSTEM =================
+        const digitsVN = ["không", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"];
+        
+        // Currency configuration dictionaries
+        const currencyUnitsVN = {
+            vnd: { main: "đồng", sub: "", only: "chẵn" },
+            usd: { main: "đô la Mỹ", sub: "cent", only: "" },
+            thb: { main: "baht Thái", sub: "satang", only: "chẵn" },
+            eur: { main: "Euro", sub: "cent", only: "" },
+            none: { main: "", sub: "", only: "" }
+        };
+
+        const currencyUnitsEN = {
+            vnd: { main: "Vietnam dongs", sub: "", only: "only" },
+            usd: { main: "dollars", sub: "cents", only: "" },
+            thb: { main: "Thai Baht", sub: "satang", only: "" },
+            eur: { main: "Euros", sub: "cents", only: "" },
+            none: { main: "", sub: "", only: "" }
+        };
+
+        const currencyUnitsTH = {
+            vnd: { main: "ดองเวียดนาม", sub: "", only: "" },
+            usd: { main: "ดอลลาร์สหรัฐ", sub: "เซนต์", only: "" },
+            thb: { main: "บาท", sub: "สตางค์", only: "ถ้วน" },
+            eur: { main: "ยูโร", sub: "เซนต์", only: "" },
+            none: { main: "", sub: "", only: "" }
+        };
+
+        // Helper formatting function to format input values on-the-fly
+        function formatNumberWithCommas(value) {
+            if (value === undefined || value === null) return "";
+            let cleaned = value.toString().replace(/[^\d.]/g, '');
+            let parts = cleaned.split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            
+            if (parts.length > 1) {
+                return parts[0] + '.' + parts[1].slice(0, 4);
+            }
+            return parts[0];
+        }
+
+        // 1. VIETNAMESE TRANSLATION
+        function convertToVietnameseWords(numString, dialect = "north", allowDecimal = true, currencyType = "vnd") {
+            numString = numString.trim().replace(/\s/g, '').replace(/,/g, '');
+            if (!numString || numString === "0") {
+                const suffix = currencyUnitsVN[currencyType]?.main || "";
+                return "Không " + suffix;
+            }
+
+            let mainPart = numString;
+            let decimalPart = "";
+            if (numString.includes(".")) {
+                const parts = numString.split(".");
+                mainPart = parts[0];
+                decimalPart = parts[1] || "";
+            }
+
+            const nghinWord = (dialect === "north") ? "nghìn" : "ngàn";
+            const leWord = (dialect === "north") ? "linh" : "lẻ";
+
+            let cleanMain = mainPart.replace(/[^\d]/g, '');
+            if (!cleanMain) cleanMain = "0";
+            
+            let mainWords = (cleanMain === "0") ? "Không" : readLargeNumberVN(cleanMain, nghinWord, leWord);
+            let decWords = "";
+            let hasDecimal = allowDecimal && decimalPart.replace(/[^\d]/g, '') !== "" && parseInt(decimalPart.replace(/[^\d]/g, '').slice(0, 2)) > 0;
+
+            if (hasDecimal) {
+                let cleanDec = decimalPart.replace(/[^\d]/g, '').slice(0, 2);
+                if (cleanDec.length === 1) cleanDec += "0";
+                decWords = readLargeNumberVN(cleanDec, nghinWord, leWord);
+            }
+
+            const unit = currencyUnitsVN[currencyType] || currencyUnitsVN.none;
+            let result = "";
+
+            if (currencyType === "none") {
+                result = mainWords;
+                if (hasDecimal) {
+                    result += " phẩy";
+                    let cleanDec = decimalPart.replace(/[^\d]/g, '');
+                    for (let char of cleanDec) {
+                        result += " " + digitsVN[parseInt(char)];
+                    }
+                }
+            } else {
+                result = mainWords + " " + unit.main;
+                if (hasDecimal && unit.sub !== "") {
+                    result += " và " + decWords + " " + unit.sub;
+                } else if (hasDecimal && unit.sub === "") {
+                    result += " phẩy";
+                    let cleanDec = decimalPart.replace(/[^\d]/g, '');
+                    for (let char of cleanDec) {
+                        result += " " + digitsVN[parseInt(char)];
+                    }
+                }
+                if (unit.only && !hasDecimal) {
+                    result += " " + unit.only;
+                }
+            }
+
+            return cleanAndFormatText(result);
+        }
+
+        function readLargeNumberVN(numStr, nghinWord, leWord) {
+            numStr = numStr.replace(/^0+/, '');
+            if (numStr === "") return "";
+
+            let chunks = [];
+            while (numStr.length > 0) {
+                chunks.unshift(numStr.slice(-3));
+                numStr = numStr.slice(0, -3);
+            }
+
+            let words = [];
+            const chunkUnits = ["", nghinWord, "triệu", "tỷ", "nghìn tỷ", "triệu tỷ", "tỷ tỷ"];
+
+            for (let i = 0; i < chunks.length; i++) {
+                let chunkVal = parseInt(chunks[i]);
+                if (chunkVal === 0 && chunks.length > 1) {
+                    continue;
+                }
+                
+                let chunkWord = readGroupOfThreeVN(chunks[i], i === 0, leWord);
+                if (chunkWord) {
+                    let unitIndex = chunks.length - 1 - i;
+                    words.push(chunkWord + " " + (chunkUnits[unitIndex] || ""));
+                }
+            }
+
+            return words.join(" ").trim();
+        }
+
+        function readGroupOfThreeVN(chunk, isFirst, leWord) {
+            let val = parseInt(chunk);
+            let padded = chunk.padStart(3, '0');
+            
+            let tram = parseInt(padded[0]);
+            let chuc = parseInt(padded[1]);
+            let donVi = parseInt(padded[2]);
+
+            let out = "";
+
+            if (tram === 0 && chuc === 0 && donVi === 0) return "";
+            if (!isFirst || tram > 0) {
+                out += digitsVN[tram] + " trăm ";
+            }
+
+            if (chuc > 1) {
+                out += digitsVN[chuc] + " mươi ";
+            } else if (chuc === 1) {
+                out += "mười ";
+            } else if (chuc === 0 && donVi > 0) {
+                if (!isFirst || tram > 0) {
+                    out += leWord + " ";
+                }
+            }
+
+            if (donVi === 1 && chuc > 1) {
+                out += "mốt";
+            } else if (donVi === 5 && chuc > 0) {
+                out += "lăm";
+            } else if (donVi === 4 && chuc > 1) {
+                out += "tư"; 
+            } else if (donVi > 0 || (donVi === 0 && chuc === 0 && tram === 0)) {
+                if (donVi > 0) {
+                    out += digitsVN[donVi];
+                }
+            }
+
+            return out.trim();
+        }
+
+        // 2. ENGLISH TRANSLATION
+        const onesEN = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+        const tensEN = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+        const scalesEN = ["", "thousand", "million", "billion", "trillion", "quadrillion"];
+
+        function convertToEnglishWords(numString, allowDecimal = true, currencyType = "usd") {
+            numString = numString.trim().replace(/\s/g, '').replace(/,/g, '');
+            if (!numString || numString === "0") {
+                const suffix = currencyUnitsEN[currencyType]?.main || "";
+                return "Zero " + suffix;
+            }
+
+            let mainPart = numString;
+            let decimalPart = "";
+            if (numString.includes(".")) {
+                const parts = numString.split(".");
+                mainPart = parts[0];
+                decimalPart = parts[1] || "";
+            }
+
+            let cleanMain = mainPart.replace(/[^\d]/g, '');
+            if (!cleanMain) cleanMain = "0";
+
+            let mainWords = (cleanMain === "0") ? "Zero" : readLargeNumberEN(cleanMain);
+            let decWords = "";
+            let hasDecimal = allowDecimal && decimalPart.replace(/[^\d]/g, '') !== "" && parseInt(decimalPart.replace(/[^\d]/g, '').slice(0, 2)) > 0;
+
+            if (hasDecimal) {
+                let cleanDec = decimalPart.replace(/[^\d]/g, '').slice(0, 2);
+                if (cleanDec.length === 1) cleanDec += "0";
+                decWords = readGroupOfThreeEN(parseInt(cleanDec));
+            }
+
+            const unit = currencyUnitsEN[currencyType] || currencyUnitsEN.none;
+            let result = "";
+
+            if (currencyType === "none") {
+                result = mainWords;
+                if (hasDecimal) {
+                    result += " point";
+                    let cleanDec = decimalPart.replace(/[^\d]/g, '');
+                    for (let char of cleanDec) {
+                        result += " " + (onesEN[parseInt(char)] || "zero");
+                    }
+                }
+            } else {
+                result = mainWords + " " + unit.main;
+                if (hasDecimal && unit.sub !== "") {
+                    result += " and " + decWords + " " + unit.sub;
+                } else if (hasDecimal && unit.sub === "") {
+                    result += " point";
+                    let cleanDec = decimalPart.replace(/[^\d]/g, '');
+                    for (let char of cleanDec) {
+                        result += " " + (onesEN[parseInt(char)] || "zero");
+                    }
+                }
+                if (unit.only && !hasDecimal) {
+                    result += " " + unit.only;
+                }
+            }
+
+            return cleanAndFormatText(result);
+        }
+
+        function readLargeNumberEN(numStr) {
+            numStr = numStr.replace(/^0+/, '');
+            if (numStr === "") return "";
+
+            let chunks = [];
+            while (numStr.length > 0) {
+                chunks.unshift(numStr.slice(-3));
+                numStr = numStr.slice(0, -3);
+            }
+
+            let words = [];
+            for (let i = 0; i < chunks.length; i++) {
+                let chunkVal = parseInt(chunks[i]);
+                if (chunkVal === 0) continue;
+
+                let chunkWord = readGroupOfThreeEN(chunkVal);
+                let scaleIndex = chunks.length - 1 - i;
+                words.push(chunkWord + " " + (scalesEN[scaleIndex] || ""));
+            }
+
+            return words.join(" ").trim();
+        }
+
+        function readGroupOfThreeEN(num) {
+            let out = "";
+            if (num >= 100) {
+                out += onesEN[Math.floor(num / 100)] + " hundred ";
+                num %= 100;
+            }
+            if (num >= 20) {
+                out += tensEN[Math.floor(num / 10)] + " ";
+                num %= 10;
+                if (num > 0) {
+                    out = out.trim() + "-" + onesEN[num] + " ";
+                }
+            } else if (num > 0) {
+                out += onesEN[num] + " ";
+            }
+            return out.trim();
+        }
+
+        // 3. THAI TRANSLATION ALGORITHM (ภาษาไทย)
+        function convertToThaiWords(numString, allowDecimal = true, currencyType = "thb") {
+            numString = numString.trim().replace(/\s/g, '').replace(/,/g, '');
+            if (!numString || numString === "0") {
+                const suffix = currencyUnitsTH[currencyType]?.main || "";
+                const only = currencyUnitsTH[currencyType]?.only || "";
+                return "ศูนย์" + suffix + only;
+            }
+
+            let mainPart = numString;
+            let decimalPart = "";
+            if (numString.includes(".")) {
+                const parts = numString.split(".");
+                mainPart = parts[0];
+                decimalPart = parts[1] || "";
+            }
+
+            let cleanMain = mainPart.replace(/[^\d]/g, '');
+            if (!cleanMain) cleanMain = "0";
+
+            let mainWords = translateThaiInt(cleanMain);
+            let decWords = "";
+            let hasDecimal = allowDecimal && decimalPart.replace(/[^\d]/g, '') !== "" && parseInt(decimalPart.replace(/[^\d]/g, '').slice(0, 2)) > 0;
+
+            if (hasDecimal) {
+                let cleanDec = decimalPart.replace(/[^\d]/g, '').slice(0, 2);
+                if (cleanDec.length === 1) cleanDec += "0";
+                decWords = translateThaiInt(cleanDec);
+            }
+
+            const unit = currencyUnitsTH[currencyType] || currencyUnitsTH.none;
+            let result = "";
+
+            if (currencyType === "none") {
+                result = mainWords;
+                if (hasDecimal) {
+                    result += "จุด";
+                    let cleanDec = decimalPart.replace(/[^\d]/g, '');
+                    for (let char of cleanDec) {
+                        result += translateThaiInt(char);
+                    }
+                }
+            } else {
+                result = mainWords + unit.main;
+                if (hasDecimal && unit.sub !== "") {
+                    result += decWords + unit.sub;
+                } else if (hasDecimal && unit.sub === "") {
+                    result += "จุด";
+                    let cleanDec = decimalPart.replace(/[^\d]/g, '');
+                    for (let char of cleanDec) {
+                        result += translateThaiInt(char);
+                    }
+                }
+                if (unit.only && !hasDecimal) {
+                    result += unit.only;
+                }
+            }
+
+            return result;
+        }
+
+        function translateThaiInt(numStr) {
+            if (numStr === "0" || numStr === "") return "ศูนย์";
+            let result = "";
+            let n = numStr.replace(/^0+/, '');
+            if (n === "") return "ศูนย์";
+            
+            let chunks = [];
+            while (n.length > 0) {
+                chunks.unshift(n.slice(-6));
+                n = n.slice(0, -6);
+            }
+            
+            for (let i = 0; i < chunks.length; i++) {
+                let chunkStr = chunks[i];
+                let chunkWords = translateThaiSixDigits(chunkStr);
+                if (chunkWords !== "") {
+                    result += chunkWords;
+                    let remainingMillionUnits = chunks.length - 1 - i;
+                    for (let j = 0; j < remainingMillionUnits; j++) {
+                        result += "ล้าน";
+                    }
+                }
+            }
+            return result;
+        }
+
+        function translateThaiSixDigits(str) {
+            let digits = ["ศูนย์", "หนึ่ง", "สอง", "สาม", "สี่", "ห้า", "หก", "เจ็ด", "แปด", "เก้า"];
+            let units = ["", "สิบ", "ร้อย", "พัน", "หมื่น", "แสน"];
+            
+            let padded = str.padStart(6, '0');
+            let words = "";
+            
+            for (let i = 0; i < 6; i++) {
+                let d = parseInt(padded[i]);
+                let pos = 5 - i;
+                
+                if (d !== 0) {
+                    let digitWord = digits[d];
+                    let unitWord = units[pos];
+                    
+                    if (pos === 1 && d === 1) {
+                        digitWord = "";
+                    }
+                    if (pos === 1 && d === 2) {
+                        digitWord = "ยี่";
+                    }
+                    if (pos === 0 && d === 1) {
+                        let hasPreceding = false;
+                        for (let k = 0; k < i; k++) {
+                            if (parseInt(padded[k]) > 0) {
+                                hasPreceding = true;
+                                break;
+                            }
+                        }
+                        if (hasPreceding) {
+                            digitWord = "เอ็ด";
+                        }
+                    }
+                    words += digitWord + unitWord;
+                }
+            }
+            return words;
+        }
+
+        function cleanAndFormatText(str) {
+            str = str.replace(/\s+/g, ' ').trim();
+            if (!str) return "";
+
+            const selectedCase = document.querySelector('input[name="text-case"]:checked')?.value || 'sentence';
+
+            if (selectedCase === 'upper') {
+                return str.toUpperCase();
+            } else if (selectedCase === 'lower') {
+                return str.toLowerCase();
+            } else {
+                return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+            }
+        }
+
+        // ================= INTERACTION LOGIC & EVENT HANDLERS =================
+        let currentCurrencyType = "vnd";
+
+        function changeCurrencyType(value) {
+            currentCurrencyType = value;
+            document.getElementById('input-unit-badge').textContent = value.toUpperCase();
+            runConversion();
+        }
+
+        function formatAndConvert(inputElement) {
+            let rawValue = inputElement.value;
+            let formatted = formatNumberWithCommas(rawValue);
+            inputElement.value = formatted;
+
+            let numericString = formatted.replace(/,/g, '');
+            const preview = document.getElementById('live-formatted-preview');
+            if (numericString && !isNaN(numericString)) {
+                preview.textContent = "≈ " + parseFloat(numericString).toLocaleString('vi-VN', {maximumFractionDigits: 4}) + " " + currentCurrencyType.toUpperCase();
+            } else {
+                preview.textContent = "";
+            }
+
+            runConversion();
+        }
+
+        function runConversion() {
+            const inputVal = document.getElementById('num-input').value;
+            const numericString = inputVal.replace(/,/g, '');
+            
+            const dialect = document.querySelector('input[name="dialect"]:checked')?.value || 'north';
+            const allowDecimal = document.getElementById('allow-decimal').checked;
+
+            const viOutput = document.getElementById('vi-output');
+            const enOutput = document.getElementById('en-output');
+            const thOutput = document.getElementById('th-output');
+            const statusBadge = document.getElementById('status-badge');
+
+            if (!numericString || isNaN(numericString) || parseFloat(numericString) === 0) {
+                viOutput.innerText = "Vui lòng nhập số tiền để đọc.";
+                enOutput.innerText = "Please enter an amount to read.";
+                thOutput.innerText = "กรุณากรอกจำนวนเงินเพื่อแปลภาษา";
+                statusBadge.textContent = "Đang đợi số liệu...";
+                statusBadge.className = "text-[10px] bg-pink-100 dark:bg-pink-950 text-pink-500 font-bold px-2.5 py-1 rounded-md";
+                return;
+            }
+
+            const viText = convertToVietnameseWords(numericString, dialect, allowDecimal, currentCurrencyType);
+            const enText = convertToEnglishWords(numericString, allowDecimal, currentCurrencyType);
+            const thText = convertToThaiWords(numericString, allowDecimal, currentCurrencyType);
+
+            viOutput.innerText = viText;
+            enOutput.innerText = enText;
+            thOutput.innerText = thText;
+
+            statusBadge.textContent = "Đã dịch 3 thứ tiếng";
+            statusBadge.className = "text-[10px] bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 font-bold px-2.5 py-1 rounded-lg";
+
+            addToHistoryDebounced(numericString, viText);
+        }
+
+        let historyTimeout;
+        function addToHistoryDebounced(num, txt) {
+            clearTimeout(historyTimeout);
+            historyTimeout = setTimeout(() => {
+                if (historyList.length > 0 && historyList[0].num === parseFloat(num).toLocaleString('vi-VN')) return;
+                
+                const timeStr = new Date().toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+                const historyItem = { time: timeStr, num: parseFloat(num).toLocaleString('vi-VN'), text: txt };
+                
+                historyList.unshift(historyItem);
+                if (historyList.length > 10) historyList.pop();
+                
+                renderHistory();
+            }, 1500);
+        }
+
+        function renderHistory() {
+            const rowsContainer = document.getElementById('history-rows');
+            const emptyRow = document.getElementById('empty-history-row');
+            
+            if (historyList.length === 0) {
+                if (emptyRow) emptyRow.style.display = 'table-row';
+                return;
+            }
+
+            if (emptyRow) emptyRow.style.display = 'none';
+
+            const oldRows = rowsContainer.querySelectorAll('.history-item-row');
+            oldRows.forEach(row => row.remove());
+
+            historyList.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'history-item-row border-b border-pink-100 dark:border-pink-900/40 hover:bg-pink-50 dark:hover:bg-pink-950/20 transition-colors duration-150';
+                tr.innerHTML = `
+                    <td class="py-3 text-pink-400 dark:text-pink-500 font-mono font-bold">${item.time}</td>
+                    <td class="py-3 font-mono text-pink-600 dark:text-pink-400 font-extrabold text-sm">${item.num}</td>
+                    <td class="py-3 pr-2 text-rose-950 dark:text-pink-200 text-xs font-semibold">${item.text}</td>
+                `;
+                rowsContainer.appendChild(tr);
+            });
+        }
+
+        function clearHistory() {
+            historyList = [];
+            const rowsContainer = document.getElementById('history-rows');
+            const oldRows = rowsContainer.querySelectorAll('.history-item-row');
+            oldRows.forEach(row => row.remove());
+            document.getElementById('empty-history-row').style.display = 'table-row';
+            showToast("Đã dọn dẹp lịch sử phiên làm việc!");
+        }
+
+        function clearConvertInput() {
+            document.getElementById('num-input').value = "";
+            document.getElementById('live-formatted-preview').textContent = "";
+            runConversion();
+        }
+
+        // ================= TAB 2: VAT CALCULATOR LOGIC =================
+        let currentVatRate = 8;
+
+        function toggleVatDirection() {
+            const direction = document.querySelector('input[name="vat-direction"]:checked').value;
+            const netInput = document.getElementById('vat-net');
+            const grossInput = document.getElementById('vat-gross');
+            const netContainer = document.getElementById('container-net');
+            const grossContainer = document.getElementById('container-gross');
+
+            if (direction === 'forward') {
+                netInput.disabled = false;
+                netInput.focus();
+                grossInput.disabled = true;
+                netContainer.classList.remove('opacity-50');
+                grossContainer.classList.add('opacity-50');
+            } else {
+                netInput.disabled = true;
+                grossInput.disabled = false;
+                grossInput.focus();
+                netContainer.classList.add('opacity-50');
+                grossContainer.classList.remove('opacity-50');
+            }
+            calculateVat(direction === 'forward' ? 'net' : 'gross');
+        }
+
+        function setVatRate(rate) {
+            currentVatRate = rate;
+            
+            document.querySelectorAll('[id^="btn-vat-"]').forEach(btn => {
+                btn.className = "py-2.5 border border-pink-200 dark:border-pink-900 rounded-xl text-xs font-bold hover:bg-pink-100 dark:hover:bg-pink-900/40 text-rose-800 dark:text-pink-300 transition-all";
+            });
+            
+            const activeBtn = document.getElementById(`btn-vat-${rate}`);
+            if (activeBtn) {
+                activeBtn.className = "py-2.5 border border-pink-300 dark:border-pink-800 bg-pink-100/60 dark:bg-pink-950/50 rounded-xl text-xs font-bold text-pink-600 dark:text-pink-300 shadow-sm transition-all";
+            }
+
+            document.getElementById('vat-custom-rate').value = rate;
+            
+            const direction = document.querySelector('input[name="vat-direction"]:checked').value;
+            calculateVat(direction === 'forward' ? 'net' : 'gross');
+        }
+
+        function setVatCustomRate(val) {
+            let num = parseFloat(val);
+            if (isNaN(num) || num < 0) num = 0;
+            currentVatRate = num;
+
+            document.querySelectorAll('[id^="btn-vat-"]').forEach(btn => {
+                btn.className = "py-2.5 border border-pink-200 dark:border-pink-900 rounded-xl text-xs font-bold hover:bg-pink-100 dark:hover:bg-pink-900/40 text-rose-800 dark:text-pink-300 transition-all";
+            });
+
+            const direction = document.querySelector('input[name="vat-direction"]:checked').value;
+            calculateVat(direction === 'forward' ? 'net' : 'gross');
+        }
+
+        function calculateVat(triggerType) {
+            const direction = document.querySelector('input[name="vat-direction"]:checked').value;
+            const rateMultiplier = currentVatRate / 100;
+
+            let netVal = 0;
+            let grossVal = 0;
+            let vatVal = 0;
+
+            if (direction === 'forward') {
+                const inputVal = document.getElementById('vat-net').value.replace(/,/g, '');
+                document.getElementById('vat-net').value = formatNumberWithCommas(document.getElementById('vat-net').value);
+                
+                if (inputVal && !isNaN(inputVal)) {
+                    netVal = parseFloat(inputVal);
+                    vatVal = netVal * rateMultiplier;
+                    grossVal = netVal + vatVal;
+                    document.getElementById('vat-gross').value = formatNumberWithCommas(grossVal.toFixed(0));
+                } else {
+                    document.getElementById('vat-gross').value = "";
+                }
+            } else {
+                const inputVal = document.getElementById('vat-gross').value.replace(/,/g, '');
+                document.getElementById('vat-gross').value = formatNumberWithCommas(document.getElementById('vat-gross').value);
+                
+                if (inputVal && !isNaN(inputVal)) {
+                    grossVal = parseFloat(inputVal);
+                    netVal = grossVal / (1 + rateMultiplier);
+                    vatVal = grossVal - netVal;
+                    document.getElementById('vat-net').value = formatNumberWithCommas(netVal.toFixed(0));
+                } else {
+                    document.getElementById('vat-net').value = "";
+                }
+            }
+
+            const rNet = Math.round(netVal);
+            const rVat = Math.round(vatVal);
+            const rGross = Math.round(grossVal);
+
+            document.getElementById('res-net').textContent = rNet.toLocaleString('vi-VN') + " ₫";
+            document.getElementById('res-vat-amount').textContent = rVat.toLocaleString('vi-VN') + " ₫";
+            document.getElementById('res-gross').textContent = rGross.toLocaleString('vi-VN') + " ₫";
+            document.getElementById('res-rate-label').textContent = currentVatRate + "%";
+
+            // Multi-Language readout for VAT Gross
+            const wordsTextVi = convertToVietnameseWords(rGross.toString(), "north", false, "vnd");
+            const wordsTextEn = convertToEnglishWords(rGross.toString(), false, "vnd");
+            const wordsTextTh = convertToThaiWords(rGross.toString(), false, "vnd");
+
+            document.getElementById('res-words').textContent = wordsTextVi;
+            document.getElementById('res-words-en').textContent = wordsTextEn;
+            document.getElementById('res-words-th').textContent = wordsTextTh;
+        }
+
+        function copyVatResult() {
+            const net = document.getElementById('res-net').textContent;
+            const vatAmount = document.getElementById('res-vat-amount').textContent;
+            const gross = document.getElementById('res-gross').textContent;
+            const rate = document.getElementById('res-rate-label').textContent;
+            const wordsVi = document.getElementById('res-words').textContent;
+            const wordsEn = document.getElementById('res-words-en').textContent;
+            const wordsTh = document.getElementById('res-words-th').textContent;
+
+            const summary = `GIÁ TRỊ CHI TIẾT THANH TOÁN (VAT ${rate}):\n- Giá trước thuế (NET): ${net}\n- Thuế VAT (${rate}): ${vatAmount}\n- Tổng thanh toán (GROSS): ${gross}\n\nĐỌC BẰNG CHỮ:\n- Tiếng Việt: ${wordsVi}\n- Tiếng Anh: ${wordsEn}\n- Tiếng Thái: ${wordsTh}`;
+            
+            const tempInput = document.createElement("textarea");
+            tempInput.value = summary;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            showToast("Đã sao chép báo cáo chi tiết VAT!");
+        }
+
+        function sendVatToReader() {
+            const grossString = document.getElementById('res-gross').textContent.replace(/[^\d]/g, '');
+            if (!grossString || grossString === "0") {
+                showToast("Vui lòng nhập số tiền hợp lệ để phân tích!");
+                return;
+            }
+            switchTab('tab-convert');
+            const numInput = document.getElementById('num-input');
+            numInput.value = formatNumberWithCommas(grossString);
+            formatAndConvert(numInput);
+        }
+
+        // ================= TAB 3: FOREIGN CONTRACTOR TAX (FCT) LOGIC =================
+        function formatAndCalculateFct(element) {
+            let rawValue = element.value;
+            let formatted = formatNumberWithCommas(rawValue);
+            element.value = formatted;
+            calculateFct();
+        }
+
+        function handleFctSectorChange() {
+            const sector = document.getElementById('fct-sector').value;
+            const vatInput = document.getElementById('fct-vat-rate');
+            const citInput = document.getElementById('fct-cit-rate');
+            
+            if (sector === 'custom') {
+                vatInput.disabled = false;
+                citInput.disabled = false;
+                vatInput.classList.remove('bg-slate-100');
+                citInput.classList.remove('bg-slate-100');
+            } else {
+                vatInput.disabled = true;
+                citInput.disabled = true;
+                vatInput.classList.add('bg-slate-100');
+                citInput.classList.add('bg-slate-100');
+                
+                const [vat, cit] = sector.split('-').map(Number);
+                vatInput.value = vat;
+                citInput.value = cit;
+            }
+            calculateFct();
+        }
+
+        function calculateFct() {
+            const method = document.querySelector('input[name="fct-method"]:checked').value;
+            const amountInput = document.getElementById('fct-amount');
+            const rawAmount = amountInput.value.replace(/,/g, '');
+
+            const vatRate = parseFloat(document.getElementById('fct-vat-rate').value) || 0;
+            const citRate = parseFloat(document.getElementById('fct-cit-rate').value) || 0;
+
+            const labelFctAmount = document.getElementById('label-fct-amount');
+            const labelCdtCost = document.getElementById('label-fct-cdt-cost');
+
+            if (method === 'net') {
+                labelFctAmount.textContent = "Giá trị thanh toán nhà thầu thực nhận (Net)";
+                labelCdtCost.textContent = "Tổng chi phí dự án CĐT ghi nhận (Gross-up value):";
+            } else {
+                labelFctAmount.textContent = "Tổng giá trị hợp đồng gồm thuế (Gross)";
+                labelCdtCost.textContent = "Tổng giá trị hợp đồng thầu (Gross value):";
+            }
+
+            document.getElementById('fct-cit-rate-badge').textContent = citRate + "%";
+            document.getElementById('fct-vat-rate-badge').textContent = vatRate + "%";
+
+            let contractorNet = 0;
+            let citRevenue = 0;
+            let citTax = 0;
+            let vatRevenue = 0;
+            let vatTax = 0;
+            let totalTax = 0;
+            let cdtTotalCost = 0;
+
+            const inputNum = parseFloat(rawAmount);
+
+            if (!isNaN(inputNum) && inputNum > 0) {
+                const rVat = vatRate / 100;
+                const rCit = citRate / 100;
+
+                const denomCit = (1 - rCit) === 0 ? 1 : (1 - rCit);
+                const denomVat = (1 - rVat) === 0 ? 1 : (1 - rVat);
+
+                if (method === 'net') {
+                    contractorNet = inputNum;
+                    citRevenue = contractorNet / denomCit;
+                    citTax = citRevenue * rCit;
+                    vatRevenue = citRevenue / denomVat;
+                    vatTax = vatRevenue * rVat;
+                    cdtTotalCost = vatRevenue;
+                    totalTax = citTax + vatTax;
+                } else {
+                    cdtTotalCost = inputNum;
+                    vatRevenue = cdtTotalCost;
+                    vatTax = vatRevenue * rVat;
+                    citRevenue = vatRevenue - vatTax;
+                    citTax = citRevenue * rCit;
+                    totalTax = vatTax + citTax;
+                    contractorNet = cdtTotalCost - totalTax;
+                }
+            }
+
+            document.getElementById('fct-res-cit-revenue').textContent = Math.round(citRevenue).toLocaleString('vi-VN') + " ₫";
+            document.getElementById('fct-res-cit-tax').textContent = Math.round(citTax).toLocaleString('vi-VN') + " ₫";
+            
+            document.getElementById('fct-res-vat-revenue').textContent = Math.round(vatRevenue).toLocaleString('vi-VN') + " ₫";
+            document.getElementById('fct-res-vat-tax').textContent = Math.round(vatTax).toLocaleString('vi-VN') + " ₫";
+
+            document.getElementById('fct-res-contractor-get').textContent = Math.round(contractorNet).toLocaleString('vi-VN') + " ₫";
+            document.getElementById('fct-res-total-tax').textContent = Math.round(totalTax).toLocaleString('vi-VN') + " ₫";
+            document.getElementById('fct-res-cdt-cost').textContent = Math.round(cdtTotalCost).toLocaleString('vi-VN') + " ₫";
+
+            const roundedTax = Math.round(totalTax);
+            document.getElementById('fct-res-words-vi').textContent = convertToVietnameseWords(roundedTax.toString(), "north", false, "vnd");
+            document.getElementById('fct-res-words-en').textContent = convertToEnglishWords(roundedTax.toString(), false, "vnd");
+            document.getElementById('fct-res-words-th').textContent = convertToThaiWords(roundedTax.toString(), false, "vnd");
+        }
+
+        function copyFctResult() {
+            const rawAmount = document.getElementById('fct-amount').value;
+            if (!rawAmount || rawAmount === "0") {
+                showToast("Không có số liệu thuế FCT để sao chép!");
+                return;
+            }
+
+            const method = document.querySelector('input[name="fct-method"]:checked').value === 'net' ? "NET (Gross-up)" : "GROSS (Direct)";
+            const sector = document.getElementById('fct-sector').options[document.getElementById('fct-sector').selectedIndex].text;
+            
+            const citRevenue = document.getElementById('fct-res-cit-revenue').textContent;
+            const citTax = document.getElementById('fct-res-cit-tax').textContent;
+            const vatRevenue = document.getElementById('fct-res-vat-revenue').textContent;
+            const vatTax = document.getElementById('fct-res-vat-tax').textContent;
+            
+            const contractorGet = document.getElementById('fct-res-contractor-get').textContent;
+            const totalTax = document.getElementById('fct-res-total-tax').textContent;
+            const cdtCost = document.getElementById('fct-res-cdt-cost').textContent;
+            const wordsVi = document.getElementById('fct-res-words-vi').textContent;
+
+            const summaryText = `BÁO CÁO PHÂN TÍCH THUẾ NHÀ THẦU NƯỚC NGOÀI (FCT)-----------------------------------------------* Phương thức hạch toán: ${method}* Lĩnh vực hoạt động: ${sector}* Giá trị đầu vào: ${rawAmount} VND
+
+CHI TIẾT PHÂN RÃ CƠ CẤU THUẾ:1. Thuế TNDN (CIT):   - Doanh thu tính thuế CIT: ${citRevenue}   - Tiền thuế CIT khấu trừ: ${citTax}2. Thuế GTGT (VAT):   - Doanh thu tính thuế VAT: ${vatRevenue}   - Tiền thuế VAT khấu trừ: ${vatTax}
+
+KẾT LUẬN DÒNG TIỀN DỰ ÁN:- Nhà thầu nước ngoài thực nhận (Net): ${contractorGet}- Tổng thuế FCT thực nộp ngân sách: ${totalTax}- Tổng chi phí thực tế CĐT ghi nhận: ${cdtCost}- Đọc bằng chữ (Tiền thuế FCT): ${wordsVi}`;
+
+            const tempInput = document.createElement("textarea");
+            tempInput.value = summaryText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            showToast("Đã sao chép toàn bộ báo cáo phân rã FCT!");
+        }
+
+        // ================= TAB 4: REAL-TIME 3-WAY CURRENCY EXCHANGE RATE =================
+        let activeExchangeCurrency = 'usd';
+
+        function syncRatesGlobal() {
+            // Update rates values in real-time calculations from inputs
+            calculateThreeWay(activeExchangeCurrency);
+        }
+
+        function calculateThreeWay(triggerSource) {
+            activeExchangeCurrency = triggerSource;
+            
+            const rateVndStr = document.getElementById('global-usd-rate').value.replace(/,/g, '');
+            const rateThbStr = document.getElementById('global-thb-rate').value.replace(/,/g, '');
+            
+            const rateVnd = parseFloat(rateVndStr) || 25450;
+            const rateThb = parseFloat(rateThbStr) || 36.50;
+
+            const usdField = document.getElementById('rate-usd-input');
+            const vndField = document.getElementById('rate-vnd-input');
+            const thbField = document.getElementById('rate-thb-input');
+
+            let usdVal = 0;
+            let vndVal = 0;
+            let thbVal = 0;
+
+            if (triggerSource === 'usd') {
+                const usdRaw = usdField.value.replace(/,/g, '');
+                usdField.value = formatNumberWithCommas(usdField.value);
+                if (usdRaw && !isNaN(usdRaw)) {
+                    usdVal = parseFloat(usdRaw);
+                    vndVal = usdVal * rateVnd;
+                    thbVal = usdVal * rateThb;
+                    
+                    vndField.value = formatNumberWithCommas(Math.round(vndVal).toString());
+                    thbField.value = formatNumberWithCommas(thbVal.toFixed(2));
+                } else {
+                    vndField.value = "";
+                    thbField.value = "";
+                }
+            } else if (triggerSource === 'vnd') {
+                const vndRaw = vndField.value.replace(/,/g, '');
+                vndField.value = formatNumberWithCommas(vndField.value);
+                if (vndRaw && !isNaN(vndRaw)) {
+                    vndVal = parseFloat(vndRaw);
+                    usdVal = vndVal / rateVnd;
+                    thbVal = usdVal * rateThb;
+
+                    usdField.value = formatNumberWithCommas(usdVal.toFixed(2));
+                    thbField.value = formatNumberWithCommas(thbVal.toFixed(2));
+                } else {
+                    usdField.value = "";
+                    thbField.value = "";
+                }
+            } else if (triggerSource === 'thb') {
+                const thbRaw = thbField.value.replace(/,/g, '');
+                thbField.value = formatNumberWithCommas(thbField.value);
+                if (thbRaw && !isNaN(thbRaw)) {
+                    thbVal = parseFloat(thbRaw);
+                    usdVal = thbVal / rateThb;
+                    vndVal = usdVal * rateVnd;
+
+                    usdField.value = formatNumberWithCommas(usdVal.toFixed(2));
+                    vndField.value = formatNumberWithCommas(Math.round(vndVal).toString());
+                } else {
+                    usdField.value = "";
+                    vndField.value = "";
+                }
+            }
+
+            // Perform translation readouts for all converted currencies
+            // USD Translate
+            document.getElementById('ex-usd-vi').textContent = convertToVietnameseWords(usdVal.toFixed(2), "north", true, "usd");
+            document.getElementById('ex-usd-en').textContent = convertToEnglishWords(usdVal.toFixed(2), true, "usd");
+            document.getElementById('ex-usd-th').textContent = convertToThaiWords(usdVal.toFixed(2), true, "usd");
+
+            // VND Translate
+            document.getElementById('ex-vnd-vi').textContent = convertToVietnameseWords(Math.round(vndVal).toString(), "north", false, "vnd");
+            document.getElementById('ex-vnd-en').textContent = convertToEnglishWords(Math.round(vndVal).toString(), false, "vnd");
+            document.getElementById('ex-vnd-th').textContent = convertToThaiWords(Math.round(vndVal).toString(), false, "vnd");
+
+            // THB Translate
+            document.getElementById('ex-thb-vi').textContent = convertToVietnameseWords(thbVal.toFixed(2), "north", true, "thb");
+            document.getElementById('ex-thb-en').textContent = convertToEnglishWords(thbVal.toFixed(2), true, "thb");
+            document.getElementById('ex-thb-th').textContent = convertToThaiWords(thbVal.toFixed(2), true, "thb");
+        }
+
+        function copyExchangeResultWords(type, buttonElement) {
+            let textToCopy = "";
+            if (type === 'usd') {
+                textToCopy = `USD: ${document.getElementById('rate-usd-input').value || "0"}\n- VN: ${document.getElementById('ex-usd-vi').textContent}\n- EN: ${document.getElementById('ex-usd-en').textContent}\n- TH: ${document.getElementById('ex-usd-th').textContent}`;
+            } else if (type === 'vnd') {
+                textToCopy = `VND: ${document.getElementById('rate-vnd-input').value || "0"}\n- VN: ${document.getElementById('ex-vnd-vi').textContent}\n- EN: ${document.getElementById('ex-vnd-en').textContent}\n- TH: ${document.getElementById('ex-vnd-th').textContent}`;
+            } else if (type === 'thb') {
+                textToCopy = `THB: ${document.getElementById('rate-thb-input').value || "0"}\n- VN: ${document.getElementById('ex-thb-vi').textContent}\n- EN: ${document.getElementById('ex-thb-en').textContent}\n- TH: ${document.getElementById('ex-thb-th').textContent}`;
+            }
+
+            const tempInput = document.createElement("textarea");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            showToast(`Đã sao chép chữ quy đổi của ${type.toUpperCase()}!`);
+
+            if (buttonElement) {
+                const originalText = buttonElement.querySelector('span').textContent;
+                buttonElement.querySelector('span').textContent = 'Đã Copy!';
+                buttonElement.classList.add('border-pink-500', 'text-pink-500');
+                setTimeout(() => {
+                    buttonElement.querySelector('span').textContent = originalText;
+                    buttonElement.classList.remove('border-pink-500', 'text-pink-500');
+                }, 1500);
+            }
+        }
+
+        window.onload = function () {
+            document.getElementById('num-input').focus();
+            syncRatesGlobal();
+            calculateFct();
+        }
+    </script>
+</body>
+</html>
