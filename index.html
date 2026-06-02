@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SWEETIE SUNNY'S APP TOOL - Premium Finance Assistant</title>
+    <title>SWEETIE SUNNY'S APP TOOL - Premium Finance Assistant v4.0</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- SheetJS Excel Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -261,6 +263,14 @@
         .dark .theme-nav-btn.active {
             background: rgba(236, 72, 153, 0.15);
         }
+            /* ===== PRINT CSS for PDF Export ===== */
+        @media print {
+            header, nav, footer, #toast, .no-print { display: none !important; }
+            body { background: white !important; }
+            .tab-content.hidden { display: block !important; }
+            .tab-content:not(#print-target) { display: none !important; }
+            .theme-card { box-shadow: none !important; border: 1px solid #ddd !important; background: white !important; }
+        }
     </style>
 </head>
 <body class="theme-bg text-rose-950 font-sans min-h-screen flex flex-col theme-transition grid-overlay">
@@ -303,6 +313,16 @@
                         <span class="theme-text-muted">USD/THB:</span>
                         <input type="text" id="global-thb-rate" value="36.50" class="w-11 bg-transparent theme-text-main font-bold border-b border-dashed theme-border text-center focus:outline-none" oninput="syncRatesGlobal()">
                     </div>
+                    <div class="h-4 w-[1px] bg-rose-200 dark:bg-pink-900/60"></div>
+                    <div class="flex items-center gap-1">
+                        <span class="theme-text-muted">EUR/VND:</span>
+                        <input type="text" id="global-eur-rate" value="27,500" class="w-14 bg-transparent theme-text-main font-bold border-b border-dashed theme-border text-center focus:outline-none" oninput="syncRatesGlobal()">
+                    </div>
+                    <div class="h-4 w-[1px] bg-rose-200 dark:bg-pink-900/60"></div>
+                    <div class="flex items-center gap-1">
+                        <span class="theme-text-muted">QAR/VND:</span>
+                        <input type="text" id="global-qar-rate" value="6,985" class="w-14 bg-transparent theme-text-main font-bold border-b border-dashed theme-border text-center focus:outline-none" oninput="syncRatesGlobal()">
+                    </div>
                 </div>
 
                 <!-- Segmented Feminine Theme Selector -->
@@ -340,6 +360,14 @@
                 <button onclick="switchTab('tab-fct')" id="btn-tab-fct" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 theme-nav-btn">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     Thuế Nhà Thầu (FCT)
+                </button>
+                <button onclick="switchTab('tab-depre')" id="btn-tab-depre" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 theme-nav-btn">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    Khấu Hao TSCĐ
+                </button>
+                <button onclick="switchTab('tab-tvm')" id="btn-tab-tvm" class="nav-tab flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 shrink-0 theme-nav-btn">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Lãi Suất &amp; TVM
                 </button>
             </div>
         </div>
@@ -623,6 +651,26 @@
                             </div>
                         </div>
 
+
+                            <!-- Tab Content EUR -->
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border theme-border space-y-2">
+                                <div class="text-[9px] font-bold text-pink-600 dark:text-pink-400 tracking-wider uppercase">Đọc số tiền EUR:</div>
+                                <div class="space-y-1 font-semibold italic text-xs">
+                                    <p id="ex-eur-vi">Không Euro chẵn.</p>
+                                    <p id="ex-eur-en" class="text-purple-600 dark:text-purple-400">Zero Euros.</p>
+                                    <p id="ex-eur-th" class="text-pink-500 dark:text-pink-400">ศูนย์ยูโร</p>
+                                </div>
+                            </div>
+
+                            <!-- Tab Content QAR -->
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border theme-border space-y-2">
+                                <div class="text-[9px] font-bold text-pink-600 dark:text-pink-400 tracking-wider uppercase">Đọc số tiền QAR:</div>
+                                <div class="space-y-1 font-semibold italic text-xs">
+                                    <p id="ex-qar-vi">Không Riyal Qatar chẵn.</p>
+                                    <p id="ex-qar-en" class="text-purple-600 dark:text-purple-400">Zero Qatari Riyals.</p>
+                                    <p id="ex-qar-th" class="text-pink-500 dark:text-pink-400">ศูนย์ริยัลกาตาร์</p>
+                                </div>
+                            </div>
                         <!-- Copy Target Buttons -->
                         <div class="grid grid-cols-3 gap-2 mt-6 text-[10px] font-extrabold">
                             <button onclick="copyExchangeResultWords('usd', this)" class="bg-white/80 dark:bg-pink-950/40 border theme-border hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
@@ -636,6 +684,15 @@
                             <button onclick="copyExchangeResultWords('thb', this)" class="bg-white/80 dark:bg-pink-950/40 border theme-border hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                 <span>Copy Chữ THB</span>
+                            </button>
+
+                            <button onclick="copyExchangeResultWords('eur', this)" class="bg-white/80 dark:bg-pink-950/40 border theme-border hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                <span>Copy Chữ EUR</span>
+                            </button>
+                            <button onclick="copyExchangeResultWords('qar', this)" class="bg-white/80 dark:bg-pink-950/40 border theme-border hover:border-pink-400 text-rose-700 dark:text-pink-300 py-2.5 px-2 rounded-xl transition-all flex items-center justify-center gap-1 shadow-sm">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                <span>Copy Chữ QAR</span>
                             </button>
                         </div>
                     </div>
@@ -759,11 +816,19 @@
                         <div class="flex gap-3 mt-6">
                             <button onclick="copyVatResult()" class="flex-grow flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold text-xs py-3.5 px-4 rounded-xl shadow-md transition-all duration-300">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
-                                Sao chép chi tiết tính thuế
+                                Sao chép
                             </button>
                             <button onclick="sendVatToReader()" class="bg-pink-50 hover:bg-pink-100 dark:bg-pink-950/40 dark:hover:bg-pink-950/80 text-pink-700 dark:text-pink-400 font-bold text-xs py-3.5 px-4 rounded-xl border theme-border transition-all duration-300 flex items-center gap-1.5" title="Đẩy tổng tiền sang tab đọc chữ chuyên sâu">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                Đọc chuyên sâu
+                                Đọc chữ
+                            </button>
+                            <button onclick="exportVatPDF()" class="bg-red-50 hover:bg-red-100 dark:bg-red-950/40 text-red-700 dark:text-red-400 font-bold text-xs py-3.5 px-4 rounded-xl border border-red-200 dark:border-red-800 transition-all duration-300 flex items-center gap-1.5" title="Xuất PDF">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                PDF
+                            </button>
+                            <button onclick="exportVatExcel()" class="bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 font-bold text-xs py-3.5 px-4 rounded-xl border border-emerald-200 dark:border-emerald-800 transition-all duration-300 flex items-center gap-1.5" title="Xuất Excel">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                Excel
                             </button>
                         </div>
                     </div>
@@ -912,11 +977,378 @@
                         </div>
 
                         <!-- Actions -->
-                        <div class="mt-6">
-                            <button onclick="copyFctResult()" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold text-xs py-3.5 px-4 rounded-xl shadow-md transition-all duration-300">
+                        <div class="mt-6 flex flex-wrap gap-2">
+                            <button onclick="copyFctResult()" class="flex-1 min-w-[120px] flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold text-xs py-3.5 px-4 rounded-xl shadow-md transition-all duration-300">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
-                                Sao chép báo cáo chi tiết thuế FCT
+                                Sao chép báo cáo FCT
                             </button>
+                            <button onclick="exportFctPDF()" class="flex items-center justify-center gap-1.5 bg-red-50 hover:bg-red-100 dark:bg-red-950/40 text-red-700 dark:text-red-400 font-bold text-xs py-3.5 px-4 rounded-xl border border-red-200 dark:border-red-800 transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                PDF
+                            </button>
+                            <button onclick="exportFctExcel()" class="flex items-center justify-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 font-bold text-xs py-3.5 px-4 rounded-xl border border-emerald-200 dark:border-emerald-800 transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                Excel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-contractor Section -->
+            <div class="theme-card rounded-2xl p-6 transition-all duration-300 sweep-effect">
+                <h3 class="text-base font-extrabold theme-text-main border-b theme-border pb-4 mb-6 flex items-center gap-2.5">
+                    <span class="p-2 bg-pink-50 dark:bg-pink-950 rounded-xl text-pink-500 shadow-[0_0_8px_rgba(236,72,153,0.2)]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </span>
+                    Tính Thuế Nhà Thầu Phụ (Sub-contractor FCT)
+                    <span class="ml-auto text-[10px] bg-amber-100 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400 px-2.5 py-1 rounded-lg border border-amber-200 dark:border-amber-800 font-bold">TT 103/2014</span>
+                </h3>
+                <p class="text-xs theme-text-muted mb-5 leading-relaxed">Khi Nhà thầu chính (nước ngoài) ký hợp đồng với Nhà thầu phụ Việt Nam, phần giá trị chuyển giao cho nhà thầu phụ sẽ được <strong>khấu trừ khỏi doanh thu tính thuế FCT</strong> của nhà thầu chính.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-semibold theme-text-muted">Tổng giá trị HĐ Nhà Thầu Chính (Gross)</label>
+                            <div class="relative">
+                                <input type="text" id="sub-main-amount" placeholder="Nhập giá trị HĐ chính..." class="w-full text-base font-bold font-mono theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="formatAndCalcSub(this)">
+                                <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold">VND</span>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-semibold theme-text-muted">Giá trị chuyển nhà thầu phụ VN (được trừ)</label>
+                            <div class="relative">
+                                <input type="text" id="sub-sub-amount" placeholder="Nhập giá trị nhà thầu phụ..." class="w-full text-base font-bold font-mono theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="formatAndCalcSub(this)">
+                                <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold">VND</span>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-semibold theme-text-muted">Nhóm ngành FCT áp dụng</label>
+                            <select id="sub-sector" class="w-full theme-input text-xs font-bold rounded-xl p-3 focus:outline-none" onchange="calculateSub()">
+                                <option value="5-5">Dịch vụ, cho thuê thiết bị (VAT: 5%, TNDN: 5%)</option>
+                                <option value="3-2">Hàng hoá kèm dịch vụ (VAT: 3%, TNDN: 2%)</option>
+                                <option value="5-2">Xây dựng, lắp đặt (VAT: 5%, TNDN: 2%)</option>
+                                <option value="2-1">Thương mại, phân phối (VAT: 2%, TNDN: 1%)</option>
+                                <option value="0-10">Bản quyền, CGCN (VAT: 0%, TNDN: 10%)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7 bg-pink-50/20 dark:bg-pink-950/20 border theme-border rounded-2xl p-6 space-y-4">
+                        <h4 class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider border-b theme-border pb-2">Kết Quả FCT Sau Khấu Trừ Nhà Thầu Phụ</h4>
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between items-center text-xs py-1.5 border-b border-dashed theme-border">
+                                <span class="theme-text-muted font-bold">Tổng HĐ nhà thầu chính:</span>
+                                <span class="font-mono font-bold" id="sub-res-main">0 ₫</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs py-1.5 border-b border-dashed theme-border">
+                                <span class="theme-text-muted font-bold">Trừ: Phần nhà thầu phụ VN:</span>
+                                <span class="font-mono font-bold text-emerald-600" id="sub-res-sub">- 0 ₫</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs py-1.5 border-b border-dashed theme-border">
+                                <span class="theme-text-muted font-bold font-bold">Doanh thu tính thuế FCT (còn lại):</span>
+                                <span class="font-mono font-bold text-amber-600 dark:text-amber-400" id="sub-res-taxable">0 ₫</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs py-1.5 border-b border-dashed theme-border">
+                                <span class="theme-text-muted font-bold">Thuế GTGT FCT (trên phần còn lại):</span>
+                                <span class="font-mono font-bold text-purple-600 dark:text-purple-400" id="sub-res-vat">0 ₫</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs py-1.5 border-b border-dashed theme-border">
+                                <span class="theme-text-muted font-bold">Thuế TNDN FCT (trên phần còn lại):</span>
+                                <span class="font-mono font-bold text-rose-600 dark:text-rose-400" id="sub-res-cit">0 ₫</span>
+                            </div>
+                            <div class="flex justify-between items-center text-sm py-2">
+                                <span class="font-extrabold theme-text-main">Tổng FCT phải nộp (sau khấu trừ):</span>
+                                <span class="font-mono font-black text-pink-600 dark:text-pink-400 text-lg" id="sub-res-total">0 ₫</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/70 dark:bg-pink-950/40 p-3.5 rounded-xl border theme-border">
+                            <div class="text-[9px] font-bold text-pink-600 dark:text-pink-400 uppercase mb-1">Đọc tổng thuế FCT (nhà thầu phụ) bằng chữ:</div>
+                            <p id="sub-res-words" class="text-xs font-semibold italic">Không đồng chẵn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 5: KHẤU HAO TSCĐ ================= -->
+        <div id="tab-depre" class="tab-content hidden space-y-6">
+            <div class="theme-card rounded-2xl p-6 transition-all duration-300 sweep-effect">
+                <h3 class="text-base font-extrabold theme-text-main border-b theme-border pb-4 mb-6 flex items-center gap-2.5">
+                    <span class="p-2 bg-pink-50 dark:bg-pink-950 rounded-xl text-pink-500 shadow-[0_0_8px_rgba(236,72,153,0.2)]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    </span>
+                    Tính Khấu Hao Tài Sản Cố Định (TSCĐ)
+                    <span class="ml-auto text-[10px] bg-pink-100 dark:bg-pink-950/50 theme-badge px-2.5 py-1 rounded-lg font-bold">TT 45/2018/TT-BTC</span>
+                </h3>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Inputs -->
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] font-extrabold theme-text-muted uppercase tracking-wider">Nguyên Giá Tài Sản</label>
+                            <div class="relative">
+                                <input type="text" id="dep-cost" placeholder="Nhập nguyên giá..." class="w-full text-lg font-bold font-mono theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="fmtDep('dep-cost'); calculateDepreciation()">
+                                <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold">VND</span>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] font-extrabold theme-text-muted uppercase tracking-wider">Giá Trị Thanh Lý Dự Kiến</label>
+                            <div class="relative">
+                                <input type="text" id="dep-salvage" placeholder="Mặc định: 0..." class="w-full text-base font-bold font-mono theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="fmtDep('dep-salvage'); calculateDepreciation()">
+                                <span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold">VND</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label class="block text-[10px] font-extrabold theme-text-muted uppercase tracking-wider">Thời Gian Sử Dụng</label>
+                                <input type="number" id="dep-life" placeholder="5" min="1" max="50" class="w-full text-base font-bold font-mono theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calculateDepreciation()">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="block text-[10px] font-extrabold theme-text-muted uppercase tracking-wider">Đơn Vị</label>
+                                <select id="dep-unit" class="w-full theme-input text-xs font-bold rounded-xl p-3 focus:outline-none h-[50px]" onchange="calculateDepreciation()">
+                                    <option value="year">Năm</option>
+                                    <option value="month">Tháng</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-[10px] font-extrabold theme-text-muted uppercase tracking-wider">Phương Pháp Khấu Hao</label>
+                            <div class="space-y-2">
+                                <label class="border theme-border rounded-xl p-3 flex items-start gap-3 cursor-pointer [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20 transition-all">
+                                    <input type="radio" name="dep-method" value="straight" checked class="mt-0.5 w-4 h-4 text-pink-600" onchange="calculateDepreciation()">
+                                    <div>
+                                        <div class="text-xs font-bold theme-text-main">Đường Thẳng (Straight-Line)</div>
+                                        <div class="text-[10px] theme-text-muted">Khấu hao đều hàng năm</div>
+                                    </div>
+                                </label>
+                                <label class="border theme-border rounded-xl p-3 flex items-start gap-3 cursor-pointer [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20 transition-all">
+                                    <input type="radio" name="dep-method" value="declining" class="mt-0.5 w-4 h-4 text-pink-600" onchange="calculateDepreciation()">
+                                    <div>
+                                        <div class="text-xs font-bold theme-text-main">Số Dư Giảm Dần Kép (DDB)</div>
+                                        <div class="text-[10px] theme-text-muted">Khấu hao nhanh đầu kỳ, Rate = 2/N</div>
+                                    </div>
+                                </label>
+                                <label class="border theme-border rounded-xl p-3 flex items-start gap-3 cursor-pointer [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20 transition-all">
+                                    <input type="radio" name="dep-method" value="soyd" class="mt-0.5 w-4 h-4 text-pink-600" onchange="calculateDepreciation()">
+                                    <div>
+                                        <div class="text-xs font-bold theme-text-main">Tổng Số Năm (Sum-of-Years)</div>
+                                        <div class="text-[10px] theme-text-muted">Giảm dần theo trọng số năm</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Outputs -->
+                    <div class="lg:col-span-7 space-y-4">
+                        <!-- Summary Cards -->
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="bg-pink-50/30 dark:bg-pink-950/30 border theme-border rounded-xl p-4 text-center">
+                                <div class="text-[9px] font-bold theme-text-muted uppercase mb-1">KH Năm Đầu</div>
+                                <div class="font-mono font-black text-pink-600 dark:text-pink-400 text-sm" id="dep-year1">0 ₫</div>
+                            </div>
+                            <div class="bg-pink-50/30 dark:bg-pink-950/30 border theme-border rounded-xl p-4 text-center">
+                                <div class="text-[9px] font-bold theme-text-muted uppercase mb-1">KH Tháng</div>
+                                <div class="font-mono font-black text-purple-600 dark:text-purple-400 text-sm" id="dep-monthly">0 ₫</div>
+                            </div>
+                            <div class="bg-pink-50/30 dark:bg-pink-950/30 border theme-border rounded-xl p-4 text-center">
+                                <div class="text-[9px] font-bold theme-text-muted uppercase mb-1">Tổng KH</div>
+                                <div class="font-mono font-black text-emerald-600 dark:text-emerald-400 text-sm" id="dep-total-depre">0 ₫</div>
+                            </div>
+                        </div>
+                        <!-- Depreciation Table -->
+                        <div class="bg-pink-50/20 dark:bg-pink-950/20 border theme-border rounded-2xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider">Bảng Khấu Hao Chi Tiết</h4>
+                                <button onclick="exportDepreExcel()" class="flex items-center gap-1 text-[10px] font-bold bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 px-3 py-1.5 rounded-lg border border-emerald-200 dark:border-emerald-800 transition-all">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                    Xuất Excel
+                                </button>
+                            </div>
+                            <div class="overflow-auto max-h-72">
+                                <table class="w-full text-left text-xs border-collapse" id="dep-table">
+                                    <thead class="sticky top-0">
+                                        <tr class="theme-text-muted font-extrabold uppercase tracking-wider border-b theme-border bg-white/60 dark:bg-black/40">
+                                            <th class="pb-2 pr-3">Kỳ</th>
+                                            <th class="pb-2 pr-3 text-right">Giá Trị Đầu Kỳ</th>
+                                            <th class="pb-2 pr-3 text-right">Khấu Hao</th>
+                                            <th class="pb-2 pr-3 text-right">KH Lũy Kế</th>
+                                            <th class="pb-2 text-right">Giá Trị Cuối Kỳ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dep-table-body" class="divide-y theme-border">
+                                        <tr><td colspan="5" class="py-4 text-center theme-text-muted">Nhập số liệu để xem bảng khấu hao</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 6: LÃI SUẤT & GIÁ TRỊ THỜI GIAN TIỀN TỆ ================= -->
+        <div id="tab-tvm" class="tab-content hidden space-y-6">
+            <div class="theme-card rounded-2xl p-6 transition-all duration-300 sweep-effect">
+                <h3 class="text-base font-extrabold theme-text-main border-b theme-border pb-4 mb-6 flex items-center gap-2.5">
+                    <span class="p-2 bg-pink-50 dark:bg-pink-950 rounded-xl text-pink-500 shadow-[0_0_8px_rgba(236,72,153,0.2)]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </span>
+                    Lãi Suất & Giá Trị Thời Gian Tiền Tệ (TVM)
+                </h3>
+                <!-- Mode Selector -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <button onclick="setTVMMode('fv')" id="tvm-btn-fv" class="tvm-mode-btn px-4 py-2 rounded-xl text-xs font-bold border theme-border transition-all theme-nav-btn active neon-glow-active">FV — Giá Trị Tương Lai</button>
+                    <button onclick="setTVMMode('pv')" id="tvm-btn-pv" class="tvm-mode-btn px-4 py-2 rounded-xl text-xs font-bold border theme-border transition-all theme-nav-btn">PV — Giá Trị Hiện Tại</button>
+                    <button onclick="setTVMMode('annuity')" id="tvm-btn-annuity" class="tvm-mode-btn px-4 py-2 rounded-xl text-xs font-bold border theme-border transition-all theme-nav-btn">PMT — Niên Kim / Trả Góp</button>
+                    <button onclick="setTVMMode('npv')" id="tvm-btn-npv" class="tvm-mode-btn px-4 py-2 rounded-xl text-xs font-bold border theme-border transition-all theme-nav-btn">NPV / IRR — Dự Án</button>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- TVM Inputs -->
+                    <div class="lg:col-span-5 space-y-4" id="tvm-inputs-panel">
+                        <!-- FV Mode -->
+                        <div id="tvm-panel-fv" class="space-y-4">
+                            <div class="space-y-1.5">
+                                <label class="block text-[10px] font-extrabold theme-text-muted uppercase">Số Tiền Hiện Tại (PV)</label>
+                                <div class="relative"><input type="text" id="tvm-fv-pv" placeholder="Nhập PV..." class="w-full font-mono font-bold text-base theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="fmtTVM('tvm-fv-pv'); calcTVM()"><span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold">VND</span></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="space-y-1.5">
+                                    <label class="block text-[10px] font-extrabold theme-text-muted uppercase">Lãi Suất / Kỳ (%)</label>
+                                    <input type="number" id="tvm-fv-rate" placeholder="8" step="0.01" class="w-full font-mono font-bold text-base theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calcTVM()">
+                                </div>
+                                <div class="space-y-1.5">
+                                    <label class="block text-[10px] font-extrabold theme-text-muted uppercase">Số Kỳ (n)</label>
+                                    <input type="number" id="tvm-fv-n" placeholder="5" min="1" class="w-full font-mono font-bold text-base theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calcTVM()">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-extrabold theme-text-muted uppercase mb-2">Loại Lãi Suất</label>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <label class="border theme-border rounded-xl p-3 flex gap-2 items-center cursor-pointer [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20 transition-all">
+                                        <input type="radio" name="tvm-fv-type" value="compound" checked class="w-4 h-4 text-pink-600" onchange="calcTVM()">
+                                        <div><div class="text-xs font-bold theme-text-main">Lãi Kép</div><div class="text-[9px] theme-text-muted">Compound</div></div>
+                                    </label>
+                                    <label class="border theme-border rounded-xl p-3 flex gap-2 items-center cursor-pointer [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20 transition-all">
+                                        <input type="radio" name="tvm-fv-type" value="simple" class="w-4 h-4 text-pink-600" onchange="calcTVM()">
+                                        <div><div class="text-xs font-bold theme-text-main">Lãi Đơn</div><div class="text-[9px] theme-text-muted">Simple</div></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- PV Mode -->
+                        <div id="tvm-panel-pv" class="space-y-4 hidden">
+                            <div class="space-y-1.5">
+                                <label class="block text-[10px] font-extrabold theme-text-muted uppercase">Số Tiền Tương Lai (FV)</label>
+                                <div class="relative"><input type="text" id="tvm-pv-fv" placeholder="Nhập FV..." class="w-full font-mono font-bold text-base theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="fmtTVM('tvm-pv-fv'); calcTVM()"><span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold">VND</span></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="space-y-1.5">
+                                    <label class="block text-[10px] font-extrabold theme-text-muted uppercase">Lãi Suất / Kỳ (%)</label>
+                                    <input type="number" id="tvm-pv-rate" placeholder="8" step="0.01" class="w-full font-mono font-bold text-base theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calcTVM()">
+                                </div>
+                                <div class="space-y-1.5">
+                                    <label class="block text-[10px] font-extrabold theme-text-muted uppercase">Số Kỳ (n)</label>
+                                    <input type="number" id="tvm-pv-n" placeholder="5" min="1" class="w-full font-mono font-bold text-base theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calcTVM()">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Annuity Mode -->
+                        <div id="tvm-panel-annuity" class="space-y-4 hidden">
+                            <div class="space-y-1.5">
+                                <label class="block text-[10px] font-extrabold theme-text-muted uppercase">Khoản Thanh Toán Định Kỳ (PMT)</label>
+                                <div class="relative"><input type="text" id="tvm-ann-pmt" placeholder="Nhập PMT..." class="w-full font-mono font-bold text-base theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="fmtTVM('tvm-ann-pmt'); calcTVM()"><span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold">VND</span></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="space-y-1.5">
+                                    <label class="block text-[10px] font-extrabold theme-text-muted uppercase">Lãi Suất / Kỳ (%)</label>
+                                    <input type="number" id="tvm-ann-rate" placeholder="1" step="0.01" class="w-full font-mono font-bold theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calcTVM()">
+                                </div>
+                                <div class="space-y-1.5">
+                                    <label class="block text-[10px] font-extrabold theme-text-muted uppercase">Số Kỳ (n)</label>
+                                    <input type="number" id="tvm-ann-n" placeholder="12" min="1" class="w-full font-mono font-bold theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calcTVM()">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-extrabold theme-text-muted uppercase mb-2">Loại Niên Kim</label>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <label class="border theme-border rounded-xl p-3 flex gap-2 items-center cursor-pointer [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20 transition-all">
+                                        <input type="radio" name="tvm-ann-type" value="ordinary" checked class="w-4 h-4 text-pink-600" onchange="calcTVM()">
+                                        <div><div class="text-xs font-bold theme-text-main">Ordinary</div><div class="text-[9px] theme-text-muted">Trả cuối kỳ</div></div>
+                                    </label>
+                                    <label class="border theme-border rounded-xl p-3 flex gap-2 items-center cursor-pointer [&:has(input:checked)]:border-pink-500 [&:has(input:checked)]:bg-pink-50/20 dark:[&:has(input:checked)]:bg-pink-950/20 transition-all">
+                                        <input type="radio" name="tvm-ann-type" value="due" class="w-4 h-4 text-pink-600" onchange="calcTVM()">
+                                        <div><div class="text-xs font-bold theme-text-main">Annuity Due</div><div class="text-[9px] theme-text-muted">Trả đầu kỳ</div></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- NPV Mode -->
+                        <div id="tvm-panel-npv" class="space-y-4 hidden">
+                            <div class="space-y-1.5">
+                                <label class="block text-[10px] font-extrabold theme-text-muted uppercase">Tỷ Lệ Chiết Khấu (%/kỳ)</label>
+                                <input type="number" id="tvm-npv-rate" placeholder="10" step="0.01" class="w-full font-mono font-bold theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calcTVM()">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="block text-[10px] font-extrabold theme-text-muted uppercase">Vốn Đầu Tư Ban Đầu (C₀, số âm)</label>
+                                <div class="relative"><input type="text" id="tvm-npv-c0" placeholder="-1,000,000,000..." class="w-full font-mono font-bold theme-input px-4 py-3 rounded-xl focus:outline-none" oninput="calcTVM()"><span class="absolute right-3.5 top-3.5 text-xs text-pink-500 font-extrabold">VND</span></div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <label class="block text-[10px] font-extrabold theme-text-muted uppercase">Dòng Tiền Vào Các Kỳ (CF₁…n)</label>
+                                    <button onclick="addNPVRow()" class="text-[10px] font-bold text-pink-600 bg-pink-50 dark:bg-pink-950/40 px-2.5 py-1 rounded-lg border theme-border">+ Thêm kỳ</button>
+                                </div>
+                                <div id="npv-cashflows" class="space-y-2">
+                                    <div class="flex gap-2 items-center npv-row">
+                                        <span class="text-[10px] theme-text-muted w-8 font-mono font-bold">CF₁</span>
+                                        <input type="text" class="flex-1 font-mono font-bold theme-input px-3 py-2 rounded-lg text-sm focus:outline-none npv-cf" placeholder="0" oninput="calcTVM()">
+                                    </div>
+                                    <div class="flex gap-2 items-center npv-row">
+                                        <span class="text-[10px] theme-text-muted w-8 font-mono font-bold">CF₂</span>
+                                        <input type="text" class="flex-1 font-mono font-bold theme-input px-3 py-2 rounded-lg text-sm focus:outline-none npv-cf" placeholder="0" oninput="calcTVM()">
+                                    </div>
+                                    <div class="flex gap-2 items-center npv-row">
+                                        <span class="text-[10px] theme-text-muted w-8 font-mono font-bold">CF₃</span>
+                                        <input type="text" class="flex-1 font-mono font-bold theme-input px-3 py-2 rounded-lg text-sm focus:outline-none npv-cf" placeholder="0" oninput="calcTVM()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TVM Outputs -->
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="bg-pink-50/20 dark:bg-pink-950/20 border theme-border rounded-2xl p-6 space-y-4">
+                            <h4 class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider border-b theme-border pb-2">Kết Quả Tính Toán</h4>
+                            <div id="tvm-results" class="space-y-3">
+                                <div class="flex justify-between items-center text-sm py-2 border-b border-dashed theme-border">
+                                    <span class="theme-text-muted font-medium" id="tvm-label-1">Giá trị tương lai (FV):</span>
+                                    <span class="font-mono font-black text-pink-600 dark:text-pink-400 text-xl" id="tvm-res-1">0 ₫</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm py-2 border-b border-dashed theme-border">
+                                    <span class="theme-text-muted font-medium" id="tvm-label-2">Tổng lãi tích lũy:</span>
+                                    <span class="font-mono font-bold text-rose-500 text-base" id="tvm-res-2">0 ₫</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm py-2 border-b border-dashed theme-border">
+                                    <span class="theme-text-muted font-medium" id="tvm-label-3">Tỷ lệ sinh lời thực tế:</span>
+                                    <span class="font-mono font-bold text-purple-600 dark:text-purple-400 text-base" id="tvm-res-3">0%</span>
+                                </div>
+                                <div id="tvm-res-4-row" class="flex justify-between items-center text-sm py-2">
+                                    <span class="theme-text-muted font-medium" id="tvm-label-4">Kết quả bổ sung:</span>
+                                    <span class="font-mono font-bold text-emerald-600 dark:text-emerald-400 text-base" id="tvm-res-4">—</span>
+                                </div>
+                            </div>
+                            <!-- Word readout -->
+                            <div class="bg-white/70 dark:bg-pink-950/40 p-4 rounded-xl border theme-border space-y-1">
+                                <div class="text-[9px] font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider">Đọc kết quả chính bằng chữ:</div>
+                                <p id="tvm-words-vi" class="text-xs font-semibold italic">Không đồng chẵn.</p>
+                                <p id="tvm-words-en" class="text-[11px] font-semibold italic text-purple-600 dark:text-purple-400">Zero dongs only.</p>
+                            </div>
+                            <button onclick="copyTVMResult()" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold text-xs py-3 px-4 rounded-xl shadow-md transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                Sao chép kết quả TVM
+                            </button>
+                        </div>
+                        <!-- Growth Chart (text-based) -->
+                        <div class="bg-pink-50/20 dark:bg-pink-950/20 border theme-border rounded-2xl p-4">
+                            <div class="text-[10px] font-extrabold text-pink-600 dark:text-pink-400 uppercase tracking-wider mb-3">Biểu Đồ Tăng Trưởng Tích Lũy</div>
+                            <div id="tvm-chart" class="space-y-1.5"></div>
                         </div>
                     </div>
                 </div>
@@ -1987,6 +2419,456 @@ KẾT LUẬN DÒNG TIỀN DỰ ÁN:- Nhà thầu nước ngoài thực nhận (N
                 }, 1500);
             }
         }
+
+
+        // ===== QAR currency units =====
+        // (injected additions to existing dicts)
+        currencyUnitsVN['qar'] = { main: "Riyal Qatar", sub: "", only: "chẵn" };
+        currencyUnitsEN['qar'] = { main: "Qatari Riyals", sub: "", only: "" };
+        currencyUnitsTH['qar'] = { main: "ริยัลกาตาร์", sub: "", only: "" };
+
+        // ===== 5-WAY EXCHANGE: Override calculateThreeWay =====
+        function calculateThreeWay(triggerSource) {
+            activeExchangeCurrency = triggerSource;
+            const rateVnd = parseFloat(document.getElementById('global-usd-rate').value.replace(/,/g,'')) || 25450;
+            const rateThb = parseFloat(document.getElementById('global-thb-rate').value.replace(/,/g,'')) || 36.50;
+            const rateEurVnd = parseFloat(document.getElementById('global-eur-rate').value.replace(/,/g,'')) || 27500;
+            const rateQarVnd = parseFloat(document.getElementById('global-qar-rate').value.replace(/,/g,'')) || 6985;
+
+            const usdF = document.getElementById('rate-usd-input');
+            const vndF = document.getElementById('rate-vnd-input');
+            const thbF = document.getElementById('rate-thb-input');
+            const eurF = document.getElementById('rate-eur-input');
+            const qarF = document.getElementById('rate-qar-input');
+
+            let usd=0, vnd=0, thb=0, eur=0, qar=0;
+
+            const getV = (el) => { const r = el.value.replace(/,/g,''); return (r && !isNaN(r)) ? parseFloat(r) : 0; };
+
+            if (triggerSource==='usd') {
+                usdF.value = formatNumberWithCommas(usdF.value);
+                usd = getV(usdF);
+                vnd = usd * rateVnd; thb = usd * rateThb;
+                eur = (usd * rateVnd) / rateEurVnd; qar = (usd * rateVnd) / rateQarVnd;
+                vndF.value = formatNumberWithCommas(Math.round(vnd).toString());
+                thbF.value = formatNumberWithCommas(thb.toFixed(2));
+                eurF.value = formatNumberWithCommas(eur.toFixed(4));
+                qarF.value = formatNumberWithCommas(qar.toFixed(2));
+            } else if (triggerSource==='vnd') {
+                vndF.value = formatNumberWithCommas(vndF.value);
+                vnd = getV(vndF);
+                usd = vnd/rateVnd; thb = usd*rateThb;
+                eur = vnd/rateEurVnd; qar = vnd/rateQarVnd;
+                usdF.value = formatNumberWithCommas(usd.toFixed(4));
+                thbF.value = formatNumberWithCommas(thb.toFixed(2));
+                eurF.value = formatNumberWithCommas(eur.toFixed(4));
+                qarF.value = formatNumberWithCommas(qar.toFixed(2));
+            } else if (triggerSource==='thb') {
+                thbF.value = formatNumberWithCommas(thbF.value);
+                thb = getV(thbF);
+                usd = thb/rateThb; vnd = usd*rateVnd;
+                eur = vnd/rateEurVnd; qar = vnd/rateQarVnd;
+                usdF.value = formatNumberWithCommas(usd.toFixed(4));
+                vndF.value = formatNumberWithCommas(Math.round(vnd).toString());
+                eurF.value = formatNumberWithCommas(eur.toFixed(4));
+                qarF.value = formatNumberWithCommas(qar.toFixed(2));
+            } else if (triggerSource==='eur') {
+                eurF.value = formatNumberWithCommas(eurF.value);
+                eur = getV(eurF);
+                vnd = eur*rateEurVnd; usd = vnd/rateVnd;
+                thb = usd*rateThb; qar = vnd/rateQarVnd;
+                usdF.value = formatNumberWithCommas(usd.toFixed(4));
+                vndF.value = formatNumberWithCommas(Math.round(vnd).toString());
+                thbF.value = formatNumberWithCommas(thb.toFixed(2));
+                qarF.value = formatNumberWithCommas(qar.toFixed(2));
+            } else if (triggerSource==='qar') {
+                qarF.value = formatNumberWithCommas(qarF.value);
+                qar = getV(qarF);
+                vnd = qar*rateQarVnd; usd = vnd/rateVnd;
+                thb = usd*rateThb; eur = vnd/rateEurVnd;
+                usdF.value = formatNumberWithCommas(usd.toFixed(4));
+                vndF.value = formatNumberWithCommas(Math.round(vnd).toString());
+                thbF.value = formatNumberWithCommas(thb.toFixed(2));
+                eurF.value = formatNumberWithCommas(eur.toFixed(4));
+            }
+
+            // Readouts for all 5 currencies
+            document.getElementById('ex-usd-vi').textContent = convertToVietnameseWords(usd.toFixed(2),"north",true,"usd");
+            document.getElementById('ex-usd-en').textContent = convertToEnglishWords(usd.toFixed(2),true,"usd");
+            document.getElementById('ex-usd-th').textContent = convertToThaiWords(usd.toFixed(2),true,"usd");
+            document.getElementById('ex-vnd-vi').textContent = convertToVietnameseWords(Math.round(vnd).toString(),"north",false,"vnd");
+            document.getElementById('ex-vnd-en').textContent = convertToEnglishWords(Math.round(vnd).toString(),false,"vnd");
+            document.getElementById('ex-vnd-th').textContent = convertToThaiWords(Math.round(vnd).toString(),false,"vnd");
+            document.getElementById('ex-thb-vi').textContent = convertToVietnameseWords(thb.toFixed(2),"north",true,"thb");
+            document.getElementById('ex-thb-en').textContent = convertToEnglishWords(thb.toFixed(2),true,"thb");
+            document.getElementById('ex-thb-th').textContent = convertToThaiWords(thb.toFixed(2),true,"thb");
+            document.getElementById('ex-eur-vi').textContent = convertToVietnameseWords(eur.toFixed(2),"north",true,"eur");
+            document.getElementById('ex-eur-en').textContent = convertToEnglishWords(eur.toFixed(2),true,"eur");
+            document.getElementById('ex-eur-th').textContent = convertToThaiWords(eur.toFixed(2),true,"eur");
+            document.getElementById('ex-qar-vi').textContent = convertToVietnameseWords(qar.toFixed(2),"north",true,"qar");
+            document.getElementById('ex-qar-en').textContent = convertToEnglishWords(qar.toFixed(2),true,"qar");
+            document.getElementById('ex-qar-th').textContent = convertToThaiWords(qar.toFixed(2),true,"qar");
+        }
+
+        // Extend copyExchangeResultWords for eur/qar
+        const _origCopyEx = copyExchangeResultWords;
+        copyExchangeResultWords = function(type, btn) {
+            if (type === 'eur' || type === 'qar') {
+                const sym = type.toUpperCase();
+                const fieldId = 'rate-' + type + '-input';
+                const textToCopy = `${sym}: ${document.getElementById(fieldId).value||"0"}\n- VN: ${document.getElementById('ex-'+type+'-vi').textContent}\n- EN: ${document.getElementById('ex-'+type+'-en').textContent}\n- TH: ${document.getElementById('ex-'+type+'-th').textContent}`;
+                const t = document.createElement("textarea"); t.value = textToCopy; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t);
+                showToast(`Đã sao chép chữ quy đổi ${sym}!`);
+                if (btn) { const s = btn.querySelector('span'); const o = s.textContent; s.textContent='Đã Copy!'; btn.classList.add('border-pink-500','text-pink-500'); setTimeout(()=>{s.textContent=o;btn.classList.remove('border-pink-500','text-pink-500');},1500); }
+            } else { _origCopyEx(type, btn); }
+        };
+
+        // ===== SUB-CONTRACTOR FCT =====
+        function formatAndCalcSub(el) { el.value = formatNumberWithCommas(el.value); calculateSub(); }
+        function calculateSub() {
+            const main = parseFloat((document.getElementById('sub-main-amount').value||'').replace(/,/g,'')) || 0;
+            const sub = parseFloat((document.getElementById('sub-sub-amount').value||'').replace(/,/g,'')) || 0;
+            const sector = document.getElementById('sub-sector').value;
+            const [vr, cr] = sector.split('-').map(Number);
+            const taxable = Math.max(0, main - sub);
+            const vatTax = taxable * vr / 100;
+            const citTax = taxable * cr / 100;
+            const total = vatTax + citTax;
+            document.getElementById('sub-res-main').textContent = main.toLocaleString('vi-VN') + ' ₫';
+            document.getElementById('sub-res-sub').textContent = '- ' + sub.toLocaleString('vi-VN') + ' ₫';
+            document.getElementById('sub-res-taxable').textContent = taxable.toLocaleString('vi-VN') + ' ₫';
+            document.getElementById('sub-res-vat').textContent = Math.round(vatTax).toLocaleString('vi-VN') + ' ₫';
+            document.getElementById('sub-res-cit').textContent = Math.round(citTax).toLocaleString('vi-VN') + ' ₫';
+            document.getElementById('sub-res-total').textContent = Math.round(total).toLocaleString('vi-VN') + ' ₫';
+            document.getElementById('sub-res-words').textContent = convertToVietnameseWords(Math.round(total).toString(),"north",false,"vnd");
+        }
+
+        // ===== EXPORT PDF / EXCEL =====
+        function fmtVND(n) { return Math.round(n).toLocaleString('vi-VN') + ' ₫'; }
+
+        function exportVatPDF() {
+            const net = document.getElementById('res-net').textContent;
+            const vat = document.getElementById('res-vat-amount').textContent;
+            const gross = document.getElementById('res-gross').textContent;
+            const rate = document.getElementById('res-rate-label').textContent;
+            const words = document.getElementById('res-words').textContent;
+            const w = window.open('','_blank');
+            w.document.write(`<html><head><title>Báo Cáo VAT</title><style>body{font-family:Arial;padding:20px;} h2{color:#e11d48;} table{border-collapse:collapse;width:100%;} td,th{border:1px solid #ddd;padding:8px;} .total{font-weight:bold;font-size:1.1em;color:#e11d48;}</style></head><body>
+            <h2>BÁO CÁO TÍNH THUẾ GTGT (VAT ${rate})</h2>
+            <p>Ngày: ${new Date().toLocaleDateString('vi-VN')}</p>
+            <table><tr><th>Chỉ tiêu</th><th>Giá trị</th></tr>
+            <tr><td>Giá trước thuế (NET)</td><td>${net}</td></tr>
+            <tr><td>Thuế GTGT (${rate})</td><td>${vat}</td></tr>
+            <tr><td class="total">Tổng thanh toán (GROSS)</td><td class="total">${gross}</td></tr>
+            </table><br><p><b>Đọc bằng chữ:</b> ${words}</p>
+            <br><p><i>Công cụ: SWEETIE SUNNY'S APP TOOL v4.0</i></p>
+            </body></html>`);
+            w.document.close(); w.print();
+        }
+
+        function exportVatExcel() {
+            if (typeof XLSX === 'undefined') { showToast("Đang tải thư viện Excel..."); return; }
+            const rate = document.getElementById('res-rate-label').textContent;
+            const net = document.getElementById('res-net').textContent.replace(/[^\d]/g,'');
+            const vat = document.getElementById('res-vat-amount').textContent.replace(/[^\d]/g,'');
+            const gross = document.getElementById('res-gross').textContent.replace(/[^\d]/g,'');
+            const words = document.getElementById('res-words').textContent;
+            const ws = XLSX.utils.aoa_to_sheet([
+                ['BÁO CÁO TÍNH THUẾ GTGT'],['Ngày:', new Date().toLocaleDateString('vi-VN')],[''],
+                ['Chỉ tiêu','Giá trị (VND)'],
+                ['Giá trước thuế (NET)', parseFloat(net)||0],
+                [`Thuế GTGT (${rate})`, parseFloat(vat)||0],
+                ['Tổng thanh toán (GROSS)', parseFloat(gross)||0],
+                [''],['Đọc bằng chữ:', words]
+            ]);
+            const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Báo Cáo VAT');
+            XLSX.writeFile(wb, `BaoCaoVAT_${new Date().toISOString().slice(0,10)}.xlsx`);
+            showToast("Đã xuất file Excel thành công!");
+        }
+
+        function exportFctPDF() {
+            const method = document.querySelector('input[name="fct-method"]:checked').value === 'net' ? "NET (Gross-up)" : "GROSS";
+            const sector = document.getElementById('fct-sector').options[document.getElementById('fct-sector').selectedIndex].text;
+            const citTax = document.getElementById('fct-res-cit-tax').textContent;
+            const vatTax = document.getElementById('fct-res-vat-tax').textContent;
+            const total = document.getElementById('fct-res-total-tax').textContent;
+            const net = document.getElementById('fct-res-contractor-get').textContent;
+            const cdt = document.getElementById('fct-res-cdt-cost').textContent;
+            const words = document.getElementById('fct-res-words-vi').textContent;
+            const w = window.open('','_blank');
+            w.document.write(`<html><head><title>Báo Cáo FCT</title><style>body{font-family:Arial;padding:20px;} h2{color:#e11d48;} table{border-collapse:collapse;width:100%;} td,th{border:1px solid #ddd;padding:8px;} .total{font-weight:bold;font-size:1.1em;color:#e11d48;}</style></head><body>
+            <h2>BÁO CÁO THUẾ NHÀ THẦU NƯỚC NGOÀI (FCT)</h2>
+            <p>Ngày: ${new Date().toLocaleDateString('vi-VN')} | Phương thức: ${method}</p>
+            <p>Lĩnh vực: ${sector}</p>
+            <table><tr><th>Chỉ tiêu</th><th>Giá trị</th></tr>
+            <tr><td>Thuế TNDN (CIT)</td><td>${citTax}</td></tr>
+            <tr><td>Thuế GTGT (VAT)</td><td>${vatTax}</td></tr>
+            <tr><td class="total">Tổng FCT phải nộp</td><td class="total">${total}</td></tr>
+            <tr><td>Nhà thầu thực nhận</td><td>${net}</td></tr>
+            <tr><td>Tổng chi phí CĐT ghi nhận</td><td>${cdt}</td></tr>
+            </table><br><p><b>Đọc tổng FCT bằng chữ:</b> ${words}</p>
+            <br><p><i>Công cụ: SWEETIE SUNNY'S APP TOOL v4.0</i></p>
+            </body></html>`);
+            w.document.close(); w.print();
+        }
+
+        function exportFctExcel() {
+            if (typeof XLSX === 'undefined') { showToast("Đang tải thư viện Excel..."); return; }
+            const getN = (id) => parseFloat(document.getElementById(id).textContent.replace(/[^\d]/g,''))||0;
+            const sector = document.getElementById('fct-sector').options[document.getElementById('fct-sector').selectedIndex].text;
+            const ws = XLSX.utils.aoa_to_sheet([
+                ['BÁO CÁO THUẾ NHÀ THẦU NƯỚC NGOÀI (FCT)'],
+                ['Ngày:', new Date().toLocaleDateString('vi-VN')],
+                ['Lĩnh vực:', sector], [''],
+                ['Chỉ tiêu', 'Giá trị (VND)'],
+                ['Thuế TNDN (CIT)', getN('fct-res-cit-tax')],
+                ['Thuế GTGT (VAT)', getN('fct-res-vat-tax')],
+                ['Tổng FCT phải nộp', getN('fct-res-total-tax')],
+                ['Nhà thầu thực nhận (Net)', getN('fct-res-contractor-get')],
+                ['Tổng chi phí CĐT', getN('fct-res-cdt-cost')],
+                [''], ['Đọc bằng chữ:', document.getElementById('fct-res-words-vi').textContent]
+            ]);
+            const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Báo Cáo FCT');
+            XLSX.writeFile(wb, `BaoCaoFCT_${new Date().toISOString().slice(0,10)}.xlsx`);
+            showToast("Đã xuất file Excel FCT thành công!");
+        }
+
+        // ===== TAB 5: DEPRECIATION =====
+        let depreData = [];
+        function fmtDep(id) { const el=document.getElementById(id); el.value=formatNumberWithCommas(el.value); }
+
+        function calculateDepreciation() {
+            const cost = parseFloat((document.getElementById('dep-cost').value||'').replace(/,/g,'')) || 0;
+            const salvage = parseFloat((document.getElementById('dep-salvage').value||'').replace(/,/g,'')) || 0;
+            const life = parseInt(document.getElementById('dep-life').value) || 0;
+            const method = document.querySelector('input[name="dep-method"]:checked')?.value || 'straight';
+            const unit = document.getElementById('dep-unit').value;
+            if (cost <= 0 || life <= 0) return;
+            const depBase = Math.max(0, cost - salvage);
+            const rows = [];
+            let bookValue = cost;
+            let accumulated = 0;
+            if (method === 'straight') {
+                const periods = (unit === 'month') ? life * 12 : life;
+                const periodDep = depBase / periods;
+                for (let i = 1; i <= periods; i++) {
+                    const dep = Math.min(periodDep, bookValue - salvage);
+                    const start = bookValue;
+                    bookValue -= dep; accumulated += dep;
+                    rows.push({p:i, start, dep, acc: accumulated, end: bookValue});
+                }
+            } else if (method === 'declining') {
+                const rate = 2 / life;
+                const periods = (unit === 'month') ? life * 12 : life;
+                const periodRate = (unit === 'month') ? 1 - Math.pow(1 - rate, 1/12) : rate;
+                for (let i = 1; i <= periods; i++) {
+                    const dep = Math.max(0, Math.min(bookValue * periodRate, bookValue - salvage));
+                    const start = bookValue;
+                    bookValue -= dep; accumulated += dep;
+                    rows.push({p:i, start, dep, acc: accumulated, end: bookValue});
+                }
+            } else if (method === 'soyd') {
+                const soyd = (life * (life + 1)) / 2;
+                for (let y = 1; y <= life; y++) {
+                    const fraction = (life - y + 1) / soyd;
+                    const yearDep = depBase * fraction;
+                    if (unit === 'month') {
+                        for (let m = 1; m <= 12; m++) {
+                            const dep = yearDep / 12;
+                            const start = bookValue;
+                            bookValue -= dep; accumulated += dep;
+                            rows.push({p: (y-1)*12+m, start, dep, acc: accumulated, end: bookValue});
+                        }
+                    } else {
+                        const start = bookValue;
+                        bookValue -= yearDep; accumulated += yearDep;
+                        rows.push({p: y, start, dep: yearDep, acc: accumulated, end: bookValue});
+                    }
+                }
+            }
+            depreData = rows;
+            // Summary
+            const year1 = rows.slice(0, unit==='month'?12:1).reduce((s,r)=>s+r.dep, 0);
+            const monthly = unit==='month' ? rows[0]?.dep||0 : (rows[0]?.dep||0)/12;
+            document.getElementById('dep-year1').textContent = fmtVND(year1);
+            document.getElementById('dep-monthly').textContent = fmtVND(monthly);
+            document.getElementById('dep-total-depre').textContent = fmtVND(depBase);
+            // Table
+            const unitLabel = unit==='month'?'Tháng':'Năm';
+            const tbody = document.getElementById('dep-table-body');
+            tbody.innerHTML = '';
+            rows.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b theme-border hover:bg-pink-50/10 dark:hover:bg-pink-950/10 transition-colors';
+                tr.innerHTML = `<td class="py-2 pr-3 font-mono font-bold text-pink-500">${unitLabel} ${r.p}</td>
+                    <td class="py-2 pr-3 text-right font-mono">${Math.round(r.start).toLocaleString('vi-VN')}</td>
+                    <td class="py-2 pr-3 text-right font-mono font-bold text-rose-500">${Math.round(r.dep).toLocaleString('vi-VN')}</td>
+                    <td class="py-2 pr-3 text-right font-mono text-amber-600">${Math.round(r.acc).toLocaleString('vi-VN')}</td>
+                    <td class="py-2 text-right font-mono font-bold text-emerald-600">${Math.round(r.end).toLocaleString('vi-VN')}</td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function exportDepreExcel() {
+            if (!depreData.length) { showToast("Chưa có dữ liệu khấu hao!"); return; }
+            if (typeof XLSX === 'undefined') { showToast("Đang tải thư viện..."); return; }
+            const unit = document.getElementById('dep-unit').value === 'month' ? 'Tháng' : 'Năm';
+            const cost = document.getElementById('dep-cost').value || '0';
+            const aoa = [
+                ['BẢNG KHẤU HAO TÀI SẢN CỐ ĐỊNH'], ['Nguyên giá:', cost, 'VND'],
+                [''], [unit, 'Giá Trị Đầu Kỳ', 'Khấu Hao Kỳ', 'KH Lũy Kế', 'Giá Trị Cuối Kỳ'],
+                ...depreData.map(r => [r.p, Math.round(r.start), Math.round(r.dep), Math.round(r.acc), Math.round(r.end)])
+            ];
+            const ws = XLSX.utils.aoa_to_sheet(aoa);
+            const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Khấu Hao');
+            XLSX.writeFile(wb, `KhauHaoTSCD_${new Date().toISOString().slice(0,10)}.xlsx`);
+            showToast("Đã xuất bảng khấu hao Excel!");
+        }
+
+        // ===== TAB 6: TVM =====
+        let tvmMode = 'fv';
+
+        function setTVMMode(mode) {
+            tvmMode = mode;
+            ['fv','pv','annuity','npv'].forEach(m => {
+                const panel = document.getElementById('tvm-panel-'+m);
+                const btn = document.getElementById('tvm-btn-'+m);
+                if (panel) panel.classList.toggle('hidden', m !== mode);
+                if (btn) btn.className = `tvm-mode-btn px-4 py-2 rounded-xl text-xs font-bold border theme-border transition-all theme-nav-btn${m===mode?' active neon-glow-active':''}`;
+            });
+            calcTVM();
+        }
+
+        function fmtTVM(id) { const el=document.getElementById(id); if(el) el.value=formatNumberWithCommas(el.value); }
+
+        function addNPVRow() {
+            const container = document.getElementById('npv-cashflows');
+            const count = container.querySelectorAll('.npv-row').length + 1;
+            const div = document.createElement('div');
+            div.className = 'flex gap-2 items-center npv-row';
+            div.innerHTML = `<span class="text-[10px] theme-text-muted w-8 font-mono font-bold">CF${count}</span>
+                <input type="text" class="flex-1 font-mono font-bold theme-input px-3 py-2 rounded-lg text-sm focus:outline-none npv-cf" placeholder="0" oninput="calcTVM()">
+                <button onclick="this.parentElement.remove(); calcTVM();" class="text-rose-400 hover:text-rose-600 text-xs px-2">✕</button>`;
+            container.appendChild(div);
+        }
+
+        function calcTVM() {
+            const setR = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
+            const fmtV = (n) => isNaN(n)||!isFinite(n) ? '—' : Math.round(n).toLocaleString('vi-VN') + ' ₫';
+            const fmtP = (n) => isNaN(n)||!isFinite(n) ? '—' : n.toFixed(2) + '%';
+            let res1=0, label1='', res2=0, label2='', res3='', label3='', res4='', label4='';
+
+            if (tvmMode === 'fv') {
+                const pv = parseFloat((document.getElementById('tvm-fv-pv')?.value||'').replace(/,/g,'')) || 0;
+                const rate = (parseFloat(document.getElementById('tvm-fv-rate')?.value)||0) / 100;
+                const n = parseInt(document.getElementById('tvm-fv-n')?.value) || 0;
+                const type = document.querySelector('input[name="tvm-fv-type"]:checked')?.value || 'compound';
+                const fv = type==='compound' ? pv * Math.pow(1+rate, n) : pv * (1 + rate*n);
+                const interest = fv - pv;
+                label1='Giá trị tương lai (FV):'; res1=fv;
+                label2='Tổng lãi tích lũy:'; res2=interest;
+                label3='Tỷ suất sinh lợi:'; res3=fmtP(pv>0?(fv-pv)/pv*100:0);
+                label4='Lãi suất thực kép:'; res4=(n>0&&pv>0)?fmtP((Math.pow(fv/pv,1/n)-1)*100):'—';
+                renderTVMChart(pv, rate, n, type);
+            } else if (tvmMode === 'pv') {
+                const fv = parseFloat((document.getElementById('tvm-pv-fv')?.value||'').replace(/,/g,'')) || 0;
+                const rate = (parseFloat(document.getElementById('tvm-pv-rate')?.value)||0) / 100;
+                const n = parseInt(document.getElementById('tvm-pv-n')?.value) || 0;
+                const pv = rate===0 ? fv : fv / Math.pow(1+rate, n);
+                label1='Giá trị hiện tại (PV):'; res1=pv;
+                label2='Lượng chiết khấu:'; res2=fv-pv;
+                label3='Tỷ lệ chiết khấu:'; res3=fmtP(fv>0?(fv-pv)/fv*100:0);
+                label4='—'; res4='—';
+            } else if (tvmMode === 'annuity') {
+                const pmt = parseFloat((document.getElementById('tvm-ann-pmt')?.value||'').replace(/,/g,'')) || 0;
+                const rate = (parseFloat(document.getElementById('tvm-ann-rate')?.value)||0) / 100;
+                const n = parseInt(document.getElementById('tvm-ann-n')?.value) || 0;
+                const type = document.querySelector('input[name="tvm-ann-type"]:checked')?.value || 'ordinary';
+                const due = type==='due' ? 1 : 0;
+                let pvAnn=0, fvAnn=0;
+                if (rate===0) { pvAnn=pmt*n; fvAnn=pmt*n; }
+                else {
+                    pvAnn = pmt * (1 - Math.pow(1+rate,-n)) / rate * (1 + rate*due);
+                    fvAnn = pmt * (Math.pow(1+rate,n) - 1) / rate * (1 + rate*due);
+                }
+                label1='PV Niên Kim (hiện tại):'; res1=pvAnn;
+                label2='FV Niên Kim (tương lai):'; res2=fvAnn;
+                label3='Tổng thanh toán:'; res3=fmtV(pmt*n);
+                label4='Tổng lãi:'; res4=fmtV(fvAnn-pmt*n);
+            } else if (tvmMode === 'npv') {
+                const rate = (parseFloat(document.getElementById('tvm-npv-rate')?.value)||0) / 100;
+                const c0 = parseFloat((document.getElementById('tvm-npv-c0')?.value||'').replace(/,/g,'')) || 0;
+                const cfEls = document.querySelectorAll('.npv-cf');
+                const cfs = Array.from(cfEls).map(el => parseFloat(el.value.replace(/,/g,''))||0);
+                let npv = c0;
+                cfs.forEach((cf,i) => { npv += cf / Math.pow(1+rate, i+1); });
+                // IRR by Newton-Raphson
+                let irr = 0.1;
+                for (let iter=0; iter<100; iter++) {
+                    let f=c0, df=0;
+                    cfs.forEach((cf,i) => { f+=cf/Math.pow(1+irr,i+1); df-=(i+1)*cf/Math.pow(1+irr,i+2); });
+                    if (Math.abs(df)<1e-12) break;
+                    const irr2 = irr - f/df;
+                    if (Math.abs(irr2-irr)<1e-8) { irr=irr2; break; }
+                    irr=irr2;
+                }
+                label1='NPV (Giá trị hiện tại ròng):'; res1=npv;
+                label2='Vốn đầu tư ban đầu:'; res2=Math.abs(c0);
+                label3='IRR (Tỷ suất hoàn vốn nội bộ):'; res3=isFinite(irr)?fmtP(irr*100):'Không tính được';
+                label4='Đánh giá dự án:'; res4=npv>0?'✅ NPV dương — Nên đầu tư':'❌ NPV âm — Cần xem xét lại';
+            }
+
+            setR('tvm-label-1', label1); setR('tvm-res-1', typeof res1==='number'?fmtV(res1):res1);
+            setR('tvm-label-2', label2); setR('tvm-res-2', typeof res2==='number'?fmtV(res2):res2);
+            setR('tvm-label-3', label3); setR('tvm-res-3', res3);
+            setR('tvm-label-4', label4); setR('tvm-res-4', res4);
+
+            const mainVal = typeof res1==='number' ? res1 : 0;
+            document.getElementById('tvm-words-vi').textContent = convertToVietnameseWords(Math.abs(Math.round(mainVal)).toString(),"north",false,"vnd");
+            document.getElementById('tvm-words-en').textContent = convertToEnglishWords(Math.abs(Math.round(mainVal)).toString(),false,"vnd");
+        }
+
+        function renderTVMChart(pv, rate, n, type) {
+            const chart = document.getElementById('tvm-chart');
+            if (!chart || n<=0 || pv<=0) return;
+            const maxPeriods = Math.min(n, 20);
+            chart.innerHTML = '';
+            let maxVal = pv;
+            const vals = [];
+            for (let i=0; i<=maxPeriods; i++) {
+                const v = type==='compound' ? pv*Math.pow(1+rate,i) : pv*(1+rate*i);
+                vals.push(v); if (v>maxVal) maxVal=v;
+            }
+            vals.forEach((v,i) => {
+                const pct = maxVal>0 ? (v/maxVal*100) : 0;
+                const div = document.createElement('div');
+                div.className = 'flex items-center gap-2 text-[10px]';
+                div.innerHTML = `<span class="w-10 text-right font-mono theme-text-muted font-bold">Kỳ ${i}</span>
+                    <div class="flex-1 bg-pink-100/30 dark:bg-pink-950/30 rounded-full h-4 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-pink-500 to-rose-400 rounded-full transition-all duration-500" style="width:${pct.toFixed(1)}%"></div>
+                    </div>
+                    <span class="w-28 text-right font-mono font-bold theme-text-main text-[9px]">${Math.round(v).toLocaleString('vi-VN')}</span>`;
+                chart.appendChild(div);
+            });
+        }
+
+        function copyTVMResult() {
+            const l1 = document.getElementById('tvm-label-1')?.textContent || '';
+            const r1 = document.getElementById('tvm-res-1')?.textContent || '';
+            const l2 = document.getElementById('tvm-label-2')?.textContent || '';
+            const r2 = document.getElementById('tvm-res-2')?.textContent || '';
+            const l3 = document.getElementById('tvm-label-3')?.textContent || '';
+            const r3 = document.getElementById('tvm-res-3')?.textContent || '';
+            const l4 = document.getElementById('tvm-label-4')?.textContent || '';
+            const r4 = document.getElementById('tvm-res-4')?.textContent || '';
+            const words = document.getElementById('tvm-words-vi')?.textContent || '';
+            const txt = `KẾT QUẢ TVM:\n${l1} ${r1}\n${l2} ${r2}\n${l3} ${r3}\n${l4} ${r4}\nBằng chữ: ${words}`;
+            const t=document.createElement('textarea'); t.value=txt; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t);
+            showToast("Đã sao chép kết quả TVM!");
+        }
+
+        // Init historyList if not defined
+        if (typeof historyList === 'undefined') { var historyList = []; }
 
         window.onload = function () {
             document.getElementById('num-input').focus();
